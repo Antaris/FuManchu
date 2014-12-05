@@ -130,12 +130,35 @@
 		}
 
 		/// <inheritdoc />
+		public override bool EquivalentTo(SyntaxTreeNode node, StringBuilder builder, int level)
+		{
+			var other = node as Block;
+			if (other == null || other.Type != Type || other.Name != Name)
+			{
+				builder.Append(string.Join("", Enumerable.Repeat("\t", level)));
+				builder.AppendFormat("F: Expected: {0}, Actual: {1}\n", this, other);
+
+				return false;
+			}
+
+			builder.Append(string.Join("", Enumerable.Repeat("\t", level)));
+			builder.AppendFormat("P: Expected: {0}, Actual: {1}\n", this, other);
+			return Enumerable.SequenceEqual(Children, other.Children, new EquivalanceComparer(builder, level + 1));
+		}
+
+		/// <inheritdoc />
 		public override int GetHashCode()
 		{
 			return HashCodeCombiner.Start()
 				.Add(Type)
 				.Add(Name)
 				.CombinedHash;
+		}
+
+		/// <inheritdoc />
+		public override string ToString()
+		{
+			return string.Format("BLOCK: {{ {0}, {1} }}", Type, Name);
 		}
 
 #if DEBUG

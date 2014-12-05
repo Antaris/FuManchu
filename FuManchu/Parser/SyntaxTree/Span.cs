@@ -100,6 +100,15 @@
 		}
 
 		/// <inheritdoc />
+		public override bool EquivalentTo(SyntaxTreeNode node, StringBuilder builder, int level)
+		{
+			var result = EquivalentTo(node);
+			builder.Append(string.Join("", Enumerable.Repeat("\t", level)));
+			builder.AppendFormat("{0}: Expected: {1}, Actual: {2}\n", result ? "P" : "F", this, node);
+			return result;
+		}
+
+		/// <inheritdoc />
 		public override bool Equals(object obj)
 		{
 			var other = obj as Span;
@@ -144,6 +153,12 @@
 		internal void SetStart(SourceLocation newStart)
 		{
 			_start = newStart;
+		}
+
+		/// <inheritdoc />
+		public override string ToString()
+		{
+			return string.Format("SPAN: {0}, {1} @ {2}", Kind, Content, Start);
 		}
 
 #if DEBUG

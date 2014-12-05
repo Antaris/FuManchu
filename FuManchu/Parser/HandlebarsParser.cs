@@ -11,14 +11,6 @@
 	/// </summary>
 	public class HandlebarsParser : TokenizerBackedParser<HandlebarsTokenizer, HandlebarsSymbol, HandlebarsSymbolType>
 	{
-		private readonly IDictionary<HandlebarsSymbolType, HandlebarsSymbolType> _balancingSymbols = new Dictionary<HandlebarsSymbolType, HandlebarsSymbolType>
-		{
-			{ HandlebarsSymbolType.OpenTag, HandlebarsSymbolType.CloseTag },
-			{ HandlebarsSymbolType.RawOpenTag, HandlebarsSymbolType.RawCloseTag },
-			{ HandlebarsSymbolType.LeftBrace, HandlebarsSymbolType.RightBrace },
-			{ HandlebarsSymbolType.RightBrace, HandlebarsSymbolType.RightBracket }
-		};
-
 		/// <inheritdoc />
 		protected override LanguageCharacteristics<HandlebarsTokenizer, HandlebarsSymbol, HandlebarsSymbolType> Language
 		{
@@ -153,6 +145,8 @@
 				{
 					Context.OnError(CurrentLocation, "Unbalanced tags - expected a closing tag for '" + Context.CurrentBlock.Name + "' but instead found '" + name + "'");
 				}
+
+				Context.CurrentBlock.Name = name;
 
 				if (Optional(HandlebarsSymbolType.Tilde))
 				{
@@ -316,7 +310,7 @@
 			if (CurrentSymbol.Type == HandlebarsSymbolType.OpenTag || CurrentSymbol.Type == HandlebarsSymbolType.RawOpenTag)
 			{
 				// Now we're at a tag.
-//				AtTag();
+				AtTag();
 			}
 		}
 
@@ -330,7 +324,7 @@
 					throw new InvalidOperationException("Context has not been set.");
 				}
 
-				using (Context.StartBlock(BlockType.Text))
+				using (Context.StartBlock(BlockType.Document))
 				{
 					if (!NextToken())
 					{

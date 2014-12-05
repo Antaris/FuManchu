@@ -1,6 +1,7 @@
 ﻿namespace FuManchu.Parser.SyntaxTree
 {
 	using System.Diagnostics;
+	using System.Text;
 	using FuManchu.Text;
 
 	/// <summary>
@@ -43,6 +44,13 @@
 		/// <param name="node">The other node.</param>
 		/// <returns>True if the nodes are equivalent otherwise false.</returns>
 		public abstract bool EquivalentTo(SyntaxTreeNode node);
+
+		/// <summary>
+		/// Determines if the given node is equivalent to the current node.
+		/// </summary>
+		/// <param name="node">The other node.</param>
+		/// <returns>True if the nodes are equivalent otherwise false.</returns>
+		public abstract bool EquivalentTo(SyntaxTreeNode node, StringBuilder builder, int level);
 
 #if DEBUG
 		public virtual string DebugToString()
