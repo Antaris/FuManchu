@@ -54,6 +54,8 @@
 				// Get the tag name and set it for the block.
 				tagName = LastSpanContent();
 
+				Context.CurrentBlock.Name = tagName;
+
 				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)
 				{
 					// Accept all the whitespace.
@@ -192,8 +194,9 @@
 				string name = LastSpanContent();
 				if (tagName == "if" && name == "else")
 				{
-					// Change the tag type to ensure this is mathed as a tag element.
+					// Change the tag type to ensure this is matched as a tag element.
 					Context.CurrentBlock.Type = BlockType.TagElement;
+					Context.CurrentBlock.Name = "else";
 				}
 
 				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)

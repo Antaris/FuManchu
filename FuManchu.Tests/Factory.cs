@@ -71,6 +71,29 @@
 			return Span(SpanKind.Parameter, Symbol(content, HandlebarsSymbolType.Identifier));
 		}
 
+		public Span Parameter(params ISymbol[] symbols)
+		{
+			return Span(SpanKind.Parameter, symbols);
+		}
+
+		public Span Map(string identifier, string value, HandlebarsSymbolType valueType)
+		{
+			return Span(SpanKind.Map,
+				Symbol(identifier, HandlebarsSymbolType.Identifier),
+				Symbol("=", HandlebarsSymbolType.Assign),
+				Symbol(value, valueType));
+		}
+
+		public Span Map(string identifier, params ISymbol[] valueSymbols)
+		{
+			return Span(SpanKind.Map,
+				new ISymbol[]
+				{
+					Symbol(identifier, HandlebarsSymbolType.Identifier),
+					Symbol("=", HandlebarsSymbolType.Assign)
+				}.Concat(valueSymbols).ToArray());
+		}
+
 		public Span MetaCode(string content, HandlebarsSymbolType type)
 		{
 			return Span(SpanKind.MetaCode, Symbol(content, type));
