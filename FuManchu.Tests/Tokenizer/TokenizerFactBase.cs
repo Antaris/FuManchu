@@ -81,7 +81,7 @@
 						success = false;
 						for (; counter < expected.Length; counter++)
 						{
-							output.AppendFormat("F: Expected: {0}; Action: << None >>\n", expected[counter]);
+							output.AppendFormat("F: Expected: {0}; Actual: << None >>\n", expected[counter]);
 						}
 					}
 				}
@@ -142,7 +142,7 @@
 						success = false;
 						for (; counter < expected.Length; counter++)
 						{
-							output.AppendFormat("F: Expected: {0}; Action: << None >>\n", expected[counter]);
+							output.AppendFormat("F: Expected: {0}; Actual: << None >>\n", expected[counter]);
 						}
 					}
 				}

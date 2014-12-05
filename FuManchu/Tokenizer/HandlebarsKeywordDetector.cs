@@ -13,7 +13,8 @@
 			{ "if", HandlebarsKeyword.If },
 			{ "unless", HandlebarsKeyword.Unless },
 			{ "else", HandlebarsKeyword.Else },
-			{ "with", HandlebarsKeyword.With }
+			{ "with", HandlebarsKeyword.With },
+			{ "this", HandlebarsKeyword.This }
 		};
 
 		/// <summary>

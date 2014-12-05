@@ -156,18 +156,6 @@
 					// We've matched a & character
 					return Transition(EndSymbol(HandlebarsSymbolType.Ampersand), () => ContinueTagContent(false));
 				}
-//				case '/':
-//				{
-//					TakeCurrent();
-//					// We've matched a . character - possibly part of an expression.
-//					return Transition(EndSymbol(HandlebarsSymbolType.Dot), () => ContinueTagContent(false));
-//				}
-//				case '.':
-//				{
-//					TakeCurrent();
-//					// We've matched a & character
-//					return Transition(EndSymbol(HandlebarsSymbolType.Ampersand), () => ContinueTagContent(false));
-//				}
 				default:
 				{
 					// Transition to the tag content.
@@ -242,8 +230,16 @@
 				case '"':
 				case '\'':
 				{
+					var quote = CurrentCharacter;
+					TakeCurrent();
 					// We've reached a quoted literal.
-					return QuotedLiteral(CurrentCharacter);
+					return QuotedLiteral(quote);
+				}
+				case '=':
+				{
+					// We're reached a map assignment.
+					TakeCurrent();
+					return Stay(EndSymbol(HandlebarsSymbolType.Assign));
 				}
 				case '}':
 				{
