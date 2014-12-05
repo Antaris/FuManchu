@@ -21,5 +21,10 @@
 		{
 			return new HandlebarsTokenizer(source);
 		}
+
+		protected virtual HandlebarsSymbol S(int absolute, int line, int character, string content, HandlebarsSymbolType type)
+		{
+			return new HandlebarsSymbol(absolute, line, character, content, type);
+		}
 	}
 }
