@@ -43,8 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Text\LineTrackingStringBufferFacts.cs" />
     <Compile Include="Text\SourceLocationFacts.cs" />
     <Compile Include="Text\SourceLocationTrackerFacts.cs" />
+    <Compile Include="Tokenizer\HandlebarsTokenizerFactBase.cs" />
+    <Compile Include="Tokenizer\HandlebarsTokenizerFacts.cs" />
+    <Compile Include="Tokenizer\HandlebarsTokenizerTagFacts.cs" />
+    <Compile Include="Tokenizer\TokenizerFactBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

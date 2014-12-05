@@ -63,11 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateMachine.cs" />
     <Compile Include="StateResult.cs" />
-    <Compile Include="Text\BacktrackContext.cs" />
     <Compile Include="Text\ITextBuffer.cs" />
     <Compile Include="Text\ITextDocument.cs" />
     <Compile Include="Text\LineTrackingStringBuffer.cs" />
-    <Compile Include="Text\LookaheadTextReader.cs" />
     <Compile Include="Text\LookaheadToken.cs" />
     <Compile Include="Text\SeekableTextReader.cs" />
     <Compile Include="Text\SourceLocation.cs" />
