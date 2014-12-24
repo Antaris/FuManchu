@@ -1,5 +1,6 @@
 ﻿namespace FuManchu.Tests
 {
+	using System;
 	using System.Linq;
 	using FuManchu.Parser.SyntaxTree;
 	using FuManchu.Text;
@@ -84,14 +85,14 @@
 				Symbol(value, valueType));
 		}
 
-		public Span Map(string identifier, params ISymbol[] valueSymbols)
+		public Span Map(string identifier, Func<ISymbol[]> valueSymbols)
 		{
 			return Span(SpanKind.Map,
 				new ISymbol[]
 				{
 					Symbol(identifier, HandlebarsSymbolType.Identifier),
 					Symbol("=", HandlebarsSymbolType.Assign)
-				}.Concat(valueSymbols).ToArray());
+				}.Concat(valueSymbols()).ToArray());
 		}
 
 		public Span MetaCode(string content, HandlebarsSymbolType type)

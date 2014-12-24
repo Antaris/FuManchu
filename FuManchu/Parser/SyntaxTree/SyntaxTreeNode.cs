@@ -36,7 +36,7 @@
 		/// Accepts a parser visitor to walk the syntax tree.
 		/// </summary>
 		/// <param name="visitor">The parser visitor</param>
-		public abstract void Accept(ParserVisitor visitor);
+		public abstract void Accept(IParserVisitor visitor);
 
 		/// <summary>
 		/// Determines if the given node is equivalent to the current node.

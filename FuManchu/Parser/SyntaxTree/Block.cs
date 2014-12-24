@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text;
+	using FuManchu.Tags;
 	using FuManchu.Text;
 
 	/// <summary>
@@ -16,7 +17,7 @@
 		/// </summary>
 		/// <param name="source">The source block builder.</param>
 		public Block(BlockBuilder source)
-			: this(source.Type, source.Name, source.Children)
+			: this(source.Type, source.Name, source.Children, source.Descriptor)
 		{
 			source.Reset();
 		}
@@ -27,11 +28,13 @@
 		/// <param name="type">The block type.</param>
 		/// <param name="name">The block name.</param>
 		/// <param name="contents">The child contents.</param>
-		protected Block(BlockType type, string name, IEnumerable<SyntaxTreeNode> contents)
+		/// <param name="descriptor">The tag descriptor.</param>
+		protected Block(BlockType type, string name, IEnumerable<SyntaxTreeNode> contents, TagDescriptor descriptor)
 		{
 			Type = type;
 			Name = name;
 			Children = contents;
+			Descriptor = descriptor;
 
 			foreach (var node in contents)
 			{
@@ -43,6 +46,11 @@
 		/// Gets the children of this block.
 		/// </summary>
 		public IEnumerable<SyntaxTreeNode> Children { get; private set; }
+
+		/// <summary>
+		/// Gets or sets the tag descriptor.
+		/// </summary>
+		public TagDescriptor Descriptor { get; set; }
 
 		/// <inheritdoc />
 		public override bool IsBlock
@@ -79,7 +87,7 @@
 		public string Name { get; set; }
 
 		/// <inheritdoc />
-		public override void Accept(ParserVisitor visitor)
+		public override void Accept(IParserVisitor visitor)
 		{
 			visitor.VisitBlock(this);
 		}

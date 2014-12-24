@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Linq;
 	using FuManchu.Parser.SyntaxTree;
 
 	/// <summary>
@@ -22,30 +23,39 @@
 				var arguments = GetArgumentsAndMappedParameters(block.Item1, context);
 				if (block.Item1.Name == "if" || block.Item1.Name == "elseif")
 				{
-					
+					if (IsTruthy(arguments.Item1[0]))
+					{
+						RenderChildren(block.Item2, context);
+						break;
+					}
+				}
+				else
+				{
+					RenderChildren(block.Item2, context);
+					break;
 				}
 			}
 		}
 
 		/// <inheritdoc />
-		protected override void Render(Block block, object[] arguments, Dictionary<string, object> maps, RenderContext context, TextWriter writer)
-		{
-
-		}
+		protected override void Render(Block block, object[] arguments, Dictionary<string, object> maps, RenderContext context, TextWriter writer) { }
 
 		/// <summary>
 		/// Parses the conditional blocks.
 		/// </summary>
 		/// <param name="target">The target.</param>
-		/// <returns></returns>
-		private List<Tuple<Block, List<SyntaxTreeNode>>> ParseConditionalBlocks(Block target)
+		/// <returns>The set of parsed conditional blocks.</returns>
+		private IEnumerable<Tuple<Block, List<SyntaxTreeNode>>> ParseConditionalBlocks(Block target)
 		{
 			var result = new List<Tuple<Block, List<SyntaxTreeNode>>>();
 
 			Block current = null;
 			var nodes = new List<SyntaxTreeNode>();
 
-			foreach (var node in target.Children)
+			var children = target.Children.ToList();
+			children.RemoveAt(children.Count - 1);
+
+			foreach (var node in children)
 			{
 				bool isNewElement = false;
 				if (node.IsBlock)
@@ -56,7 +66,7 @@
 						if (current != null)
 						{
 							result.Add(Tuple.Create(current, nodes));
-							result = new List<Tuple<Block, List<SyntaxTreeNode>>>();
+							nodes = new List<SyntaxTreeNode>();
 						}
 						current = block;
 						isNewElement = true;

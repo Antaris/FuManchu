@@ -4,7 +4,9 @@
 	using System.Text;
 	using FuManchu.Parser;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Tags;
 	using FuManchu.Text;
+	using FuManchu.Tokenizer;
 	using T = FuManchu.Tokenizer.HandlebarsSymbolType;
 	using Xunit;
 
@@ -182,7 +184,7 @@
 		{
 			var factory = new Factory();
 
-			ParserTest("{{#list model.people class=model.cssClass age=./model.ages}}", factory.Document(
+			var expected = factory.Document(
 				factory.Tag("list",
 					factory.TagElement("list",
 						factory.MetaCode("{{", T.OpenTag),
@@ -193,29 +195,38 @@
 							factory.Symbol("model", T.Identifier),
 							factory.Symbol(".", T.Dot),
 							factory.Symbol("people", T.Identifier)
-						),
+							),
 						factory.WhiteSpace(1),
 						factory.Map("class",
-							factory.Symbol("model", T.Identifier),
-							factory.Symbol(".", T.Dot),
-							factory.Symbol("cssClass", T.Identifier)
-						),
+							() => new ISymbol[]
+							      {
+								      factory.Symbol("model", T.Identifier),
+								      factory.Symbol(".", T.Dot),
+								      factory.Symbol("cssClass", T.Identifier)
+							      }),
 						factory.WhiteSpace(1),
 						factory.Map("age",
-							factory.Symbol(".", T.Dot),
-							factory.Symbol("/", T.Slash),
-							factory.Symbol("model", T.Identifier),
-							factory.Symbol(".", T.Dot),
-							factory.Symbol("ages", T.Identifier)
-						),
+							() => new ISymbol[]
+							      {
+								      factory.Symbol(".", T.Dot),
+								      factory.Symbol("/", T.Slash),
+								      factory.Symbol("model", T.Identifier),
+								      factory.Symbol(".", T.Dot),
+								      factory.Symbol("ages", T.Identifier)
+							      }
+							),
 						factory.MetaCode("}}", T.CloseTag)
+						)
 					)
-				)
-			));
+				);
+
+			ParserTest("{{#list model.people class=model.cssClass age=./model.ages}}", expected);
 		}
 
-		private void ParserTest(string content, Block document)
+		private void ParserTest(string content, Block document, TagProvidersCollection providers = null)
 		{
+			providers = providers ?? TagProvidersCollection.Default;
+
 			var output = new StringBuilder();
 			using (var reader = new StringReader(content))
 			{
@@ -224,7 +235,7 @@
 					var errors = new ParserErrorSink();
 					var parser = new HandlebarsParser();
 
-					var context = new ParserContext(source, parser, errors);
+					var context = new ParserContext(source, parser, errors, providers);
 					parser.Context = context;
 
 					parser.ParseDocument();

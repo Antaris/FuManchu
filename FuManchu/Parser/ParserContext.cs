@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Tags;
 	using FuManchu.Text;
 
 	/// <summary>
@@ -21,11 +22,12 @@
 		/// <param name="source">The source.</param>
 		/// <param name="parser">The parser.</param>
 		/// <param name="errorSink">The error sink.</param>
-		public ParserContext(ITextDocument source, ParserBase parser, ParserErrorSink errorSink)
+		public ParserContext(ITextDocument source, ParserBase parser, ParserErrorSink errorSink, TagProvidersCollection providers)
 		{
 			Source = new TextDocumentReader(source);
 			Parser = parser;
 			_errorSink = errorSink;
+			TagProviders = providers;
 		}
 
 		/// <summary>
@@ -91,6 +93,11 @@
 		public TextDocumentReader Source { get; set; }
 
 		/// <summary>
+		/// Gets or sets the collection of tag providers.
+		/// </summary>
+		public TagProvidersCollection TagProviders { get; set; }
+
+		/// <summary>
 		/// Adds the span.
 		/// </summary>
 		/// <param name="span">The span.</param>
@@ -101,6 +108,12 @@
 			if (_blockStack.Count == 0)
 			{
 				throw new InvalidOperationException("No current block");
+			}
+
+			span.Previous = LastSpan;
+			if (LastSpan != null)
+			{
+				LastSpan.Next = span;
 			}
 
 			_blockStack.Peek().Children.Add(span);

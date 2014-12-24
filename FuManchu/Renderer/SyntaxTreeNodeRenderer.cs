@@ -1,6 +1,7 @@
 ﻿namespace FuManchu.Renderer
 {
 	using System;
+	using System.Collections;
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
@@ -13,6 +14,72 @@
 	/// <typeparam name="T">The node type.</typeparam>
 	public abstract class SyntaxTreeNodeRenderer<T> : ISyntaxTreeNodeRenderer<T> where T : SyntaxTreeNode
 	{
+		/// <summary>
+		/// Determines if the given value is truthy.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>True if the value is truthy, otherwise false.</returns>
+		public bool IsTruthy(object value)
+		{
+			if (value == null)
+			{
+				return false;
+			}
+
+			if (value is string)
+			{
+				if (string.IsNullOrEmpty((string)value))
+				{
+					return false;
+				}
+			}
+
+			if (value is Array)
+			{
+				if (((Array)value).Length == 0)
+				{
+					return false;
+				}
+			}
+
+			if (value is ICollection)
+			{
+				if (((ICollection)value).Count == 0)
+				{
+					return false;
+				}
+			}
+
+			switch (Type.GetTypeCode(value.GetType()))
+			{
+				case TypeCode.Boolean:
+				{
+					return (bool)value;
+				}
+				case TypeCode.Byte:
+				case TypeCode.Int16:
+				case TypeCode.Int32:
+				case TypeCode.Int64:
+				case TypeCode.UInt16:
+				case TypeCode.UInt32:
+				case TypeCode.UInt64:
+				{
+					return ((byte)value == 0);
+				}
+				case TypeCode.Decimal:
+				{
+					return ((Decimal)value == 0.0m);
+				}
+				case TypeCode.Single:
+				case TypeCode.Double:
+				{
+					return ((float)value == 0.0F);
+				}
+			}
+
+			return true;
+		}
+
 		/// <inheritdoc />
 		public abstract void Render(T target, RenderContext context, TextWriter writer);
 
@@ -33,14 +100,14 @@
 			{
 				if (span.Kind == SpanKind.Parameter)
 				{
-					arguments.Add(ResolveValue(span.Symbols, context));
+					arguments.Add(context.ResolveValue(span));
 				}
 				else
 				{
 					var symbols = span.Symbols.Cast<HandlebarsSymbol>().ToList();
 					string key = symbols[0].Content;
 
-					object value = ResolveValue(symbols.Skip(2), context);
+					object value = context.ResolveValue(span);
 
 					if (maps.ContainsKey(key))
 					{
@@ -54,18 +121,6 @@
 			}
 
 			return Tuple.Create(arguments.ToArray(), maps);
-		}
-
-		/// <summary>
-		/// Resolves the value for the given
-		/// </summary>
-		/// <param name="symbols">The symbols.</param>
-		/// <param name="context">The render context.</param>
-		/// <returns>The resolved value.</returns>
-		protected object ResolveValue(IEnumerable<ISymbol> symbols, RenderContext context)
-		{
-			// Do work here.
-			return null;
 		}
 	}
 }

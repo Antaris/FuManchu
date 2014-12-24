@@ -39,9 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binding\EfficientTypePropertyKey.cs" />
+    <Compile Include="Binding\ExpressionMetadataProvider.cs" />
+    <Compile Include="Binding\Metadata\AssociatedMetadataProvider.cs" />
+    <Compile Include="Binding\Metadata\DefaultModelMetadataProvider.cs" />
+    <Compile Include="Binding\Metadata\IModelMetadataProvider.cs" />
+    <Compile Include="Binding\TemplateData.cs" />
+    <Compile Include="Binding\PropertyHelper.cs" />
+    <Compile Include="Binding\TemplateDataEvaluator.cs" />
+    <Compile Include="Binding\TemplateDataInfo.cs" />
+    <Compile Include="Binding\TryGetValueProvider.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="HashCodeCombiner.cs" />
+    <Compile Include="Binding\Metadata\ModelMetadata.cs" />
     <Compile Include="Parser\HandlebarsLanguageCharacteristics.cs" />
     <Compile Include="Parser\HandlebarsParser.cs" />
     <Compile Include="Parser\LanguageCharacteristics.cs" />
@@ -61,8 +72,29 @@
     <Compile Include="Parser\SyntaxTree\SyntaxTreeNode.cs" />
     <Compile Include="Parser\TokenizerBackedParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\BlockRenderer.cs" />
+    <Compile Include="Renderer\ConditionalBlockRenderer.cs" />
+    <Compile Include="Renderer\EnumerableBlockRenderer.cs" />
+    <Compile Include="Renderer\ExpressionSpanRenderer.cs" />
+    <Compile Include="Renderer\IBlockRenderer.cs" />
+    <Compile Include="Parser\IParserVisitor.cs" />
+    <Compile Include="Renderer\ISpanRenderer.cs" />
+    <Compile Include="Renderer\ISyntaxTreeNodeRenderer.cs" />
+    <Compile Include="Renderer\RenderContextScope.cs" />
+    <Compile Include="Renderer\RenderingParserVisitor.cs" />
+    <Compile Include="Renderer\RenderContext.cs" />
+    <Compile Include="Renderer\SpanRenderer.cs" />
+    <Compile Include="Renderer\SyntaxTreeNodeRenderer.cs" />
+    <Compile Include="Renderer\TextSpanRenderer.cs" />
+    <Compile Include="Renderer\MetaCodeSpanRenderer.cs" />
+    <Compile Include="Renderer\ScopeBlockRenderer.cs" />
+    <Compile Include="Renderer\UnlessBlockRenderer.cs" />
     <Compile Include="StateMachine.cs" />
     <Compile Include="StateResult.cs" />
+    <Compile Include="Tags\ITagProvider.cs" />
+    <Compile Include="Tags\StandardTagProvider.cs" />
+    <Compile Include="Tags\TagDescriptor.cs" />
+    <Compile Include="Tags\TagProvidersCollection.cs" />
     <Compile Include="Text\ITextBuffer.cs" />
     <Compile Include="Text\ITextDocument.cs" />
     <Compile Include="Text\LineTrackingStringBuffer.cs" />
@@ -84,6 +116,7 @@
     <Compile Include="Tokenizer\SymbolBase.cs" />
     <Compile Include="Tokenizer\Tokenizer.cs" />
     <Compile Include="Tokenizer\TokenizerView.cs" />
+    <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

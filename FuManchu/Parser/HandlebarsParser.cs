@@ -1,9 +1,10 @@
 ﻿namespace FuManchu.Parser
 {
 	using System;
-	using System.Collections.Generic;
 	using System.Linq;
+	using System.Runtime.Remoting.Services;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Tags;
 	using FuManchu.Tokenizer;
 
 	/// <summary>
@@ -25,6 +26,7 @@
 			var parent = Context.CurrentBlock;
 
 			string tagName = null;
+			TagDescriptor descriptor = null;
 			// Start a new block.
 			Context.StartBlock(BlockType.Tag);
 
@@ -53,32 +55,37 @@
 
 				// Get the tag name and set it for the block.
 				tagName = LastSpanContent();
+				descriptor = Context.TagProviders.GetDescriptor(tagName);
 
 				Context.CurrentBlock.Name = tagName;
+				Context.CurrentBlock.Descriptor = descriptor;
 
 				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)
 				{
-					// Accept all the whitespace.
-					AcceptAll(HandlebarsSymbolType.WhiteSpace);
-					// Take all the whitespace, and output that.
-					Output(SpanKind.WhiteSpace);
-
-					if (CurrentSymbol.Type == HandlebarsSymbolType.Identifier || CurrentSymbol.Type == HandlebarsSymbolType.Keyword)
+					if (CurrentSymbol.Type == HandlebarsSymbolType.WhiteSpace)
 					{
-						// We're at an identifier or keyword.
+						// Accept all the whitespace.
+						AcceptAll(HandlebarsSymbolType.WhiteSpace);
+						// Take all the whitespace, and output that.
+						Output(SpanKind.WhiteSpace);
+					}
+
+					if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
+					{
+						// We're in a parameterised argument (e.g. one=two
 						AcceptAndMoveNext();
-						if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
+						// Accept everything until the next whitespace or closing tag.
+						AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+						// Output this as a map.
+						Output(SpanKind.Map);
+					}
+					else
+					{
+						// Accept everything until the next whitespace or closing tag.
+						AcceptUntil(HandlebarsSymbolType.Assign, HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+						if (CurrentSymbol.Type != HandlebarsSymbolType.Assign)
 						{
-							// We're in a parameterised argument (e.g. one=two
-							AcceptAndMoveNext();
-							// Accept everything until the next whitespace or closing tag.
-							AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
-							// Output this as a map.
-							Output(SpanKind.Map);
-						}
-						else if (CurrentSymbol.Type == HandlebarsSymbolType.WhiteSpace || CurrentSymbol.Type == HandlebarsSymbolType.CloseTag || CurrentSymbol.Type == HandlebarsSymbolType.RawCloseTag || CurrentSymbol.Type == HandlebarsSymbolType.Tilde)
-						{
-							// We're at a single parameter.
+							// Output this as a parameter.
 							Output(SpanKind.Parameter);
 						}
 					}
@@ -104,7 +111,8 @@
 			}
 			else
 			{
-				Context.CurrentBlock.Name = tagName;	
+				Context.CurrentBlock.Name = tagName;
+				Context.CurrentBlock.Descriptor = descriptor;
 			}
 
 			// Switch back to parsing the content of the block.
@@ -192,7 +200,9 @@
 				Output(SpanKind.Expression);
 
 				string name = LastSpanContent();
-				if (tagName == "if" && name == "else")
+
+				// Special case - else expressions become tag elements themselves.
+				if (name == "else")
 				{
 					// Change the tag type to ensure this is matched as a tag element.
 					Context.CurrentBlock.Type = BlockType.TagElement;
@@ -201,29 +211,33 @@
 
 				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)
 				{
-					// Accept all the whitespace.
-					AcceptAll(HandlebarsSymbolType.WhiteSpace);
-					// Take all the whitespace, and output that.
-					Output(SpanKind.WhiteSpace);
-
-					if (CurrentSymbol.Type == HandlebarsSymbolType.Identifier || CurrentSymbol.Type == HandlebarsSymbolType.Keyword)
+					if (CurrentSymbol.Type == HandlebarsSymbolType.WhiteSpace)
 					{
-						// We're at an identifier or keyword.
+						// Accept all the whitespace.
+						AcceptAll(HandlebarsSymbolType.WhiteSpace);
+						// Take all the whitespace, and output that.
+						Output(SpanKind.WhiteSpace);
+					}
+
+					if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
+					{
+						// We're in a parameterised argument (e.g. one=two
 						AcceptAndMoveNext();
+						// Accept everything until the next whitespace or closing tag.
+						AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+						// Output this as a map.
+						Output(SpanKind.Map);
+					}
+					else
+					{
+						// Accept everything until the next whitespace or closing tag.
+						AcceptUntil(HandlebarsSymbolType.Assign, HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
 						if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
 						{
-							// We're in a parameterised argument (e.g. one=two
-							AcceptAndMoveNext();
-							// Accept everything until the next whitespace or closing tag.
-							AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
-							// Output this as a map.
-							Output(SpanKind.Map);
+							continue;
 						}
-						else if (CurrentSymbol.Type == HandlebarsSymbolType.WhiteSpace || CurrentSymbol.Type == HandlebarsSymbolType.CloseTag || CurrentSymbol.Type == HandlebarsSymbolType.RawCloseTag || CurrentSymbol.Type == HandlebarsSymbolType.Tilde)
-						{
-							// We're at a single parameter.
-							Output(SpanKind.Parameter);
-						}
+						// Output this as a map.
+						Output(SpanKind.Parameter);
 					}
 				}
 

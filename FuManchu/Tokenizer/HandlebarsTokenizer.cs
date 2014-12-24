@@ -156,6 +156,12 @@
 					// We've matched a & character
 					return Transition(EndSymbol(HandlebarsSymbolType.Ampersand), () => ContinueTagContent(false));
 				}
+				case '@':
+				{
+					TakeCurrent();
+					// We've matched a variable reference character.
+					return Transition(EndSymbol(HandlebarsSymbolType.At), () => ContinueTagContent(false));
+				}
 				default:
 				{
 					// Transition to the tag content.
@@ -212,6 +218,21 @@
 				case '.':
 				{
 					TakeCurrent();
+					if (CurrentCharacter == '/')
+					{
+						// We've matched a link to the current context.
+						TakeCurrent();
+						return Stay(EndSymbol(HandlebarsSymbolType.CurrentContext));
+					}
+
+					if (CurrentCharacter == '.' && Peek() == '/')
+					{
+						// We've matched a link to the parent context.
+						TakeCurrent();
+						TakeCurrent();
+						return Stay(EndSymbol(HandlebarsSymbolType.ParentContext));
+					}
+
 					// We've matched a dot, which could be part of an expression.
 					return Stay(EndSymbol(HandlebarsSymbolType.Dot));
 				}
@@ -226,6 +247,12 @@
 					// Take all the available whitespace.
 					TakeUntil(c => !ParserHelpers.IsWhiteSpace(c));
 					return Stay(EndSymbol(HandlebarsSymbolType.WhiteSpace));
+				}
+				case '~':
+				{
+					TakeCurrent();
+					// We've reached a '~' character, so jump to the end of the tag.
+					return Transition(EndSymbol(HandlebarsSymbolType.Tilde), () => EndTag(raw));
 				}
 				case '"':
 				case '\'':

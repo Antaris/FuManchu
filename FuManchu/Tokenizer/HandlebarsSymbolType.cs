@@ -30,11 +30,15 @@
 		Negate,					// ^
 		Ampersand,				// &
 		Dash,					// -
+		At,						// @
 
 		OpenTag,				// {{
 		RawOpenTag,				// {{{
 		CloseTag,				// }}
 		RawCloseTag,			// }}}
+
+		CurrentContext,			// ./
+		ParentContext,			// ../
 
 		Text					// All other text.
 	}

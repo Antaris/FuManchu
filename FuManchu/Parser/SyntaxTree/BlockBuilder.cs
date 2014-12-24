@@ -1,6 +1,7 @@
 ﻿namespace FuManchu.Parser.SyntaxTree
 {
 	using System.Collections.Generic;
+	using FuManchu.Tags;
 
 	/// <summary>
 	/// Represents a builder for creating block instances.
@@ -23,6 +24,7 @@
 		{
 			Type = original.Type;
 			Name = original.Name;
+			Descriptor = original.Descriptor;
 			Children = new List<SyntaxTreeNode>(original.Children);
 		}
 
@@ -30,6 +32,11 @@
 		/// Gets the set of child nodes
 		/// </summary>
 		public IList<SyntaxTreeNode> Children { get; private set; }
+
+		/// <summary>
+		/// Gets or sets the tag descriptor.
+		/// </summary>
+		public TagDescriptor Descriptor { get; set; }
 
 		/// <summary>
 		/// Gets or sets the name.
@@ -56,6 +63,7 @@
 		public virtual void Reset()
 		{
 			Type = BlockType.Text;
+			Descriptor = null;
 			Name = null;
 			Children = new List<SyntaxTreeNode>();
 		}

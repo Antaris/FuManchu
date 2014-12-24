@@ -5,7 +5,7 @@
 	/// <summary>
 	/// Represents a disposable action.
 	/// </summary>
-	internal class DisposableAction : IDisposable
+	public class DisposableAction : IDisposable
 	{
 		private readonly Action _action;
 		private bool _disposed;

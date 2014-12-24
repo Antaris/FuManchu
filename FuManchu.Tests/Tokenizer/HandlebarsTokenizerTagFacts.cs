@@ -38,9 +38,9 @@
 		public void RecognisesExpressionTag()
 		{
 			TestTokenizerSymbols("{{person.name}}", T.OpenTag, T.Identifier, T.Dot, T.Identifier, T.CloseTag);
-			TestTokenizerSymbols("{{./name}}", T.OpenTag, T.Dot, T.Slash, T.Identifier, T.CloseTag);
+			TestTokenizerSymbols("{{./name}}", T.OpenTag, T.CurrentContext, T.Identifier, T.CloseTag);
 			TestTokenizerSymbols("{{this/name}}", T.OpenTag, T.Keyword, T.Slash, T.Identifier, T.CloseTag);
-			TestTokenizerSymbols("{{../name}}", T.OpenTag, T.Dot, T.Dot, T.Slash, T.Identifier, T.CloseTag);
+			TestTokenizerSymbols("{{../name}}", T.OpenTag, T.ParentContext, T.Identifier, T.CloseTag);
 		}
 
 		[Fact]

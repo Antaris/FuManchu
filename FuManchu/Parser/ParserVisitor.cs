@@ -1,21 +1,45 @@
 ﻿namespace FuManchu.Parser
 {
+	using System.Collections.Generic;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Renderer;
 
 	/// <summary>
 	/// Represents a visitor for walking a parsed syntax tree.
 	/// </summary>
-	public abstract class ParserVisitor
+	public abstract class ParserVisitor<TScope> : IParserVisitor
 	{
+		private readonly Stack<TScope> _scopes = new Stack<TScope>();
+
 		/// <summary>
-		/// Called when the visitor has finished walking the syntax tree.
+		/// Gets the scope.
 		/// </summary>
+		public TScope Scope
+		{
+			get { return _scopes.Peek(); }
+		}
+
+		/// <inheritdoc />
 		public virtual void OnComplete() { }
 
 		/// <summary>
-		/// Visits the block.
+		/// Reverts the current scope.
 		/// </summary>
-		/// <param name="block">The block.</param>
+		public virtual void RevertScope()
+		{
+			_scopes.Pop();
+		}
+
+		/// <summary>
+		/// Sets the current scope.
+		/// </summary>
+		/// <param name="scope">The scope instance.</param>
+		public virtual void SetScope(TScope scope)
+		{
+			_scopes.Push(scope);
+		}
+
+		/// <inheritdoc />
 		public virtual void VisitBlock(Block block)
 		{
 			VisitStartBlock(block);
@@ -32,16 +56,10 @@
 		/// <param name="block">The block.</param>
 		public virtual void VisitEndBlock(Block block) { }
 
-		/// <summary>
-		/// Processed after an error has been encountered.
-		/// </summary>
-		/// <param name="error">The error.</param>
+		/// <inheritdoc />
 		public virtual void VisitError(Error error) { }
 
-		/// <summary>
-		/// Visits the span.
-		/// </summary>
-		/// <param name="span">The span.</param>
+		/// <inheritdoc />
 		public virtual void VisitSpan(Span span)
 		{
 			

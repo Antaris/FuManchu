@@ -67,7 +67,7 @@
 		public IEnumerable<ISymbol> Symbols { get; private set; } 
 
 		/// <inheritdoc />
-		public override void Accept(ParserVisitor visitor)
+		public override void Accept(IParserVisitor visitor)
 		{
 			visitor.VisitSpan(this);
 		}
