@@ -19,6 +19,7 @@
 			{ SpanKind.MetaCode, new MetaCodeSpanRenderer() },
 			{ SpanKind.Expression, new ExpressionSpanRenderer() }
 		};
+		private readonly ImplicitBlockRenderer _implicitRenderer = new ImplicitBlockRenderer();
 
 		/// <summary>
 		/// Initialises a new instance of <see cref="RenderingParserVisitor"/>

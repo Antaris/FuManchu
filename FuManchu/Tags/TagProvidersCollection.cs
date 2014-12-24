@@ -4,6 +4,7 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
+	using FuManchu.Renderer;
 
 	/// <summary>
 	/// Represents the collection of available tag providers.
@@ -95,7 +96,13 @@
 
 		public TagDescriptor GetDescriptor(string tagName)
 		{
-			return _providers.AsQueryable().SelectMany(p => p.GetTags()).FirstOrDefault(p => string.Equals(p.Name, tagName, StringComparison.OrdinalIgnoreCase));
+			return _providers.AsQueryable().SelectMany(p => p.GetTags()).FirstOrDefault(p => string.Equals(p.Name, tagName, StringComparison.OrdinalIgnoreCase))
+			       ?? CreateImplictTagDescriptor(tagName);
+		}
+
+		public TagDescriptor CreateImplictTagDescriptor(string tagName)
+		{
+			return new TagDescriptor(tagName, new ImplicitBlockRenderer(), requiredArguments: 0, maxArguments: 0, allowMappedParamters: false, hasChildContent: true);
 		}
 
 		/// <inheritdoc />

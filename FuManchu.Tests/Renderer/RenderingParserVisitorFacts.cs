@@ -15,6 +15,7 @@
 		public void CanRenderComplexExpression()
 		{
 			RenderTest("Hello {{person.forename}} {{person.surname}}!", "Hello Matthew Abbott!", new { person = new { forename = "Matthew", surname = "Abbott" } });
+			RenderTest("Hello {{person/forename}} {{person/surname}}!", "Hello Matthew Abbott!", new { person = new { forename = "Matthew", surname = "Abbott" } });
 		}
 
 		[Fact]

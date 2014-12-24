@@ -218,12 +218,36 @@
 				expression = expression.Substring(1);
 			}
 
+			return ResolveValue(context, templateData, expression, isVariableLookup);
+		}
+
+		/// <summary>
+		/// Resolves the value for the given expression.
+		/// </summary>
+		/// <param name="expression">The expression.</param>
+		/// <param name="isVariableLookup">True if this is a variable lookup, otherwise false.</param>
+		/// <returns>The resolved value.</returns>
+		public object ResolveValue(string expression, bool isVariableLookup)
+		{
+			return ResolveValue(this, TemplateData, expression, isVariableLookup);
+		}
+
+		/// <summary>
+		/// Resolves the value for the given expression.
+		/// </summary>
+		/// <param name="context">The render context.</param>
+		/// <param name="templateData">The template data.</param>
+		/// <param name="expression">The expression.</param>
+		/// <param name="isVariableLookup">True if this is a variable lookup, otherwise false.</param>
+		/// <returns>The resolved value.</returns>
+		public static object ResolveValue(RenderContext context, TemplateData templateData, string expression, bool isVariableLookup)
+		{
 			if (isVariableLookup)
 			{
 				return context.GetVariable(expression);
 			}
 
-			var modelMetadata =  ExpressionMetadataProvider.FromStringExpression(expression, templateData, ModelMetadataProvider);
+			var modelMetadata = ExpressionMetadataProvider.FromStringExpression(expression, templateData, context.ModelMetadataProvider);
 			if (modelMetadata == null)
 			{
 				return null;

@@ -8,20 +8,27 @@
 	/// </summary>
 	public class StandardTagProvider : ITagProvider
 	{
+		internal static readonly TagDescriptor If = new TagDescriptor("if", new ConditionalBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+		internal static readonly TagDescriptor ElseIf = new TagDescriptor("elseif", new ConditionalBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+		internal static readonly TagDescriptor Else = new TagDescriptor("else", new ConditionalBlockRenderer(), 0, maxArguments: 0, allowMappedParamters: false, hasChildContent: true);
+		internal static readonly TagDescriptor Unless = new TagDescriptor("unless", new UnlessBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+		internal static readonly TagDescriptor Each = new TagDescriptor("each", new EnumerableBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+		internal static readonly TagDescriptor With = new TagDescriptor("with", new ScopeBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+
 		/// <inheritdoc />
 		public IEnumerable<TagDescriptor> GetTags()
 		{
 			// Logic tags.
-			yield return new TagDescriptor("if", new ConditionalBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
-			yield return new TagDescriptor("elseif", new ConditionalBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
-			yield return new TagDescriptor("else", new ConditionalBlockRenderer(), 0, maxArguments: 0, allowMappedParamters: false, hasChildContent: true);
-			yield return new TagDescriptor("unless", new UnlessBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+			yield return If;
+			yield return ElseIf;
+			yield return Else;
+			yield return Unless;
 
 			// Enumerator tags.
-			yield return new TagDescriptor("each", new EnumerableBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+			yield return Each;
 
 			// Scope tags.
-			yield return new TagDescriptor("with", new ScopeBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+			yield return With;
 		}
 	}
 }

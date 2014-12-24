@@ -36,6 +36,18 @@
 				children = children.Take(elseIndex).ToList();
 			}
 
+			RenderEnumerable((IEnumerable)enumerable, context, children, elseChildren);
+		}
+
+		/// <summary>
+		/// Renders the enumerable content.
+		/// </summary>
+		/// <param name="enumerable">The enumerable instance.</param>
+		/// <param name="context">The render context.</param>
+		/// <param name="children">The child block to render for each item.</param>
+		/// <param name="alternateChildren">Alternative content to render when no content is available.</param>
+		protected internal void RenderEnumerable(IEnumerable enumerable, RenderContext context, IEnumerable<SyntaxTreeNode> children, IEnumerable<SyntaxTreeNode> alternateChildren = null)
+		{
 			int index = 0;
 			bool hasItems = false;
 
@@ -88,9 +100,9 @@
 				}
 			}
 
-			if (!hasItems && elseChildren.Count > 0)
+			if (!hasItems && alternateChildren != null && alternateChildren.Any())
 			{
-				RenderChildren(elseChildren, context);
+				RenderChildren(alternateChildren, context);
 			}
 		}
 	}

@@ -78,6 +78,7 @@
     <Compile Include="Renderer\ExpressionSpanRenderer.cs" />
     <Compile Include="Renderer\IBlockRenderer.cs" />
     <Compile Include="Parser\IParserVisitor.cs" />
+    <Compile Include="Renderer\ImplicitBlockRenderer.cs" />
     <Compile Include="Renderer\ISpanRenderer.cs" />
     <Compile Include="Renderer\ISyntaxTreeNodeRenderer.cs" />
     <Compile Include="Renderer\RenderContextScope.cs" />
