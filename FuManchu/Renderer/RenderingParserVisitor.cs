@@ -19,13 +19,13 @@
 			{ SpanKind.MetaCode, new MetaCodeSpanRenderer() },
 			{ SpanKind.Expression, new ExpressionSpanRenderer() }
 		};
-		private readonly ImplicitBlockRenderer _implicitRenderer = new ImplicitBlockRenderer();
 
 		/// <summary>
 		/// Initialises a new instance of <see cref="RenderingParserVisitor"/>
 		/// </summary>
 		/// <param name="writer">The text writer</param>
 		/// <param name="model">The document model.</param>
+		/// <param name="modelMetadataProvider">The model metadata provider.</param>
 		public RenderingParserVisitor(TextWriter writer, object model, IModelMetadataProvider modelMetadataProvider)
 		{
 			_textWriter = writer;

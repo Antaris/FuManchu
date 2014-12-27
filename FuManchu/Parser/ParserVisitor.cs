@@ -2,7 +2,6 @@
 {
 	using System.Collections.Generic;
 	using FuManchu.Parser.SyntaxTree;
-	using FuManchu.Renderer;
 
 	/// <summary>
 	/// Represents a visitor for walking a parsed syntax tree.
