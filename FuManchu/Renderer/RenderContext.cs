@@ -27,6 +27,11 @@
 		}
 
 		/// <summary>
+		/// Gets or sets whether we are escaping text encoding.
+		/// </summary>
+		public bool EscapeEncoding { get; internal set; }
+
+		/// <summary>
 		/// Gets or sets the model metadata provider.
 		/// </summary>
 		public IModelMetadataProvider ModelMetadataProvider { get; set; }
@@ -52,16 +57,7 @@
 		/// <returns>The disposable used to revert the scope.</returns>
 		public RenderContextScope BeginScope(object model)
 		{
-			var context = new RenderContext(Visitor, this)
-			              {
-				              TemplateData = new TemplateData()
-				                             {
-					                             Model = model,
-					                             ModelMetadata = (model == null) ? null : ModelMetadataProvider.GetMetadataForType(() => model, model.GetType())
-				                             },
-				              ModelMetadataProvider = ModelMetadataProvider
-			              };
-
+			var context = RenderContextFactory.CreateRenderContext(this, model);
 			Visitor.SetScope(context);
 
 			return new RenderContextScope(context, () => Visitor.RevertScope());

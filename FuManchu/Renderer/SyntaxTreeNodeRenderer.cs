@@ -5,7 +5,9 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
+	using System.Net;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Text;
 	using FuManchu.Tokenizer;
 
 	/// <summary>
@@ -121,6 +123,44 @@
 			}
 
 			return Tuple.Create(arguments.ToArray(), maps);
+		}
+
+		/// <summary>
+		/// Writes the given value to the text writer.
+		/// </summary>
+		/// <param name="context">The render context.</param>
+		/// <param name="writer">The text writer.</param>
+		/// <param name="value">The value to write.</param>
+		protected virtual void Write(RenderContext context, TextWriter writer, object value)
+		{
+			if (context == null)
+			{
+				throw new ArgumentNullException("context");
+			}
+
+			if (writer == null)
+			{
+				throw new ArgumentNullException("writer");
+			}
+
+			if (value == null)
+			{
+				return;
+			}
+
+			string output = "";
+
+			var encoded = value as IEncodedString;
+			if (encoded == null)
+			{
+				output = WebUtility.HtmlEncode(value.ToString());
+			}
+			else
+			{
+				output = encoded.ToEncodedString();
+			}
+
+			writer.Write(output);
 		}
 	}
 }

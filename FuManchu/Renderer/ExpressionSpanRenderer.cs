@@ -13,10 +13,7 @@
 		{
 			object value = context.ResolveValue(target);
 
-			if (value != null)
-			{
-				writer.Write(value.ToString());
-			}
+			Write(context, writer, value);
 		}
 	}
 }

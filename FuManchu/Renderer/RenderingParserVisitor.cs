@@ -3,9 +3,11 @@
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Linq;
 	using FuManchu.Binding;
 	using FuManchu.Parser;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Tokenizer;
 
 	/// <summary>
 	/// Provides rendering of a Handlebars document.
@@ -16,7 +18,6 @@
 		private readonly IDictionary<SpanKind, ISpanRenderer> _spanRenderers = new Dictionary<SpanKind, ISpanRenderer>()
 		{
 			{ SpanKind.Text, new TextSpanRenderer() },
-			{ SpanKind.MetaCode, new MetaCodeSpanRenderer() },
 			{ SpanKind.Expression, new ExpressionSpanRenderer() }
 		};
 
@@ -31,16 +32,7 @@
 			_textWriter = writer;
 			ModelMetadataProvider = modelMetadataProvider;
 
-			var context = new RenderContext(this)
-			{
-				TemplateData = new TemplateData()
-				{
-					Model = model,
-					ModelMetadata = (model == null) ? null : modelMetadataProvider.GetMetadataForType(() => model, model.GetType())
-				},
-				ModelMetadataProvider = ModelMetadataProvider
-			};
-
+			var context = RenderContextFactory.CreateRenderContext(this, model);
 			SetScope(context);
 		}
 
@@ -62,13 +54,49 @@
 			}
 		}
 
+		/// <summary>
+		/// Visits a metacode span.
+		/// </summary>
+		/// <param name="span">The metacode span.</param>
+		public void VisitMetaCodeSpan(Span span)
+		{
+			var symbol = span.Symbols.FirstOrDefault() as HandlebarsSymbol;
+			if (symbol == null)
+			{
+				VisitError(new Error("Expected span to have at least 1 symbol", span.Start, span.Content.Length));
+			}
+
+			switch (symbol.Type)
+			{
+				case HandlebarsSymbolType.RawOpenTag:
+				{
+					// Tell the render context that it is rendering in escaped mode.
+					Scope.EscapeEncoding = true;
+					break;
+				}
+					case HandlebarsSymbolType.RawCloseTag:
+				{
+					// Tell the render context that it is no longer in escaped mode.
+					Scope.EscapeEncoding = false;
+					break;
+				}
+			}
+		}
+
 		/// <inheritdoc />
 		public override void VisitSpan(Span span)
 		{
-			ISpanRenderer renderer = null;
-			if (_spanRenderers.TryGetValue(span.Kind, out renderer))
+			if (span.Kind == SpanKind.MetaCode)
 			{
-				renderer.Render(span, Scope, _textWriter);
+				VisitMetaCodeSpan(span);
+			}
+			else
+			{
+				ISpanRenderer renderer = null;
+				if (_spanRenderers.TryGetValue(span.Kind, out renderer))
+				{
+					renderer.Render(span, Scope, _textWriter);
+				}
 			}
 		}
 	}

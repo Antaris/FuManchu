@@ -49,9 +49,9 @@
 		}
 
 		[Fact]
-		public void CanRenderAdjacentWhiteSpace()
+		public void CanCollapseWhiteSpace()
 		{
-			RenderTest("Hello {{~world~}}", "Hello   World!  ", new { world = "World!" });
+			RenderTest("Hello {{~world~}} !", "HelloWorld!", new { world = "World" });
 		}
 	}
 }

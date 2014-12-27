@@ -2,6 +2,7 @@
 {
 	using System.IO;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Text;
 
 	/// <summary>
 	/// Renders text to the output writer.
@@ -13,7 +14,7 @@
 		{
 			string content = target == null || target.Content == null ? string.Empty : target.Content;
 
-			writer.Write(content);
+			Write(context, writer, new RawString(content));
 		}
 	}
 }
