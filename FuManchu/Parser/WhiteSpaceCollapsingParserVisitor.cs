@@ -21,7 +21,7 @@
 			Block scope = null;
 			List<SyntaxTreeNode> children;
 
-			if (element.Type == BlockType.TagElement || element.Type == BlockType.Expression || element.Type == BlockType.Comment)
+			if (element.Type == BlockType.TagElement || element.Type == BlockType.Expression || element.Type == BlockType.Comment || element.Type == BlockType.Partial)
 			{
 				scope = element.Parent; // Up to parent block containing the Expression tag.
 				children = scope.Children.ToList();
@@ -72,7 +72,7 @@
 			Block scope = null;
 			List<SyntaxTreeNode> children;
 
-			if (element.Type == BlockType.TagElement || element.Type == BlockType.Expression || element.Type == BlockType.Comment)
+			if (element.Type == BlockType.TagElement || element.Type == BlockType.Expression || element.Type == BlockType.Comment || element.Type == BlockType.Partial)
 			{
 				scope = element.Parent; // Up to parent block containing the Expression tag.
 				children = scope.Children.ToList();

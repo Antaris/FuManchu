@@ -52,8 +52,10 @@
     <Compile Include="Binding\TryGetValueProvider.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="HandlebarsService.cs" />
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="Binding\Metadata\ModelMetadata.cs" />
+    <Compile Include="IHandlebarsService.cs" />
     <Compile Include="Parser\HandlebarsLanguageCharacteristics.cs" />
     <Compile Include="Parser\HandlebarsParser.cs" />
     <Compile Include="Parser\LanguageCharacteristics.cs" />

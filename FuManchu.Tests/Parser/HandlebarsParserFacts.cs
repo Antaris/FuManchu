@@ -226,6 +226,20 @@
 			ParserTest("{{#list model.people class=model.cssClass age=./model.ages}}", expected);
 		}
 
+		[Fact]
+		public void CanParsePartialTag()
+		{
+			var factory = new Factory();
+
+			ParserTest("{{>body}}", factory.Document(
+				factory.Partial(
+					factory.MetaCode("{{", T.OpenTag),
+					factory.MetaCode(">", T.RightArrow),
+					factory.Span(SpanKind.Expression, factory.Symbol("body", T.Identifier)),
+					factory.MetaCode("}}", T.CloseTag))
+				));
+		}
+
 		private void ParserTest(string content, Block document, TagProvidersCollection providers = null)
 		{
 			providers = providers ?? TagProvidersCollection.Default;

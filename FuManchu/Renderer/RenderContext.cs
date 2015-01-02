@@ -37,6 +37,11 @@
 		public IModelMetadataProvider ModelMetadataProvider { get; set; }
 
 		/// <summary>
+		/// Gets or sets the Handlebars service.
+		/// </summary>
+		public IHandlebarsService Service { get; set; }
+
+		/// <summary>
 		/// Gets or sets the template data.
 		/// </summary>
 		public TemplateData TemplateData { get; set; }

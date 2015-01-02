@@ -28,7 +28,8 @@
 					Model = model,
 					ModelMetadata = (model == null) ? null : renderer.ModelMetadataProvider.GetMetadataForType(() => model, model.GetType())
 				},
-				ModelMetadataProvider = renderer.ModelMetadataProvider
+				ModelMetadataProvider = renderer.ModelMetadataProvider,
+				Service = renderer.Service
 			};
 
 			return context;
@@ -56,7 +57,8 @@
 					Model = model,
 					ModelMetadata = (model == null) ? null : parent.ModelMetadataProvider.GetMetadataForType(() => model, model.GetType())
 				},
-				ModelMetadataProvider = parent.ModelMetadataProvider
+				ModelMetadataProvider = parent.ModelMetadataProvider,
+				Service = parent.Service
 			};
 
 			return context;

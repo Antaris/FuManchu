@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factory.cs" />
+    <Compile Include="HandlebarsServiceFacts.cs" />
     <Compile Include="Parser\HandlebarsParserFacts.cs" />
     <Compile Include="Parser\WhiteSpaceCollapsingParserVisitorFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

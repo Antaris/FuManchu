@@ -39,9 +39,28 @@
 		}
 
 		/// <summary>
+		/// Initialises a new instance of <see cref="RenderingParserVisitor"/>
+		/// </summary>
+		/// <param name="writer">The text writer</param>
+		/// <param name="context">The render context.</param>
+		/// <param name="modelMetadataProvider">The model metadata provider.</param>
+		public RenderingParserVisitor(TextWriter writer, RenderContext context, IModelMetadataProvider modelMetadataProvider)
+		{
+			_textWriter = writer;
+			ModelMetadataProvider = modelMetadataProvider;
+
+			SetScope(context);
+		}
+
+		/// <summary>
 		/// Gets the model metadata provider.
 		/// </summary>
 		public IModelMetadataProvider ModelMetadataProvider { get; private set; }
+
+		/// <summary>
+		/// Gets the Handlebars service.
+		/// </summary>
+		public IHandlebarsService Service { get; internal set; }
 
 		/// <inheritdoc />
 		public override void VisitBlock(Block block)
@@ -52,6 +71,11 @@
 			}
 			else
 			{
+				if (block.Type == BlockType.Partial && Service != null)
+				{
+					VisitPartial(block);
+				}
+
 				base.VisitBlock(block);
 			}
 		}
@@ -88,6 +112,15 @@
 					break;
 				}
 			}
+		}
+
+		/// <summary>
+		/// Visits a partial reference block.
+		/// </summary>
+		/// <param name="block">The block.</param>
+		public void VisitPartial(Block block)
+		{
+			new PartialBlockRenderer().Render(block, Scope, _textWriter);
 		}
 
 		/// <inheritdoc />

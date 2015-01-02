@@ -10,6 +10,7 @@
 		Comment,
 		Tag,
 		TagElement,
-		Expression
+		Expression,
+		Partial
 	}
 }

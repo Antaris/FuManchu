@@ -294,6 +294,81 @@
 		}
 
 		/// <summary>
+		/// Parses an expression.
+		/// </summary>
+		public void AtPartialTag()
+		{
+			string tagName = Context.CurrentBlock.Name;
+
+			using (var block = Context.StartBlock(BlockType.Partial))
+			{
+				// Accept the open tag.
+				AcceptAndMoveNext();
+				// Output that tag as metacode.
+				Output(SpanKind.MetaCode);
+
+				if (Optional(HandlebarsSymbolType.Tilde))
+				{
+					// Output the tilde.
+					Output(SpanKind.MetaCode);
+				}
+
+				// Accept the right arrow >.
+				AcceptAndMoveNext();
+				// Output that tag as metacode.
+				Output(SpanKind.MetaCode);
+
+				// Accept everything until either the close of the tag, or the first element of whitespace.
+				AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+				// Output the first part as an expression.
+				Output(SpanKind.Expression);
+
+				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)
+				{
+					if (CurrentSymbol.Type == HandlebarsSymbolType.WhiteSpace)
+					{
+						// Accept all the whitespace.
+						AcceptAll(HandlebarsSymbolType.WhiteSpace);
+						// Take all the whitespace, and output that.
+						Output(SpanKind.WhiteSpace);
+					}
+
+					if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
+					{
+						// We're in a parameterised argument (e.g. one=two
+						AcceptAndMoveNext();
+						// Accept everything until the next whitespace or closing tag.
+						AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+						// Output this as a map.
+						Output(SpanKind.Map);
+					}
+					else
+					{
+						// Accept everything until the next whitespace or closing tag.
+						AcceptUntil(HandlebarsSymbolType.Assign, HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+						if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
+						{
+							continue;
+						}
+						// Output this as a map.
+						Output(SpanKind.Parameter);
+					}
+				}
+
+				if (Optional(HandlebarsSymbolType.Tilde))
+				{
+					// Output the tilde.
+					Output(SpanKind.MetaCode);
+				}
+
+				// Accept the closing tag.
+				AcceptAndMoveNext();
+				// Output this as metacode.
+				Output(SpanKind.MetaCode);
+			}
+		}
+
+		/// <summary>
 		/// Parses a tag.
 		/// </summary>
 		public void AtTag()
@@ -346,6 +421,19 @@
 				NextToken();
 				// We're at a closing block tag {{/each}}
 				AtBlockEndTag();
+			}
+			else if (CurrentSymbol.Type == HandlebarsSymbolType.RightArrow)
+			{
+				// Put the opening tag back.
+				PutBack(CurrentSymbol);
+				if (tilde != null)
+				{
+					PutBack(tilde);
+				}
+				PutBack(current);
+				NextToken();
+				// We're at a partial include tag {{>body}}
+				AtPartialTag();
 			}
 			else
 			{

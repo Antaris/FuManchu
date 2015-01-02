@@ -47,6 +47,11 @@
 			return Block(BlockType.Expression, null, children);
 		}
 
+		public Block Partial(params SyntaxTreeNode[] children)
+		{
+			return Block(BlockType.Partial, null, children);
+		}
+
 		public Span Span(SpanKind kind, params ISymbol[] symbols)
 		{
 			var builder = new SpanBuilder();
