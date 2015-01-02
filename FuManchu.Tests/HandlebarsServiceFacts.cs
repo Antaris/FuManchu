@@ -19,14 +19,14 @@
 		{
 			var service = new HandlebarsService();
 
-			Assert.Equal("Hello Matt", service.CompileAndRun("Hello {{name}}", new { name = "Matt" }));
+			Assert.Equal("Hello Matt", service.CompileAndRun("my-template", "Hello {{name}}", new { name = "Matt" }));
 		}
 
 		[Fact]
 		public void CanCompileAndRunLater()
 		{
 			var service = new HandlebarsService();
-			service.Compile("Hello {{name}}", "template-name");
+			service.Compile("template-name", "Hello {{name}}");
 
 			Assert.Equal("Hello Matt", service.Run("template-name", new { name = "Matt" }));
 		}

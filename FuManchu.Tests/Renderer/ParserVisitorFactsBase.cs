@@ -18,7 +18,7 @@
 			_handlebarsService = new Lazy<IHandlebarsService>(CreateHandlebarsService);
 		}
 
-		protected IHandlebarsService Handlebars { get { return _handlebarsService.Value; } }
+		protected IHandlebarsService HandlebarsService { get { return _handlebarsService.Value; } }
 
 		protected virtual IHandlebarsService CreateHandlebarsService()
 		{
@@ -27,7 +27,7 @@
 
 		protected void RenderTest(string content, string expected, object model = null, TagProvidersCollection providers = null)
 		{
-			var func = Handlebars.Compile(content);
+			var func = HandlebarsService.Compile(Guid.NewGuid().ToString(), content);
 			string result = func(model);
 
 			Assert.Equal(expected, result);

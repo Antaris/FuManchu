@@ -7,7 +7,7 @@
 		[Fact]
 		public void CanRenderPartial()
 		{
-			Handlebars.RegisterPartial("body", "Hello World");
+			HandlebarsService.RegisterPartial("body", "Hello World");
 
 			string template = "{{>body}}";
 			string expected = "Hello World";
@@ -18,7 +18,7 @@
 		[Fact]
 		public void CanRenderPartialWithCurrentModel()
 		{
-			Handlebars.RegisterPartial("body", "{{forename}} {{surname}}");
+			HandlebarsService.RegisterPartial("body", "{{forename}} {{surname}}");
 
 			string template = "{{>body}}";
 			string expected = "Matthew Abbott";
@@ -29,7 +29,7 @@
 		[Fact]
 		public void CanRenderPartialWithChildModel()
 		{
-			Handlebars.RegisterPartial("body", "{{forename}} {{surname}}");
+			HandlebarsService.RegisterPartial("body", "{{forename}} {{surname}}");
 
 			string template = "{{>body person}}";
 			string expected = "Matthew Abbott";

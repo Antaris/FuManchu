@@ -52,6 +52,7 @@
     <Compile Include="Binding\TryGetValueProvider.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="Handlebars.cs" />
     <Compile Include="HandlebarsService.cs" />
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="Binding\Metadata\ModelMetadata.cs" />

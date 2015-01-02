@@ -11,21 +11,34 @@
 	using FuManchu.Tags;
 	using FuManchu.Text;
 
+	/// <summary>
+	/// Provides services for running Handlebars templates.
+	/// </summary>
 	public class HandlebarsService : IHandlebarsService
 	{
 		private readonly ConcurrentDictionary<string, Func<RenderContext, string>> _partials = new ConcurrentDictionary<string, Func<RenderContext, string>>();
 		private readonly ConcurrentDictionary<string, Func<object, string>> _templates = new ConcurrentDictionary<string, Func<object, string>>(); 
 
+		/// <summary>
+		/// Initialises a new instance of <see cref="HandlebarsService"/>
+		/// </summary>
 		public HandlebarsService()
 		{
 			TagProviders = new TagProvidersCollection(TagProvidersCollection.Default);
 			ModelMetadataProvider = new DefaultModelMetadataProvider();
 		}
 
+		/// <summary>
+		/// The collection of tag providers.
+		/// </summary>
 		public TagProvidersCollection TagProviders { get; private set; }
 
+		/// <summary>
+		/// The model metadata provider.
+		/// </summary>
 		public IModelMetadataProvider ModelMetadataProvider { get; set; }
 
+		/// <inheritdoc />
 		public Func<object, string> Compile(string template)
 		{
 			var document = CreateDocument(template);
@@ -51,7 +64,8 @@
 			       };
 		}
 
-		public Func<object, string> Compile(string template, string name)
+		/// <inheritdoc />
+		public Func<object, string> Compile(string name, string template)
 		{
 			Func<object, string> func;
 			if (_templates.TryGetValue(name, out func))
@@ -65,14 +79,16 @@
 			return func;
 		}
 
-		public string CompileAndRun(string template, object model = null, string name = null)
+		/// <inheritdoc />
+		public string CompileAndRun(string name, string template, object model = null)
 		{
-			Func<object, string> func = (string.IsNullOrEmpty(name)) ? Compile(template) : Compile(template, name);
+			Func<object, string> func = (string.IsNullOrEmpty(name)) ? Compile(template) : Compile(name, template);
 
 			return func(model);
 		}
 
-		public Func<RenderContext, string> CompilePartial(string template, string name)
+		/// <inheritdoc />
+		public Func<RenderContext, string> CompilePartial(string template)
 		{
 			var document = CreateDocument(template);
 
@@ -97,6 +113,11 @@
 			};
 		}
 
+		/// <summary>
+		/// Registers a partial template with the given name.
+		/// </summary>
+		/// <param name="name">The name of the partial template.</param>
+		/// <param name="func">The partial delegate.</param>
 		public void RegisterPartial(string name, Func<RenderContext, string> func)
 		{
 			Func<RenderContext, string> temp;
@@ -106,22 +127,38 @@
 			}
 		}
 
+		/// <inheritdoc />
 		public void RegisterPartial(string name, string template)
 		{
 			Func<RenderContext, string> func;
 			if (!_partials.TryGetValue(name, out func))
 			{
-				func = CompilePartial(template, name);
+				func = CompilePartial(template);
 				_partials.TryAdd(name, func);
 			}
 		}
 
+		/// <summary>
+		/// Removes a compiled template.
+		/// </summary>
+		/// <param name="name">The name of the compiled template.</param>
 		public void RemoveCompiledTemplate(string name)
 		{
 			Func<object, string> func;
 			_templates.TryRemove(name, out func);
 		}
 
+		/// <summary>
+		/// Removes a compiled partial template.
+		/// </summary>
+		/// <param name="name">The name of the compiled partial template.</param>
+		public void RemoveCompiledPartial(string name)
+		{
+			Func<RenderContext, string> func;
+			_partials.TryRemove(name, out func);
+		}
+
+		/// <inheritdoc />
 		public string Run(string name, object model = null)
 		{
 			Func<object, string> func;
@@ -133,6 +170,7 @@
 			throw new ArgumentException("No template called '" + name + "' has been compiled.");
 		}
 
+		/// <inheritdoc />
 		public string RunPartial(string name, RenderContext context)
 		{
 			Func<RenderContext, string> func;
@@ -144,6 +182,11 @@
 			throw new ArgumentException("No partial template called '" + name + "' has been compiled.");
 		}
 
+		/// <summary>
+		/// Creates a document <see cref="Block"/> from the given template.
+		/// </summary>
+		/// <param name="template">The template.</param>
+		/// <returns>The document <see cref="Block"/></returns>
 		private Block CreateDocument(string template)
 		{
 			using (var reader = new StringReader(template))

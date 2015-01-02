@@ -13,7 +13,7 @@
 			string expected = "Matt Abbott is 30 years old";
 
 			var service = new HandlebarsService();
-			string result = service.CompileAndRun(template, person);
+			string result = service.CompileAndRun("my-template", template, person);
 
 			Assert.Equal(expected, result);
 		}
@@ -26,7 +26,7 @@
 			string expected = "Matt Abbott is 30 years old";
 
 			var service = new HandlebarsService();
-			string result = service.CompileAndRun(template, person);
+			string result = service.CompileAndRun("my-template", template, person);
 
 			Assert.Equal(expected, result);
 		}
@@ -39,7 +39,7 @@
 			string expected = "Matt Abbott is 30 years old";
 
 			var service = new HandlebarsService();
-			string result = service.CompileAndRun(template, person);
+			string result = service.CompileAndRun("my-template", template, person);
 
 			Assert.Equal(expected, result);
 		}
@@ -52,7 +52,7 @@
 			string expected = "<ul><li>1</li><li>2</li></ul>";
 
 			var service = new HandlebarsService();
-			string result = service.CompileAndRun(template, model);
+			string result = service.CompileAndRun("my-template", template, model);
 
 			Assert.Equal(expected, result);
 		}
@@ -68,7 +68,7 @@
 			string expected = "Matthew Abbott";
 
 			var service = new HandlebarsService();
-			string result = service.CompileAndRun(template, model);
+			string result = service.CompileAndRun("my-template", template, model);
 
 			Assert.Equal(expected, result);
 		}
