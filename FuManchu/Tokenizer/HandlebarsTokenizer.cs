@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Security;
+	using System.Xml;
 	using FuManchu.Parser;
 	using FuManchu.Text;
 
@@ -27,7 +28,7 @@
 			get { return Data; }
 		}
 
-		#region Tag Structure		
+		#region Tag Structure
 		/// <summary>
 		/// Attempts to tokenize a comment.
 		/// </summary>
@@ -350,6 +351,11 @@
 				return Stop();
 			}
 
+			if (ParserHelpers.IsWhiteSpace(CurrentCharacter) || ParserHelpers.IsNewLine(CurrentCharacter))
+			{
+				return Transition(WhiteSpace);
+			}
+
 			TakeUntil(c => c == '{');
 
 			if (HaveContent)
@@ -515,6 +521,21 @@
 			}
 
 			return Stay(EndSymbol(HandlebarsSymbolType.RealLiteral));
+		}
+
+		/// <summary>
+		/// Tokenizes a block of whitespace.
+		/// </summary>
+		/// <returns>The state result.</returns>
+		private StateResult WhiteSpace()
+		{
+			TakeUntil(c => !ParserHelpers.IsWhiteSpace(c) && !ParserHelpers.IsNewLine(c));
+			if (HaveContent)
+			{
+				return Transition(EndSymbol(HandlebarsSymbolType.WhiteSpace), Data);
+			}
+
+			return Transition(Data);
 		}
 	}
 }

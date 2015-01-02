@@ -63,6 +63,7 @@
     <Compile Include="Parser\ParserHelpers.cs" />
     <Compile Include="Parser\ParserResults.cs" />
     <Compile Include="Parser\ParserVisitor.cs" />
+    <Compile Include="Parser\ParserVisitorOfT.cs" />
     <Compile Include="Parser\SyntaxTree\Block.cs" />
     <Compile Include="Parser\SyntaxTree\BlockBuilder.cs" />
     <Compile Include="Parser\SyntaxTree\BlockType.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Parser\SyntaxTree\SpanKind.cs" />
     <Compile Include="Parser\SyntaxTree\SyntaxTreeNode.cs" />
     <Compile Include="Parser\TokenizerBackedParser.cs" />
+    <Compile Include="Parser\WhiteSpaceCollapsingParserVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\BlockRenderer.cs" />
     <Compile Include="Renderer\ConditionalBlockRenderer.cs" />

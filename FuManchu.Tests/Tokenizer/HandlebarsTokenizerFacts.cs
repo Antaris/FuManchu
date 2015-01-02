@@ -24,7 +24,7 @@
 		[Fact]
 		public void NextReturnsTokenForWhitespaceCharacters()
 		{
-			TestTokenizer(" \f\t\u000B \n ", new HandlebarsSymbol(0, 0, 0, " \f\t\u000B \n ", HandlebarsSymbolType.Text));
+			TestTokenizer(" \f\t\u000B \n ", new HandlebarsSymbol(0, 0, 0, " \f\t\u000B \n ", HandlebarsSymbolType.WhiteSpace));
 		}
 	}
 }

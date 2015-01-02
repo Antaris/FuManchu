@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Factory.cs" />
     <Compile Include="Parser\HandlebarsParserFacts.cs" />
+    <Compile Include="Parser\WhiteSpaceCollapsingParserVisitorFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\ConditionalBlockRendererFacts.cs" />
     <Compile Include="Renderer\EnumerableBlockRendererFacts.cs" />

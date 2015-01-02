@@ -7,6 +7,7 @@
 	using FuManchu.Binding;
 	using FuManchu.Parser;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Text;
 	using FuManchu.Tokenizer;
 
 	/// <summary>
@@ -74,10 +75,15 @@
 					Scope.EscapeEncoding = true;
 					break;
 				}
-					case HandlebarsSymbolType.RawCloseTag:
+				case HandlebarsSymbolType.RawCloseTag:
 				{
 					// Tell the render context that it is no longer in escaped mode.
 					Scope.EscapeEncoding = false;
+					break;
+				}
+				case HandlebarsSymbolType.Tilde:
+				{
+
 					break;
 				}
 			}

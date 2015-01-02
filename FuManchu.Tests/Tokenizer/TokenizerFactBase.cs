@@ -49,7 +49,7 @@
 
 					while ((current = tokenizer.NextSymbol()) != null)
 					{
-						if (counter > expected.Length)
+						if (counter >= expected.Length)
 						{
 							output.AppendFormat("F: Expected: << Nothing >>; Actual: {0}\n", current);
 							success = false;

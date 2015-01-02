@@ -1,0 +1,65 @@
+﻿namespace FuManchu.Renderer
+{
+	using System;
+	using FuManchu.Binding;
+
+	/// <summary>
+	/// Provides factory methods for creating <see cref="RenderContext"/> instances.
+	/// </summary>
+	public static class RenderContextFactory
+	{
+		/// <summary>
+		/// Creates a <see cref="RenderContext"/> using the renderer provided.
+		/// </summary>
+		/// <param name="renderer">The renderering parser visitor.</param>
+		/// <param name="model">The model.</param>
+		/// <returns>The render context.</returns>
+		public static RenderContext CreateRenderContext(RenderingParserVisitor renderer, object model = null)
+		{
+			if (renderer == null)
+			{
+				throw new ArgumentNullException("renderer");
+			}
+
+			var context = new RenderContext(renderer)
+			{
+				TemplateData = new TemplateData()
+				{
+					Model = model,
+					ModelMetadata = (model == null) ? null : renderer.ModelMetadataProvider.GetMetadataForType(() => model, model.GetType())
+				},
+				ModelMetadataProvider = renderer.ModelMetadataProvider
+			};
+
+			return context;
+		}
+
+		/// <summary>
+		/// Creates a child <see cref="RenderContext"/> based on the parent context provided.
+		/// </summary>
+		/// <param name="parent">The parent render context.</param>
+		/// <param name="model">The child model.</param>
+		/// <returns>The parent render context.</returns>
+		public static RenderContext CreateRenderContext(RenderContext parent, object model = null)
+		{
+			if (parent == null)
+			{
+				throw new ArgumentNullException("parent");
+			}
+
+			model = model ?? parent.TemplateData.Model;
+
+			var context = new RenderContext(parent.Visitor, parent)
+			{
+				TemplateData = new TemplateData()
+				{
+					Model = model,
+					ModelMetadata = (model == null) ? null : parent.ModelMetadataProvider.GetMetadataForType(() => model, model.GetType())
+				},
+				ModelMetadataProvider = parent.ModelMetadataProvider
+			};
+
+			return context;
+		}
+	}
+}

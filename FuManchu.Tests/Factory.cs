@@ -9,9 +9,12 @@
 	public class Factory
 	{
 		private readonly SourceLocationTracker _tracker = new SourceLocationTracker();
+		private Span _last;
 
 		public Block Block(BlockType type, string name = null, params SyntaxTreeNode[] children)
 		{
+			_last = null;
+
 			var builder = new BlockBuilder();
 			builder.Type = type;
 			builder.Name = name;
@@ -54,7 +57,15 @@
 				builder.Accept(symbol);
 			}
 
-			return builder.Build();
+			var span = builder.Build();
+			if (_last != null)
+			{
+				span.Previous = _last;
+				_last.Next = span;
+			}
+			_last = span;
+
+			return span;
 		}
 
 		public Span Text(string content)

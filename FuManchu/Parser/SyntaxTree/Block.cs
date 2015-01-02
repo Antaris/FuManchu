@@ -163,6 +163,20 @@
 				.CombinedHash;
 		}
 
+		/// <summary>
+		/// Replace the child nodes.
+		/// </summary>
+		/// <param name="children">The new set of children.</param>
+		internal void ReplaceChildren(IEnumerable<SyntaxTreeNode> children)
+		{
+			if (children == null)
+			{
+				throw new ArgumentNullException("children");
+			}
+
+			Children = children;
+		}
+
 		/// <inheritdoc />
 		public override string ToString()
 		{

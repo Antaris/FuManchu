@@ -313,6 +313,11 @@
 		/// <inheritdoc />
 		public override void ParseBlock()
 		{
+			// Accept any leading whitespace.
+			AcceptWhile(HandlebarsSymbolType.WhiteSpace);
+			// Output the whitespace.
+			Output(SpanKind.WhiteSpace);
+
 			// Accept everything until we meet a tag (either {{ or {{{).
 			AcceptUntil(HandlebarsSymbolType.OpenTag, HandlebarsSymbolType.RawOpenTag);
 
