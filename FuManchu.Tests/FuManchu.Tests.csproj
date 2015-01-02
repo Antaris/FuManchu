@@ -51,6 +51,7 @@
     <Compile Include="Renderer\EnumerableBlockRendererFacts.cs" />
     <Compile Include="Renderer\ImplictBlockRendererFacts.cs" />
     <Compile Include="Renderer\ParserVisitorFactsBase.cs" />
+    <Compile Include="Renderer\PartialBlockRendererFacts.cs" />
     <Compile Include="Renderer\RenderingParserVisitorFacts.cs" />
     <Compile Include="Renderer\ScopeBlockRendererFacts.cs" />
     <Compile Include="Renderer\UnlessBlockRendererFacts.cs" />

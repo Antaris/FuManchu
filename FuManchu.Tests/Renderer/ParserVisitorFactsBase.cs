@@ -1,5 +1,6 @@
 ﻿namespace FuManchu.Tests.Renderer
 {
+	using System;
 	using System.IO;
 	using FuManchu.Binding;
 	using FuManchu.Parser;
@@ -10,38 +11,26 @@
 
 	public abstract class ParserVisitorFactsBase
 	{
+		private readonly Lazy<IHandlebarsService> _handlebarsService;
+
+		protected ParserVisitorFactsBase()
+		{
+			_handlebarsService = new Lazy<IHandlebarsService>(CreateHandlebarsService);
+		}
+
+		protected IHandlebarsService Handlebars { get { return _handlebarsService.Value; } }
+
+		protected virtual IHandlebarsService CreateHandlebarsService()
+		{
+			return new HandlebarsService();
+		}
+
 		protected void RenderTest(string content, string expected, object model = null, TagProvidersCollection providers = null)
 		{
-			providers = providers ?? TagProvidersCollection.Default;
+			var func = Handlebars.Compile(content);
+			string result = func(model);
 
-			using (var reader = new StringReader(content))
-			{
-				using (var source = new SeekableTextReader(reader))
-				{
-					var errors = new ParserErrorSink();
-					var parser = new HandlebarsParser();
-
-					var context = new ParserContext(source, parser, errors, providers);
-					parser.Context = context;
-
-					parser.ParseDocument();
-
-					var results = context.CompleteParse();
-
-					using (var writer = new StringWriter())
-					{
-						var whitespaceCollapsingVisitor = new WhiteSpaceCollapsingParserVisitor();
-						var visitor = new RenderingParserVisitor(writer, model, new DefaultModelMetadataProvider());
-
-						results.Document.Accept(whitespaceCollapsingVisitor);
-						results.Document.Accept(visitor);
-
-						string result = writer.GetStringBuilder().ToString();
-
-						Assert.Equal(expected, result);
-					}
-				}
-			}
+			Assert.Equal(expected, result);
 		}
 	}
 }

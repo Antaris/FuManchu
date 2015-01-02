@@ -133,6 +133,17 @@
 			throw new ArgumentException("No template called '" + name + "' has been compiled.");
 		}
 
+		public string RunPartial(string name, RenderContext context)
+		{
+			Func<RenderContext, string> func;
+			if (_partials.TryGetValue(name, out func))
+			{
+				return func(context);
+			}
+
+			throw new ArgumentException("No partial template called '" + name + "' has been compiled.");
+		}
+
 		private Block CreateDocument(string template)
 		{
 			using (var reader = new StringReader(template))

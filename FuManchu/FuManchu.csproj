@@ -86,6 +86,7 @@
     <Compile Include="Renderer\ImplicitBlockRenderer.cs" />
     <Compile Include="Renderer\ISpanRenderer.cs" />
     <Compile Include="Renderer\ISyntaxTreeNodeRenderer.cs" />
+    <Compile Include="Renderer\PartialBlockRenderer.cs" />
     <Compile Include="Renderer\RenderContextFactory.cs" />
     <Compile Include="Renderer\RenderContextScope.cs" />
     <Compile Include="Renderer\RenderingParserVisitor.cs" />

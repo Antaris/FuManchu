@@ -22,6 +22,7 @@
 			{ SpanKind.WhiteSpace, new WhiteSpaceSpanRenderer() },
 			{ SpanKind.Expression, new ExpressionSpanRenderer() }
 		};
+		private IHandlebarsService _handlebarsService;
 
 		/// <summary>
 		/// Initialises a new instance of <see cref="RenderingParserVisitor"/>
@@ -60,7 +61,15 @@
 		/// <summary>
 		/// Gets the Handlebars service.
 		/// </summary>
-		public IHandlebarsService Service { get; internal set; }
+		public IHandlebarsService Service
+		{
+			get { return _handlebarsService; }
+			set
+			{
+				_handlebarsService = value;
+				Scope.Service = _handlebarsService;
+			}
+		}
 
 		/// <inheritdoc />
 		public override void VisitBlock(Block block)
@@ -69,13 +78,12 @@
 			{
 				block.Descriptor.Renderer.Render(block, Scope, _textWriter);
 			}
+			else if (block.Type == BlockType.Partial && Service != null)
+			{
+				VisitPartial(block);
+			}
 			else
 			{
-				if (block.Type == BlockType.Partial && Service != null)
-				{
-					VisitPartial(block);
-				}
-
 				base.VisitBlock(block);
 			}
 		}
