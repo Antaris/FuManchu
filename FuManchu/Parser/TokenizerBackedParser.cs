@@ -265,10 +265,12 @@
 		/// <summary>
 		/// Configures Span to be of the given kind.
 		/// </summary>
-		/// <param name="kind">The kind.</param>
-		private void Configure(SpanKind kind)
+		/// <param name="kind">The kind of span..</param>
+		/// <param name="collapsed">Whether the span is collapsed.</param>
+		private void Configure(SpanKind kind, bool collapsed)
 		{
 			Span.Kind = kind;
+			Span.Collapsed = collapsed;
 		}
 
 		/// <summary>
@@ -383,9 +385,10 @@
 		/// Outputs the current set of symbols as the given span kind.
 		/// </summary>
 		/// <param name="kind">The kind.</param>
-		protected internal void Output(SpanKind kind)
+		/// <param name="collapsed">Whether the span is collapsed.</param>
+		protected internal void Output(SpanKind kind, bool collapsed = false)
 		{
-			Configure(kind);
+			Configure(kind, collapsed);
 			Output();
 		}
 

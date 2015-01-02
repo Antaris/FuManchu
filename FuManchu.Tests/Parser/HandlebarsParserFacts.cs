@@ -17,7 +17,10 @@
 		{
 			var factory = new Factory();
 
-			ParserTest("<h1>Hello World</h1>", factory.Document(factory.Text("<h1>Hello World</h1>")));
+			ParserTest("<h1>Hello World</h1>", factory.Document(
+				factory.Text("<h1>Hello"),
+				factory.WhiteSpace(1),
+				factory.Text("World</h1>")));
 		}
 
 		[Fact]

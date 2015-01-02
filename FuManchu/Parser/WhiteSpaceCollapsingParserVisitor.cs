@@ -1,5 +1,6 @@
 ﻿namespace FuManchu.Parser
 {
+	using System.Collections.Generic;
 	using System.Linq;
 	using FuManchu.Parser.SyntaxTree;
 	using FuManchu.Tokenizer;
@@ -15,7 +16,49 @@
 		/// <param name="span">The tilde span.</param>
 		private void CollapseNextWhiteSpace(Span span)
 		{
-			
+			// Traverse to parent block. (TagElement | Expression)
+			var element = span.Parent;
+			Block scope = null;
+			List<SyntaxTreeNode> children;
+
+			if (element.Type == BlockType.TagElement || element.Type == BlockType.Expression || element.Type == BlockType.Comment)
+			{
+				scope = element.Parent; // Up to parent block containing the Expression tag.
+				children = scope.Children.ToList();
+
+				if (children[children.Count - 1].Equals(element))
+				{
+					CollapseNextWhiteSpace(scope.Parent, scope);
+				}
+				else
+				{
+					CollapseNextWhiteSpace(scope, element);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Collapses the next whitespace element from the given block, offset by the child element.
+		/// </summary>
+		/// <param name="block">The block.</param>
+		/// <param name="element">The child element.</param>
+		private void CollapseNextWhiteSpace(Block block, SyntaxTreeNode element)
+		{
+			if (block == null)
+			{
+				return;
+			}
+
+			var children = block.Children.ToList();
+			int index = children.IndexOf(element);
+			if (index < (children.Count - 1))
+			{
+				var potential = children[index + 1] as Span;
+				if (potential != null && potential.Kind == SpanKind.WhiteSpace)
+				{
+					potential.Collapsed = true;
+				}
+			}
 		}
 
 		/// <summary>
@@ -24,28 +67,51 @@
 		/// <param name="span">The tilde span.</param>
 		private void CollapsePreviousWhiteSpace(Span span)
 		{
-			// Walk to parent block. (TagElement)
+			// Traverse to parent block. (TagElement | Expression)
 			var element = span.Parent;
-			// Walk to the parent block. (Tag)
-			var tag = element.Parent;
-			// Walk to the parent block. (Tag or Document)
-			var root = tag.Parent;
+			Block scope = null;
+			List<SyntaxTreeNode> children;
 
-			var items = root.Children.ToList();
-			int index = items.IndexOf(tag);
-			if (index > 0)
+			if (element.Type == BlockType.TagElement || element.Type == BlockType.Expression || element.Type == BlockType.Comment)
 			{
-				var potential = items[index - 1] as Span;
-				if (potential != null && potential.Kind == SpanKind.WhiteSpace)
+				scope = element.Parent; // Up to parent block containing the Expression tag.
+				children = scope.Children.ToList();
+
+				if (children[0].Equals(element))
 				{
-					// Remove this item.
-					items.Remove(potential);
-					// Override the items.
-					root.ReplaceChildren(items);
+					CollapsePreviousWhiteSpace(scope.Parent, scope);
+				}
+				else
+				{
+					CollapsePreviousWhiteSpace(scope, element);
 				}
 			}
 		}
 
+		/// <summary>
+		/// Collapses the previous whitespace element from the given block, offset by the child element.
+		/// </summary>
+		/// <param name="block">The block.</param>
+		/// <param name="element">The child element.</param>
+		private void CollapsePreviousWhiteSpace(Block block, SyntaxTreeNode element)
+		{
+			if (block == null)
+			{
+				return;
+			}
+
+			var children = block.Children.ToList();
+			int index = children.IndexOf(element);
+			if (index > 0)
+			{
+				var potential = children[index - 1] as Span;
+				if (potential != null && potential.Kind == SpanKind.WhiteSpace)
+				{
+					potential.Collapsed = true;
+				}
+			}
+		}
+		
 		/// <inheritdoc />
 		public override void VisitSpan(Span span)
 		{

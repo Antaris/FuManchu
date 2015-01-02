@@ -46,6 +46,7 @@
 		{
 			RenderTest("Hello {{!-- Here is a comment --}}", "Hello ", null);
 			RenderTest("Hello {{! Here is a comment }}", "Hello ", null);
+			RenderTest("Hello {{~! Here is a comment }}", "Hello", null);
 		}
 
 		[Fact]

@@ -175,6 +175,45 @@
 		}
 
 		/// <summary>
+		/// Parses a comment tag.
+		/// </summary>
+		public void AtCommentTag()
+		{
+			using (var block = Context.StartBlock(BlockType.Comment))
+			{
+				// Accept the open tag.
+				AcceptAndMoveNext();
+				// Output the tag as metacode.
+				Output(SpanKind.MetaCode);
+
+				if (Optional(HandlebarsSymbolType.Tilde))
+				{
+					// Output the tilde.
+					Output(SpanKind.MetaCode);
+				}
+
+				// Accept the ! symbol.
+				AcceptAndMoveNext();
+				// Output the symbol as metacode.
+				Output(SpanKind.MetaCode);
+
+				// Accept the comment.
+				AcceptAndMoveNext();
+				Output(SpanKind.Comment, collapsed: true);
+
+				if (Optional(HandlebarsSymbolType.Tilde))
+				{
+					// Output the tilde.
+					Output(SpanKind.MetaCode);
+				}
+
+				// Accept the closing tag.
+				AcceptAndMoveNext();
+				Output(SpanKind.MetaCode);
+			}
+		}
+
+		/// <summary>
 		/// Parses an expression.
 		/// </summary>
 		public void AtExpressionTag()
@@ -261,11 +300,22 @@
 		{
 			var current = CurrentSymbol;
 			NextToken();
+			HandlebarsSymbol tilde = null;
+
+			if (CurrentSymbol.Type == HandlebarsSymbolType.Tilde)
+			{
+				tilde = CurrentSymbol;
+				NextToken();
+			}
 
 			if (CurrentSymbol.Type == HandlebarsSymbolType.Hash)
 			{
 				// Put the opening tag back.
 				PutBack(CurrentSymbol);
+				if (tilde != null)
+				{
+					PutBack(tilde);
+				}
 				PutBack(current);
 				NextToken();
 				// We're at a block tag {{#hello}} etc.
@@ -273,13 +323,25 @@
 			}
 			else if (CurrentSymbol.Type == HandlebarsSymbolType.Bang)
 			{
+				// Put the opening tag back.
+				PutBack(CurrentSymbol);
+				if (tilde != null)
+				{
+					PutBack(tilde);
+				}
+				PutBack(current);
+				NextToken();
 				// We're at a comment {{!....}}
-
+				AtCommentTag();
 			}
 			else if (CurrentSymbol.Type == HandlebarsSymbolType.Slash)
 			{
 				// Put the opening tag back.
 				PutBack(CurrentSymbol);
+				if (tilde != null)
+				{
+					PutBack(tilde);
+				}
 				PutBack(current);
 				NextToken();
 				// We're at a closing block tag {{/each}}
@@ -289,6 +351,10 @@
 			{
 				// Put the opening tag back.
 				PutBack(CurrentSymbol);
+				if (tilde != null)
+				{
+					PutBack(tilde);
+				}
 				PutBack(current);
 				NextToken();
 				// Handle an expression tag.
@@ -319,7 +385,7 @@
 			Output(SpanKind.WhiteSpace);
 
 			// Accept everything until we meet a tag (either {{ or {{{).
-			AcceptUntil(HandlebarsSymbolType.OpenTag, HandlebarsSymbolType.RawOpenTag);
+			AcceptUntil(HandlebarsSymbolType.OpenTag, HandlebarsSymbolType.RawOpenTag, HandlebarsSymbolType.WhiteSpace);
 
 			// Output everything we have so far as text.
 			Output(SpanKind.Text);

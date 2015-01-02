@@ -73,9 +73,13 @@
 			return Span(SpanKind.Text, Symbol(content, HandlebarsSymbolType.Text));
 		}
 
-		public Span WhiteSpace(int length)
+		public Span WhiteSpace(int length, bool collapsed = false)
 		{
-			return Span(SpanKind.WhiteSpace, Symbol(string.Join("", Enumerable.Repeat(" ", length)), HandlebarsSymbolType.WhiteSpace));
+			var span =  Span(SpanKind.WhiteSpace, Symbol(string.Join("", Enumerable.Repeat(" ", length)), HandlebarsSymbolType.WhiteSpace));
+
+			span.Collapsed = collapsed;
+
+			return span;
 		}
 
 		public Span Parameter(string content, HandlebarsSymbolType type = HandlebarsSymbolType.Identifier)

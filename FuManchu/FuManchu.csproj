@@ -93,6 +93,7 @@
     <Compile Include="Renderer\TextSpanRenderer.cs" />
     <Compile Include="Renderer\ScopeBlockRenderer.cs" />
     <Compile Include="Renderer\UnlessBlockRenderer.cs" />
+    <Compile Include="Renderer\WhiteSpaceSpanRenderer.cs" />
     <Compile Include="StateMachine.cs" />
     <Compile Include="StateResult.cs" />
     <Compile Include="Tags\ITagProvider.cs" />

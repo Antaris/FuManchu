@@ -24,6 +24,11 @@
 		}
 
 		/// <summary>
+		/// Gets whether the span is collapsed.
+		/// </summary>
+		public bool Collapsed { get; protected internal set; }
+
+		/// <summary>
 		/// Gets the content of the span.
 		/// </summary>
 		public string Content { get; private set; }
@@ -96,6 +101,7 @@
 			return other != null &&
 				   Kind.Equals(other.Kind) && 
 			       Start.Equals(other.Start) &&
+				   Collapsed.Equals(other.Collapsed) &&
 			       string.Equals(Content, other.Content, StringComparison.Ordinal);
 		}
 
@@ -115,6 +121,7 @@
 			return other != null &&
 				   Kind.Equals(other.Kind) && 
 				   Start.Equals(other.Start) &&
+				   Collapsed.Equals(other.Collapsed) &&
 				   Symbols.SequenceEqual(other.Symbols);
 		}
 
@@ -125,6 +132,7 @@
 				.Add(Kind)
 				.Add(Start)
 				.Add(Content)
+				.Add(Collapsed)
 				.CombinedHash;
 		}
 
@@ -134,6 +142,7 @@
 		/// <param name="builder">The span builder.</param>
 		public void ReplaceWith(SpanBuilder builder)
 		{
+			Collapsed = builder.Collapsed;
 			Kind = builder.Kind;
 			Symbols = builder.Symbols;
 			_start = builder.Start;
@@ -158,7 +167,7 @@
 		/// <inheritdoc />
 		public override string ToString()
 		{
-			return string.Format("SPAN: {0}, {1} @ {2}", Kind, Content, Start);
+			return string.Format("SPAN: {0}, {1} @ {2}{3}", Kind, Content, Start, Collapsed ? " [Collapsed]" : "");
 		}
 
 #if DEBUG

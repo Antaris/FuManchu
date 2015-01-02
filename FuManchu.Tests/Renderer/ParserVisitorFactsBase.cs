@@ -30,8 +30,10 @@
 
 					using (var writer = new StringWriter())
 					{
+						var whitespaceCollapsingVisitor = new WhiteSpaceCollapsingParserVisitor();
 						var visitor = new RenderingParserVisitor(writer, model, new DefaultModelMetadataProvider());
 
+						results.Document.Accept(whitespaceCollapsingVisitor);
 						results.Document.Accept(visitor);
 
 						string result = writer.GetStringBuilder().ToString();

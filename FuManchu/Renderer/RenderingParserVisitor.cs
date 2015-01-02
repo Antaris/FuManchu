@@ -19,6 +19,7 @@
 		private readonly IDictionary<SpanKind, ISpanRenderer> _spanRenderers = new Dictionary<SpanKind, ISpanRenderer>()
 		{
 			{ SpanKind.Text, new TextSpanRenderer() },
+			{ SpanKind.WhiteSpace, new WhiteSpaceSpanRenderer() },
 			{ SpanKind.Expression, new ExpressionSpanRenderer() }
 		};
 

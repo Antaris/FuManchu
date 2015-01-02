@@ -27,10 +27,16 @@
 		/// <param name="original">The original span.</param>
 		public SpanBuilder(Span original)
 		{
+			Collapsed = original.Collapsed;
 			Kind = original.Kind;
 			_symbols = new List<ISymbol>(original.Symbols);
 			Start = original.Start;
 		}
+
+		/// <summary>
+		/// Gets or sets whether the span is collapsed.
+		/// </summary>
+		public bool Collapsed { get; set; }
 
 		/// <summary>
 		/// Gets or sets the kind.

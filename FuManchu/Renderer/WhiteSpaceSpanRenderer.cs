@@ -5,9 +5,9 @@
 	using FuManchu.Text;
 
 	/// <summary>
-	/// Renders text to the output writer.
+	/// Renders whitespace to the output writer.
 	/// </summary>
-	public class TextSpanRenderer : SpanRenderer
+	public class WhiteSpaceSpanRenderer : SpanRenderer
 	{
 		/// <inheritdoc />
 		public override void Render(Span target, RenderContext context, TextWriter writer)

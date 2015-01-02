@@ -353,12 +353,22 @@
 
 			if (ParserHelpers.IsWhiteSpace(CurrentCharacter) || ParserHelpers.IsNewLine(CurrentCharacter))
 			{
+				if (HaveContent)
+				{
+					return Transition(EndSymbol(HandlebarsSymbolType.Text), WhiteSpace);
+				}
+
 				return Transition(WhiteSpace);
 			}
 
-			TakeUntil(c => c == '{');
+			TakeUntil(c => c == '{' || ParserHelpers.IsWhiteSpace(c));
 
-			if (HaveContent)
+			if (ParserHelpers.IsWhiteSpace(CurrentCharacter))
+			{
+				return Stay();
+			}
+
+			if (HaveContent && CurrentCharacter == '{')
 			{
 				if (Buffer[Buffer.Length - 1] == '\\')
 				{
@@ -373,14 +383,12 @@
 					return Transition(EndSymbol(HandlebarsSymbolType.Text), BeginTag);
 				}
 			}
-
 			if (Peek() == '{')
 			{
 				// We're at the start of a tag.
 				return Transition(BeginTag);
 			}
 
-			// Take the curent character.
 			TakeCurrent();
 
 			return Stay();
