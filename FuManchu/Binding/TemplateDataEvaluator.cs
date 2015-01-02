@@ -95,16 +95,17 @@
 
 		private static TemplateDataInfo GetPropertyValue(object container, string propertyName)
 		{
-			var value = GetIndexPropertyValue(container, propertyName);
-			if (value != null)
-			{
-				return value;
-			}
 
 			var templateData = container as TemplateData;
 			if (templateData != null)
 			{
 				container = templateData.Model;
+			}
+
+			var value = GetIndexPropertyValue(container, propertyName);
+			if (value != null)
+			{
+				return value;
 			}
 
 			if (container == null)

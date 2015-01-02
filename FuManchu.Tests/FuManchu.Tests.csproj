@@ -42,6 +42,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binding\BindingFacts.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="HandlebarsServiceFacts.cs" />
     <Compile Include="Parser\HandlebarsParserFacts.cs" />
