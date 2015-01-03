@@ -171,6 +171,9 @@ Target "Release" (fun _ ->
 
 "All"
   ==> "Clean"
+  ==> "RestorePackages"
+  ==> "SetVersions"
+  ==> "BuildApp_40"
   ==> "VersionBump"
   ==> "NuGet"
 //  ==> "GithubDoc"
