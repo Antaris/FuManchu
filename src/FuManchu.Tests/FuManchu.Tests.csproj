@@ -42,9 +42,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Binding\BindingFacts.cs" />
@@ -68,9 +65,6 @@
     <Compile Include="Tokenizer\HandlebarsTokenizerFacts.cs" />
     <Compile Include="Tokenizer\HandlebarsTokenizerTagFacts.cs" />
     <Compile Include="Tokenizer\TokenizerFactBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FuManchu\FuManchu.csproj">
