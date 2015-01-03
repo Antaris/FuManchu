@@ -1,0 +1,16 @@
+version: 1.0.{build}
+branches:
+  except:
+  - gh-pages
+skip_tags: true
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+- nuget restore src\FuManchu.sln
+build:
+  project: src\FuManch.sln
+  verbosity: detailed
