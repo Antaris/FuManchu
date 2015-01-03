@@ -9,7 +9,7 @@ if not exist .nuget/Build/NuGet.CommandLine/tools/NuGet.exe (
 echo Resolve build dependencies
 ".nuget/Build/NuGet.CommandLine/tools/NuGet.exe" "install" "packages.config" "-OutputDirectory" ".nuget/Build" "-ExcludeVersion" 
 
-SET TARGET="RunTests_45"
+SET TARGET="Release"
 
 IF NOT [%1]==[] (set TARGET="%1")
 
