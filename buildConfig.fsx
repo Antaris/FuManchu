@@ -84,5 +84,34 @@ let buildApp (buildParams:BuildParams) =
         "CustomBuildName", buildParams.CustomBuildName ]
     |> Log "AppBuild-Output: "
 
+let buildTests (buildParams:BuildParams) =
+  let testDir = testDir @@ buildParams.CustomBuildName
+  CleanDirs [ testDir ]
+  let files = !! "src/FuManchu.Tests/FuManchu.Tests.csproj"
+  files
+    |> MSBuild testDir "Build"
+      [ "Configuration", buildMode
+        "CustomBuildName", buildParams.CustomBuildName ]
+    |> Log "TestBuild-Output: "
+
+let runTests (buildParams:BuildParams) =
+  let testDir = testDir @@ buildParams.CustomBuildName
+  let logs = System.IO.Path.Combine(testDir, "logs")
+  System.IO.Directory.CreateDirectory(logs) |> ignore
+  let files = !! (testDir + "/*.Tests.dll")
+  files
+    |> xUnit (fun p ->
+        { p with
+            ToolPath = ".nuget/Build/xunit.runners/tools/xunit.console.clr4.exe"
+            Verbose = true
+            ShadowCopy = false
+            HtmlOutput = false
+            XmlOutput = false
+            OutputDir = "temp"
+        }
+      )
+
+
+
 let net40Params = { CustomBuildName = "net40" }
 let net45Params = { CustomBuildName = "net45" }

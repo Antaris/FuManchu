@@ -1,0 +1,3337 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FuManchu</name>
+    </assembly>
+    <members>
+        <member name="T:FuManchu.Binding.EfficientTypePropertyKey`2">
+            <summary>
+            Represents a cache key with pregenerated hashcode.
+            </summary>
+            <typeparam name="T1">The first key type.</typeparam>
+            <typeparam name="T2">The second key type.</typeparam>
+        </member>
+        <member name="M:FuManchu.Binding.EfficientTypePropertyKey`2.#ctor(`0,`1)">
+            <summary>
+            Intialises a new instance of <see cref="T:FuManchu.Binding.EfficientTypePropertyKey`2"/>
+            </summary>
+            <param name="item1">The first item.</param>
+            <param name="item2">The second item.</param>
+        </member>
+        <member name="M:FuManchu.Binding.EfficientTypePropertyKey`2.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Binding.ExpressionMetadataProvider">
+            <summary>
+            Provides metadata from expressions.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Binding.AssociatedMetadataProvider`1">
+            <summary>
+            Provides base services for reading associated metadata for types and properties.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Binding.IModelMetadataProvider">
+            <summary>
+            Defines the required contract for implementing a model metadata provider.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Binding.IModelMetadataProvider.GetMetadataForProperties(System.Object,System.Type)">
+            <summary>
+            Gets the metadata for all available properties of the given container.
+            </summary>
+            <param name="container">The container instance.</param>
+            <param name="containerType">The container type.</param>
+            <returns>The set of metadata instances.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.IModelMetadataProvider.GetMetadataForProperty(System.Func{System.Object},System.Type,System.String)">
+            <summary>
+            Gets the metadata for the given named property.
+            </summary>
+            <param name="modelAccessor">The model accessor.</param>
+            <param name="containerType">The container type.</param>
+            <param name="propertyName">The property name.</param>
+            <returns>The metadata instance.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.IModelMetadataProvider.GetMetadataForType(System.Func{System.Object},System.Type)">
+            <summary>
+            Gets the metadata for the given model type.
+            </summary>
+            <param name="modelAccessor">The model accessor.</param>
+            <param name="modelType">The model type.</param>
+            <returns>The metadata instance.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.GetMetadataForProperties(System.Object,System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.GetMetadataForProperty(System.Func{System.Object},System.Type,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.GetMetadataForType(System.Func{System.Object},System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.CreateMetadataPrototype(System.Type,System.Type,System.String)">
+            <summary>
+            Creates a metadata prototype for the given model type.
+            </summary>
+            <param name="containerType">The container type.</param>
+            <param name="modelType">The model type.</param>
+            <param name="propertyName">The property name.</param>
+            <returns>The metadata prototype.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.CreateMetadataFromPrototype(`0,System.Func{System.Object})">
+            <summary>
+            Creates metadata from a prototype used to generate the final metadata.
+            </summary>
+            <param name="prototype">The metadata prototype.</param>
+            <param name="modelAccessor">The model accessor.</param>
+            <returns>The metadata instance.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.CreatePropertyInformation(System.Type,FuManchu.Binding.PropertyHelper)">
+            <summary>
+            Creates property information for the given helper.
+            </summary>
+            <param name="containerType">The container type.</param>
+            <param name="helper">The property helper.</param>
+            <returns>The property information.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.CreatePropertyMetadata(System.Func{System.Object},FuManchu.Binding.AssociatedMetadataProvider{`0}.PropertyInformation)">
+            <summary>
+            Creates finalised metadata for the given model/property.
+            </summary>
+            <param name="modelAccessor">The model accessor.</param>
+            <param name="propertyInfo">The property information.</param>
+            <returns>The property model metadata.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.CreateTypeInformation(System.Type)">
+            <summary>
+            Creates type information for the given type.
+            </summary>
+            <param name="type">The type instance.</param>
+            <returns>The type information.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.GetMetadataForPropertiesCore(System.Object,System.Type)">
+            <summary>
+            Gets the metadata for all properties of the given container type.
+            </summary>
+            <param name="container">The container instance.</param>
+            <param name="containerType">The container type.</param>
+            <returns>The property metadata instances.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.AssociatedMetadataProvider`1.GetTypeInformation(System.Type)">
+            <summary>
+            Gets the type information for the given type.
+            </summary>
+            <param name="type">The type instance.</param>
+            <returns>The type information.</returns>
+        </member>
+        <member name="T:FuManchu.Binding.AssociatedMetadataProvider`1.TypeInformation">
+            <summary>
+            Represents basic type information.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.AssociatedMetadataProvider`1.TypeInformation.Prototype">
+            <summary>
+            Gets or sets the metadata prototype.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.AssociatedMetadataProvider`1.TypeInformation.Properties">
+            <summary>
+            Gets or sets the set of properties.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Binding.AssociatedMetadataProvider`1.PropertyInformation">
+            <summary>
+            Represents basic property information.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.AssociatedMetadataProvider`1.PropertyInformation.PropertyHelper">
+            <summary>
+            Gets or sets the property helper.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.AssociatedMetadataProvider`1.PropertyInformation.Prototype">
+            <summary>
+            Gets or sets the metadata prototype.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Binding.DefaultModelMetadataProvider">
+            <summary>
+            Provides default services for managing model metadata.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Binding.DefaultModelMetadataProvider.CreateMetadataPrototype(System.Type,System.Type,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Binding.DefaultModelMetadataProvider.CreateMetadataFromPrototype(FuManchu.Binding.ModelMetadata,System.Func{System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Binding.TemplateData">
+            <summary>
+            Represents template data.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.TemplateData.ModelMetadata">
+            <summary>
+            Gets or sets the model metadata.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.TemplateData.Model">
+            <summary>
+            Gets or sets the model.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Binding.PropertyHelper">
+            <summary>
+            Providers helepr methods for working with properties.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Binding.PropertyHelper"/>
+            </summary>
+            <param name="property">The property.</param>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.GetProperties(System.Type)">
+            <summary>
+            Gets the set of property helpers for the given container type.
+            </summary>
+            <param name="type">The container type.</param>
+            <returns>The set of property helpers.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.GetProperties(System.Object)">
+            <summary>
+            Gets the set of property helpers for the given container instance.
+            </summary>
+            <param name="container">The container instance.</param>
+            <returns>The set of property helpers.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.GetValue(System.Object)">
+            <summary>
+            Gets the value of the property from the given instance.
+            </summary>
+            <param name="instance">the container instance.</param>
+            <returns>The property value.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.MakeFastPropertyGetter(System.Reflection.PropertyInfo)">
+            <summary>
+            Creates a single fast property getter.
+            </summary>
+            <param name="propertyInfo">The property.</param>
+            <returns>The property getter.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.CreateInstance(System.Reflection.PropertyInfo)">
+            <summary>
+            Creates an instance of <see cref="T:FuManchu.Binding.PropertyHelper"/> for the given property information.
+            </summary>
+            <param name="propertyInfo">The property.</param>
+            <returns>The property helper.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.CallPropertyGetter``2(System.Func{``0,``1},System.Object)">
+            <summary>
+            Calls the property getter for the given reference type.
+            </summary>
+            <typeparam name="TDeclaringType">The reference type.</typeparam>
+            <typeparam name="TValue">The value type.</typeparam>
+            <param name="getter">The getter delegate</param>
+            <param name="target">The target container.</param>
+            <returns>The property value.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.CallPropertyGetterByReference``2(FuManchu.Binding.PropertyHelper.ByRefFunc{``0,``1},System.Object)">
+            <summary>
+            Calls the property getter for the given value type, called by reference.
+            </summary>
+            <typeparam name="TDeclaringType">The reference type.</typeparam>
+            <typeparam name="TValue">The value type.</typeparam>
+            <param name="getter">The getter delegate</param>
+            <param name="target">The target container.</param>
+            <returns>The property value.</returns>
+        </member>
+        <member name="M:FuManchu.Binding.PropertyHelper.GetProperties(System.Type,System.Func{System.Reflection.PropertyInfo,FuManchu.Binding.PropertyHelper},System.Collections.Concurrent.ConcurrentDictionary{System.Type,FuManchu.Binding.PropertyHelper[]})">
+            <summary>
+            Gets the properties for the given type.
+            </summary>
+            <param name="type">The container type.</param>
+            <param name="createPropertyHelper">The delegate used to create a property helper instance.</param>
+            <param name="cache">The cache of available lookups.</param>
+            <returns>The property helpers.</returns>
+        </member>
+        <member name="P:FuManchu.Binding.PropertyHelper.Name">
+            <summary>
+            Gets the property name.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.PropertyHelper.Property">
+            <summary>
+            Gets the property.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Binding.TemplateDataEvaluator">
+            <summary>
+            Provides evaluation of dynamic expressions against template data.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Binding.TemplateDataInfo">
+            <summary>
+            Represents information about template data.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Binding.TemplateDataInfo.#ctor(System.Object,System.Object)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Binding.TemplateDataInfo"/>
+            </summary>
+            <param name="container">The container instance.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:FuManchu.Binding.TemplateDataInfo.#ctor(System.Object,System.Reflection.PropertyInfo,System.Func{System.Object})">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Binding.TemplateDataInfo"/>
+            </summary>
+            <param name="container">The container instance.</param>
+            <param name="propertyInfo">The property information.</param>
+            <param name="valueAccessor">The value accessor.</param>
+        </member>
+        <member name="P:FuManchu.Binding.TemplateDataInfo.Container">
+            <summary>
+            Gets the container instance.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.TemplateDataInfo.PropertyInfo">
+            <summary>
+            Gets the property information.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.TemplateDataInfo.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+        </member>
+        <member name="T:FuManchu.DisposableAction">
+            <summary>
+            Represents a disposable action.
+            </summary>
+        </member>
+        <member name="M:FuManchu.DisposableAction.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.DisposableAction"/> class.
+            </summary>
+            <param name="action">The action.</param>
+            <exception cref="T:System.ArgumentNullException">action</exception>
+        </member>
+        <member name="M:FuManchu.DisposableAction.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Error">
+            <summary>
+            Represents an error in a Handlerbars template.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Error.#ctor(System.String,FuManchu.Text.SourceLocation,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Error"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="location">The location.</param>
+            <param name="length">The length of the error.</param>
+        </member>
+        <member name="P:FuManchu.Error.Length">
+            <summary>
+            Gets the length.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Error.Location">
+            <summary>
+            Gets the location of the error.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Error.Message">
+            <summary>
+            Gets the message.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Handlebars">
+            <summary>
+            Provides rendering of Handlebars templates.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Handlebars.#cctor">
+            <summary>
+            Initialises the <see cref="T:FuManchu.Handlebars"/> type.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Handlebars.Compile(System.String,System.String)">
+            <summary>
+            Compiles a Handlebars template
+            </summary>
+            <param name="name">The name of the template.</param>
+            <param name="template">The handlebars template.</param>
+            <returns>The compiled template as an executable delegate.</returns>
+        </member>
+        <member name="M:FuManchu.Handlebars.CompileAndRun(System.String,System.String,System.Object)">
+            <summary>
+            Compiles and runs the given Handlebars template.
+            </summary>
+            <param name="name">The name of the template.</param>
+            <param name="template">The handlebars template.</param>
+            <param name="model">The model for the template.</param>
+            <returns>The template result.</returns>
+        </member>
+        <member name="M:FuManchu.Handlebars.RegisterPartial(System.String,System.String)">
+            <summary>
+            Registers a partial template with the given name.
+            </summary>
+            <param name="name">The name of the partial template.</param>
+            <param name="template">The partial template content.</param>
+        </member>
+        <member name="M:FuManchu.Handlebars.Run(System.String,System.Object)">
+            <summary>
+            Runs a pre-compiled template.
+            </summary>
+            <param name="name">The name of the template.</param>
+            <param name="model">The model for the template.</param>
+            <returns>The template result.</returns>
+        </member>
+        <member name="M:FuManchu.Handlebars.RunPartial(System.String,FuManchu.Renderer.RenderContext)">
+            <summary>
+            Runs a pre-compiled partial template.
+            </summary>
+            <param name="name">The name of the partial template.</param>
+            <param name="context">The render context.</param>
+            <returns>The template result.</returns>
+        </member>
+        <member name="P:FuManchu.Handlebars.Service">
+            <summary>
+            Gets or sets the global handlebars service.
+            </summary>
+        </member>
+        <member name="T:FuManchu.HandlebarsService">
+            <summary>
+            Provides services for running Handlebars templates.
+            </summary>
+        </member>
+        <member name="T:FuManchu.IHandlebarsService">
+            <summary>
+            Defines the required contract for implementing a Handlebars service.
+            </summary>
+        </member>
+        <member name="M:FuManchu.IHandlebarsService.Compile(System.String,System.String)">
+            <summary>
+            Compiles a Handlebars template
+            </summary>
+            <param name="name">The name of the template.</param>
+            <param name="template">The handlebars template.</param>
+            <returns>The compiled template as an executable delegate.</returns>
+        </member>
+        <member name="M:FuManchu.IHandlebarsService.CompileAndRun(System.String,System.String,System.Object)">
+            <summary>
+            Compiles and runs the given Handlebars template.
+            </summary>
+            <param name="name">The name of the template.</param>
+            <param name="template">The handlebars template.</param>
+            <param name="model">The model for the template.</param>
+            <returns>The template result.</returns>
+        </member>
+        <member name="M:FuManchu.IHandlebarsService.RegisterPartial(System.String,System.String)">
+            <summary>
+            Registers a partial template with the given name.
+            </summary>
+            <param name="name">The name of the partial template.</param>
+            <param name="template">The partial template content.</param>
+        </member>
+        <member name="M:FuManchu.IHandlebarsService.Run(System.String,System.Object)">
+            <summary>
+            Runs a pre-compiled template.
+            </summary>
+            <param name="name">The name of the template.</param>
+            <param name="model">The model for the template.</param>
+            <returns>The template result.</returns>
+        </member>
+        <member name="M:FuManchu.IHandlebarsService.RunPartial(System.String,FuManchu.Renderer.RenderContext)">
+            <summary>
+            Runs a pre-compiled partial template.
+            </summary>
+            <param name="name">The name of the partial template.</param>
+            <param name="context">The render context.</param>
+            <returns>The template result.</returns>
+        </member>
+        <member name="M:FuManchu.HandlebarsService.#ctor">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.HandlebarsService"/>
+            </summary>
+        </member>
+        <member name="M:FuManchu.HandlebarsService.Compile(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.Compile(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.CompileAndRun(System.String,System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.CompilePartial(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.RegisterPartial(System.String,System.Func{FuManchu.Renderer.RenderContext,System.String})">
+            <summary>
+            Registers a partial template with the given name.
+            </summary>
+            <param name="name">The name of the partial template.</param>
+            <param name="func">The partial delegate.</param>
+        </member>
+        <member name="M:FuManchu.HandlebarsService.RegisterPartial(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.RemoveCompiledTemplate(System.String)">
+            <summary>
+            Removes a compiled template.
+            </summary>
+            <param name="name">The name of the compiled template.</param>
+        </member>
+        <member name="M:FuManchu.HandlebarsService.RemoveCompiledPartial(System.String)">
+            <summary>
+            Removes a compiled partial template.
+            </summary>
+            <param name="name">The name of the compiled partial template.</param>
+        </member>
+        <member name="M:FuManchu.HandlebarsService.Run(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.RunPartial(System.String,FuManchu.Renderer.RenderContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.CreateDocument(System.String)">
+            <summary>
+            Creates a document <see cref="T:FuManchu.Parser.SyntaxTree.Block"/> from the given template.
+            </summary>
+            <param name="template">The template.</param>
+            <returns>The document <see cref="T:FuManchu.Parser.SyntaxTree.Block"/></returns>
+        </member>
+        <member name="P:FuManchu.HandlebarsService.TagProviders">
+            <summary>
+            The collection of tag providers.
+            </summary>
+        </member>
+        <member name="P:FuManchu.HandlebarsService.ModelMetadataProvider">
+            <summary>
+            The model metadata provider.
+            </summary>
+        </member>
+        <member name="T:FuManchu.HashCodeCombiner">
+            <summary>
+            Provides services for combining hashcodes.
+            </summary>
+        </member>
+        <member name="M:FuManchu.HashCodeCombiner.Start">
+            <summary>
+            Creates a new instance of <see cref="T:FuManchu.HashCodeCombiner"/>
+            </summary>
+            <returns>The combiner instance.</returns>
+        </member>
+        <member name="M:FuManchu.HashCodeCombiner.Add(System.Collections.IEnumerable)">
+            <summary>
+            Adds the hashcode of items in the given set.
+            </summary>
+            <param name="e">The enumerable set.</param>
+            <returns>The current combiner.</returns>
+        </member>
+        <member name="M:FuManchu.HashCodeCombiner.Add(System.Int32)">
+            <summary>
+            Adds the hashcode of the given integer.
+            </summary>
+            <param name="i">The integer.</param>
+            <returns>The current combiner.</returns>
+        </member>
+        <member name="M:FuManchu.HashCodeCombiner.Add(System.Object)">
+            <summary>
+            Adds the hashcode of the given object.
+            </summary>
+            <param name="o">The object.</param>
+            <returns>The current combiner.</returns>
+        </member>
+        <member name="M:FuManchu.HashCodeCombiner.Add``1(``0,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Adds the hashcode of the specified value.
+            </summary>
+            <typeparam name="T">The value type.</typeparam>
+            <param name="value">The value.</param>
+            <param name="comparer">The comparer.</param>
+            <returns>The current combiner.</returns>
+        </member>
+        <member name="P:FuManchu.HashCodeCombiner.CombinedHash">
+            <summary>
+            Gets the combined hash.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Binding.ModelMetadata">
+            <summary>
+            Represents metadata for a model.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Binding.ModelMetadata.#ctor(FuManchu.Binding.IModelMetadataProvider,System.Type,System.Func{System.Object},System.Type,System.String)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Binding.ModelMetadata"/>.
+            </summary>
+            <param name="provider">The metadata provider.</param>
+            <param name="containerType">The container type.</param>
+            <param name="modelAccessor">The model accessor.</param>
+            <param name="modelType">The model type.</param>
+            <param name="propertyName">The property name.</param>
+        </member>
+        <member name="M:FuManchu.Binding.ModelMetadata.CreateCacheKey(System.Type,System.Type,System.String)">
+            <summary>
+            Creates a cache key for the given container/model type and property name.
+            </summary>
+            <param name="containerType">The container type.</param>
+            <param name="modelType">The model type.</param>
+            <param name="propertyName">The property name.</param>
+            <returns>The cache key.</returns>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.CacheKey">
+            <summary>
+            Gets the cache key for the current instance.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.ContainerType">
+            <summary>
+            Gets the container type.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.IsNullableValueType">
+            <summary>
+            Gets whether the model type is a nullable value type.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.Model">
+            <summary>
+            Gets the model.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.ModelType">
+            <summary>
+            Gets the model type.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.Properties">
+            <summary>
+            Gets the properties of the given model.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.PropertyName">
+            <summary>
+            Gets the property name.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.Provider">
+            <summary>
+            Gets the metadata provider.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Binding.ModelMetadata.RealModelType">
+            <summary>
+            Gets the runtime model type.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.HandlebarsLanguageCharacteristics">
+            <summary>
+            Represents characteristics for the Handlebars language.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.LanguageCharacteristics`3">
+            <summary>
+            Provides services for a language.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.LanguageCharacteristics`3.CreateSymbol(FuManchu.Text.SourceLocation,System.String,`2,System.Collections.Generic.IEnumerable{FuManchu.Error})">
+            <summary>
+            Creates the symbol.
+            </summary>
+            <param name="location">The location.</param>
+            <param name="content">The content.</param>
+            <param name="type">The type.</param>
+            <param name="errors">The errors.</param>
+            <returns>The symbol instance.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.LanguageCharacteristics`3.CreateTokenizer(FuManchu.Text.ITextDocument)">
+            <summary>
+            Creates the tokenizer.
+            </summary>
+            <param name="source">The source.</param>
+            <returns>The tokenizer instance.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.LanguageCharacteristics`3.SplitSymbol(`1,System.Int32,`2)">
+            <summary>
+            Splits the symbol.
+            </summary>
+            <param name="symbol">The symbol.</param>
+            <param name="splitAt">The index at which to split the symbol.</param>
+            <param name="leftType">The left symbol type.</param>
+            <returns>The split symbol as two new symbols.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.LanguageCharacteristics`3.TokenizeString(System.String)">
+            <summary>
+            Tokenizes the string.
+            </summary>
+            <param name="content">The content.</param>
+            <returns>The set of symbols from the source string.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.LanguageCharacteristics`3.TokenizeString(FuManchu.Text.SourceLocation,System.String)">
+            <summary>
+            Tokenizes the string.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="content">The content.</param>
+            <returns>The set of symbols from the source string.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsLanguageCharacteristics.CreateSymbol(FuManchu.Text.SourceLocation,System.String,FuManchu.Tokenizer.HandlebarsSymbolType,System.Collections.Generic.IEnumerable{FuManchu.Error})">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsLanguageCharacteristics.CreateTokenizer(FuManchu.Text.ITextDocument)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Parser.HandlebarsParser">
+            <summary>
+            Provides parsing services for the Handlebars language.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.TokenizerBackedParser`3">
+            <summary>
+            Represents a parser backed by a tokenizer.
+            </summary>
+            <typeparam name="TTokenizer">The type of the tokenizer.</typeparam>
+            <typeparam name="TSymbol">The type of the symbol.</typeparam>
+            <typeparam name="TSymbolType">The type of the symbol type.</typeparam>
+        </member>
+        <member name="T:FuManchu.Parser.ParserBase">
+            <summary>
+            Provides a base implementation of a parser.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserBase.BuildSpan(FuManchu.Parser.SyntaxTree.SpanBuilder,FuManchu.Text.SourceLocation,System.String)">
+            <summary>
+            Builds the span.
+            </summary>
+            <param name="span">The span.</param>
+            <param name="start">The start.</param>
+            <param name="content">The content.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserBase.ParseBlock">
+            <summary>
+            Parses the block.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserBase.ParseDocument">
+            <summary>
+            Parses the document.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserBase.Context">
+            <summary>
+            Gets or sets the context.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Parser.TokenizerBackedParser`3"/> class.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.BuildSpan(FuManchu.Parser.SyntaxTree.SpanBuilder,FuManchu.Text.SourceLocation,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Initialize(FuManchu.Parser.SyntaxTree.SpanBuilder)">
+            <summary>
+            Initializes the specified span builder.
+            </summary>
+            <param name="span">The span builder.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.InitTokenizer">
+            <summary>
+            Initializes the tokenizer.
+            </summary>
+            <returns>The tokenizer instance.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Accept(`1)">
+            <summary>
+            Accepts the specified symbol.
+            </summary>
+            <param name="symbol">The symbol.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Accept(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Accepts the specified symbols.
+            </summary>
+            <param name="symbols">The symbols.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptAll(`2[])">
+            <summary>
+            Accepts all symbols of the given types (in order).
+            </summary>
+            <param name="types">The types.</param>
+            <returns>True if all symbol types were accepted, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptAndMoveNext">
+            <summary>
+            Accepts the current token and moves to the next token.
+            </summary>
+            <returns>True if we could move to the next token.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptUntil(`2)">
+            <summary>
+            Accepts all tokens until they match the given type.
+            </summary>
+            <param name="type">The first type.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptUntil(`2,`2)">
+            <summary>
+            Accepts all tokens until they match any of the given types.
+            </summary>
+            <param name="type1">The first type.</param>
+            <param name="type2">The second type.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptUntil(`2,`2,`2)">
+            <summary>
+            Accepts all tokens until they match any of the given types.
+            </summary>
+            <param name="type1">The first type.</param>
+            <param name="type2">The second type.</param>
+            <param name="type3">The third type.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptUntil(`2[])">
+            <summary>
+            Accepts all tokens until they match any of the given types.
+            </summary>
+            <param name="types">The types.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptWhile(`2)">
+            <summary>
+            Accepts all tokens while they match the given type.
+            </summary>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptWhile(`2,`2)">
+            <summary>
+            Accepts all tokens while they match any of the given types.
+            </summary>
+            <param name="type1">The first type.</param>
+            <param name="type2">The second type.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptWhile(`2,`2,`2)">
+            <summary>
+            Accepts all tokens while they match any of the given types.
+            </summary>
+            <param name="type1">The first type.</param>
+            <param name="type2">The second type.</param>
+            <param name="type3">The third type.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptWhile(`2[])">
+            <summary>
+            Accepts all tokens while they match any of the given types.
+            </summary>
+            <param name="types">The types.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.AcceptWhile(System.Func{`1,System.Boolean})">
+            <summary>
+            Accepts all tokens while the given condition is met.
+            </summary>
+            <param name="condition">The condition.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.At(`2)">
+            <summary>
+            Determines if the parser is currently at a symbol of the specified type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>True if we are currently at a symbol of the specified type, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Configure(FuManchu.Parser.SyntaxTree.SpanKind,System.Boolean)">
+            <summary>
+            Configures Span to be of the given kind.
+            </summary>
+            <param name="kind">The kind of span..</param>
+            <param name="collapsed">Whether the span is collapsed.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.ConfigureSpan(System.Action{FuManchu.Parser.SyntaxTree.SpanBuilder})">
+            <summary>
+            Configures the span builder using the given configuration delegate.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.ConfigureSpan(System.Action{FuManchu.Parser.SyntaxTree.SpanBuilder,System.Action{FuManchu.Parser.SyntaxTree.SpanBuilder}})">
+            <summary>
+            Configures the span builder using the given configuration delegate.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.EnsureCurrent">
+            <summary>
+            Ensures the current symbol is read.
+            </summary>
+            <returns>True if the current symbol was read, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Expected(`2[])">
+            <summary>
+            Accepts all tokens of the given type (in order).
+            </summary>
+            <param name="types">The types.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.NextIs(`2)">
+            <summary>
+            Determines if the next symbol matches the given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>True if the next symbol matches the type, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.NextIs(`2[])">
+            <summary>
+            Determines if the next symbol matches any of the given types.
+            </summary>
+            <param name="types">The typse.</param>
+            <returns>True if the next symbol matches any of the given types, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.NextIs(System.Func{`1,System.Boolean})">
+            <summary>
+            Determines if the next symbol matches the given condition.
+            </summary>
+            <param name="condition">The condition.</param>
+            <returns>True if the next symbol matches the condition, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.NextToken">
+            <summary>
+            Moves to the next token.
+            </summary>
+            <returns>True if we advanced to the next token, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Output">
+            <summary>
+            Outputs the current set of matched symbols as a span.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Output(FuManchu.Parser.SyntaxTree.SpanKind,System.Boolean)">
+            <summary>
+            Outputs the current set of symbols as the given span kind.
+            </summary>
+            <param name="kind">The kind.</param>
+            <param name="collapsed">Whether the span is collapsed.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Optional(`2)">
+            <summary>
+            Accepts an option symbol type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>True if the optional type was found, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.PushSpanConfig">
+            <summary>
+            Pushes the span configuration.
+            </summary>
+            <returns>The disposable used to restore the previous span configuration.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.PushSpanConfig(System.Action{FuManchu.Parser.SyntaxTree.SpanBuilder})">
+            <summary>
+            Pushes the span configuration.
+            </summary>
+            <param name="newConfig">The new configuration.</param>
+            <returns>The disposable used to restore the previous span configuration.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.PushSpanConfig(System.Action{FuManchu.Parser.SyntaxTree.SpanBuilder,System.Action{FuManchu.Parser.SyntaxTree.SpanBuilder}})">
+            <summary>
+            Pushes the span configuration.
+            </summary>
+            <param name="newConfig">The new configuration.</param>
+            <returns>The disposable used to restore the previous span configuration.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.PutBack(`1)">
+            <summary>
+            Resets the source back to the beginning of the symbol.
+            </summary>
+            <param name="symbol">The symbol.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.PutBack(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Puts the set of symbols back (in reverse order).
+            </summary>
+            <param name="symbols">The symbols.</param>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.PutCurrentBack">
+            <summary>
+            Puts the current back in the input stream.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Required(`2,System.Boolean,System.Func{System.String,System.String})">
+            <summary>
+            Determines if the current token is of the given required type.
+            </summary>
+            <param name="expected">The expected.</param>
+            <param name="errorIfNotFound">if set to <c>true</c> [error if not found].</param>
+            <param name="errorBase">The error base.</param>
+            <returns>True if the token was found, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.ReadWhile(System.Func{`1,System.Boolean})">
+            <summary>
+            Reads all tokens while the condition is met.
+            </summary>
+            <param name="condition">The condition.</param>
+            <returns>The set of read tokens.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.ReadWhileLazy(System.Func{`1,System.Boolean})">
+            <summary>
+            Lazily reads the tokens while the condition is met.
+            </summary>
+            <param name="condition">The condition.</param>
+            <returns>The set of read tokens.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Was(`2)">
+            <summary>
+            Determines if the previous symbol matches the given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>True if the previous symbol matches the given type, otherwise false.</returns>
+        </member>
+        <member name="P:FuManchu.Parser.TokenizerBackedParser`3.CurrentLocation">
+            <summary>
+            Gets the current location.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.TokenizerBackedParser`3.CurrentSymbol">
+            <summary>
+            Gets the current symbol.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.TokenizerBackedParser`3.EndOfFile">
+            <summary>
+            Gets a value indicating whether we are at the end of the input stream.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.TokenizerBackedParser`3.Language">
+            <summary>
+            Gets the language characteristics.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.TokenizerBackedParser`3.PreviousSymbol">
+            <summary>
+            Gets the previous symbol.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.TokenizerBackedParser`3.Span">
+            <summary>
+            Gets or sets the span (builder).
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.TokenizerBackedParser`3.SpanConfig">
+            <summary>
+            Gets or sets the span configuration.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.TokenizerBackedParser`3.Tokenizer">
+            <summary>
+            Gets the tokenizer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.AtBlockTag">
+            <summary>
+            Parses a block tag.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.AtBlockEndTag">
+            <summary>
+            Parses the end of a tag block.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.AtCommentTag">
+            <summary>
+            Parses a comment tag.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.AtExpressionTag">
+            <summary>
+            Parses an expression.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.AtPartialTag">
+            <summary>
+            Parses an expression.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.AtTag">
+            <summary>
+            Parses a tag.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.LastSpanContent">
+            <summary>
+            Gets the content of the last span.
+            </summary>
+            <returns>The span content.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.ParseBlock">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.HandlebarsParser.ParseDocument">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.HandlebarsParser.Language">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Parser.ParserContext">
+            <summary>
+            Represents a context for parsing.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.#ctor(FuManchu.Text.ITextDocument,FuManchu.Parser.ParserBase,FuManchu.Parser.ParserErrorSink,FuManchu.Tags.TagProvidersCollection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Parser.ParserContext"/> class.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="parser">The parser.</param>
+            <param name="errorSink">The error sink.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.AddSpan(FuManchu.Parser.SyntaxTree.Span)">
+            <summary>
+            Adds the span.
+            </summary>
+            <param name="span">The span.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.CompleteParse">
+            <summary>
+            Completes the parse operation.
+            </summary>
+            <returns>The parser results.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.EndBlock">
+            <summary>
+            Ends the block.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.EnsureNotTerminated">
+            <summary>
+            Ensures the not parse is not terminated.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.MergeCurrentWithParent">
+            <summary>
+            Merges the current block with it's parent.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.OnError(FuManchu.Error)">
+            <summary>
+            Adds an error to the sink.
+            </summary>
+            <param name="error">The error.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.OnError(FuManchu.Text.SourceLocation,System.String)">
+            <summary>
+            Adds an error to the sink.
+            </summary>
+            <param name="location">The location.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.OnError(FuManchu.Text.SourceLocation,System.String,System.Int32)">
+            <summary>
+            Adds an error to the sink.
+            </summary>
+            <param name="location">The location.</param>
+            <param name="message">The message.</param>
+            <param name="length">The length.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserContext.StartBlock(System.Nullable{FuManchu.Parser.SyntaxTree.BlockType},System.String)">
+            <summary>
+            Starts a block.
+            </summary>
+            <param name="blockType">Type of the block.</param>
+            <returns>The disposable used to end the block.</returns>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.BlockStack">
+            <summary>
+            Gets the block stack.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.CurrentBlock">
+            <summary>
+            Gets the current block (builder).
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.CurrentCharacter">
+            <summary>
+            Gets the current character.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.EndOfFile">
+            <summary>
+            Gets or sets a value indicating whether we at the end of the input source.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.Errors">
+            <summary>
+            Gets the errors generated through parsing.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.LastSpan">
+            <summary>
+            Gets the last span.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.Parser">
+            <summary>
+            Gets the parser.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.Source">
+            <summary>
+            Gets or sets the source.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserContext.TagProviders">
+            <summary>
+            Gets or sets the collection of tag providers.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.ParserErrorSink">
+            <summary>
+            Manages <see cref="T:FuManchu.Error"/>'s that are encountered during parsing.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserErrorSink.OnError(FuManchu.Error)">
+            <summary>
+            Adds an error to the sink.
+            </summary>
+            <param name="error">The error.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserErrorSink.OnError(FuManchu.Text.SourceLocation,System.String)">
+            <summary>
+            Adds an error to the sink.
+            </summary>
+            <param name="location">The location.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserErrorSink.OnError(FuManchu.Text.SourceLocation,System.String,System.Int32)">
+            <summary>
+            Adds an error to the sink.
+            </summary>
+            <param name="location">The location.</param>
+            <param name="message">The message.</param>
+            <param name="length">The length.</param>
+        </member>
+        <member name="P:FuManchu.Parser.ParserErrorSink.Errors">
+            <summary>
+            Gets the errors.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.ParserHelpers">
+            <summary>
+            Provides helper methods for parsing.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserHelpers.IsHexDigit(System.Char)">
+            <summary>
+            Determines whether the specified value is a hex digit.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>True if the value is a hex digit, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.ParserHelpers.IsNewLine(System.Char)">
+            <summary>
+            Determines whether the given character represents a new line.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>True if the character is a new line, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.ParserHelpers.IsWhiteSpace(System.Char)">
+            <summary>
+            Determines whether the given character represents whitespace.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>True if the character is whitespace, otherwise false.</returns>
+        </member>
+        <member name="T:FuManchu.Parser.ParserResults">
+            <summary>
+            Represents the result of parsing.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserResults.#ctor(FuManchu.Parser.SyntaxTree.Block,System.Collections.Generic.IList{FuManchu.Error})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Parser.ParserResults"/> class.
+            </summary>
+            <param name="document">The document.</param>
+            <param name="errors">The errors.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserResults.#ctor(System.Boolean,FuManchu.Parser.SyntaxTree.Block,System.Collections.Generic.IList{FuManchu.Error})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Parser.ParserResults"/> class.
+            </summary>
+            <param name="succes">We parsing succesful?</param>
+            <param name="document">The document.</param>
+            <param name="errors">The errors.</param>
+        </member>
+        <member name="P:FuManchu.Parser.ParserResults.Document">
+            <summary>
+            Gets the root block of the syntax tree.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserResults.Errors">
+            <summary>
+            Gets the errors.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.ParserResults.Success">
+            <summary>
+            Gets a whether the parse was succesful.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.ParserVisitor">
+            <summary>
+            Represents a visitor for walking a parsed syntax tree.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.IParserVisitor">
+            <summary>
+            Defines the required contract for implementing a parser visitor.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.IParserVisitor.OnComplete">
+            <summary>
+            Called when the visitor has finished walking the syntax tree.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.IParserVisitor.VisitBlock(FuManchu.Parser.SyntaxTree.Block)">
+            <summary>
+            Visits the block.
+            </summary>
+            <param name="block">The block.</param>
+        </member>
+        <member name="M:FuManchu.Parser.IParserVisitor.VisitError(FuManchu.Error)">
+            <summary>
+            Processed after an error has been encountered.
+            </summary>
+            <param name="error">The error.</param>
+        </member>
+        <member name="M:FuManchu.Parser.IParserVisitor.VisitSpan(FuManchu.Parser.SyntaxTree.Span)">
+            <summary>
+            Visits the span.
+            </summary>
+            <param name="span">The span.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserVisitor.OnComplete">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.ParserVisitor.VisitBlock(FuManchu.Parser.SyntaxTree.Block)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.ParserVisitor.VisitEndBlock(FuManchu.Parser.SyntaxTree.Block)">
+            <summary>
+            Processed after a all child nodes of a block are visited.
+            </summary>
+            <param name="block">The block.</param>
+        </member>
+        <member name="M:FuManchu.Parser.ParserVisitor.VisitError(FuManchu.Error)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.ParserVisitor.VisitSpan(FuManchu.Parser.SyntaxTree.Span)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.ParserVisitor.VisitStartBlock(FuManchu.Parser.SyntaxTree.Block)">
+            <summary>
+            Processed before any child nodes of a block are visited.
+            </summary>
+            <param name="block">The block.</param>
+        </member>
+        <member name="T:FuManchu.Parser.ParserVisitor`1">
+            <summary>
+            Represents a parser visitor that supports scoping.
+            </summary>
+            <typeparam name="TScope">The scope type.</typeparam>
+        </member>
+        <member name="M:FuManchu.Parser.ParserVisitor`1.RevertScope">
+            <summary>
+            Reverts the current scope.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.ParserVisitor`1.SetScope(`0)">
+            <summary>
+            Sets the current scope.
+            </summary>
+            <param name="scope">The scope instance.</param>
+        </member>
+        <member name="P:FuManchu.Parser.ParserVisitor`1.Scope">
+            <summary>
+            Gets the scope.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.SyntaxTree.Block">
+            <summary>
+            Represents a block.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.SyntaxTree.SyntaxTreeNode">
+            <summary>
+            Represents a node in a syntax tree.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SyntaxTreeNode.Accept(FuManchu.Parser.IParserVisitor)">
+            <summary>
+            Accepts a parser visitor to walk the syntax tree.
+            </summary>
+            <param name="visitor">The parser visitor</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SyntaxTreeNode.EquivalentTo(FuManchu.Parser.SyntaxTree.SyntaxTreeNode)">
+            <summary>
+            Determines if the given node is equivalent to the current node.
+            </summary>
+            <param name="node">The other node.</param>
+            <returns>True if the nodes are equivalent otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SyntaxTreeNode.EquivalentTo(FuManchu.Parser.SyntaxTree.SyntaxTreeNode,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Determines if the given node is equivalent to the current node.
+            </summary>
+            <param name="node">The other node.</param>
+            <returns>True if the nodes are equivalent otherwise false.</returns>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.SyntaxTreeNode.IsBlock">
+            <summary>
+            Gets whether this node represents a block.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.SyntaxTreeNode.Length">
+            <summary>
+            Gets the length of the node.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.SyntaxTreeNode.Parent">
+            <summary>
+            Gets the parent block.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.SyntaxTreeNode.Start">
+            <summary>
+            Gets the stat location of the node.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.#ctor(FuManchu.Parser.SyntaxTree.BlockBuilder)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Parser.SyntaxTree.Block"/>
+            </summary>
+            <param name="source">The source block builder.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.#ctor(FuManchu.Parser.SyntaxTree.BlockType,System.String,System.Collections.Generic.IEnumerable{FuManchu.Parser.SyntaxTree.SyntaxTreeNode},FuManchu.Tags.TagDescriptor)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Parser.SyntaxTree.Block"/>
+            </summary>
+            <param name="type">The block type.</param>
+            <param name="name">The block name.</param>
+            <param name="contents">The child contents.</param>
+            <param name="descriptor">The tag descriptor.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.Accept(FuManchu.Parser.IParserVisitor)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.ChildrenEqual(System.Collections.Generic.IEnumerable{FuManchu.Parser.SyntaxTree.SyntaxTreeNode},System.Collections.Generic.IEnumerable{FuManchu.Parser.SyntaxTree.SyntaxTreeNode})">
+            <summary>
+            Determines if the given enumerables are equal in terms of child content.
+            </summary>
+            <param name="left">The left enumerable.</param>
+            <param name="right">The right enumerable.</param>
+            <returns>True if they are considered equal, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.EquivalentTo(FuManchu.Parser.SyntaxTree.SyntaxTreeNode)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.EquivalentTo(FuManchu.Parser.SyntaxTree.SyntaxTreeNode,System.Text.StringBuilder,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.ReplaceChildren(System.Collections.Generic.IEnumerable{FuManchu.Parser.SyntaxTree.SyntaxTreeNode})">
+            <summary>
+            Replace the child nodes.
+            </summary>
+            <param name="children">The new set of children.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Block.ToString">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Block.Children">
+            <summary>
+            Gets the children of this block.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Block.Descriptor">
+            <summary>
+            Gets or sets the tag descriptor.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Block.IsBlock">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Block.Length">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Block.Start">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Block.Type">
+            <summary>
+            Gets the block type.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Block.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.SyntaxTree.BlockBuilder">
+            <summary>
+            Represents a builder for creating block instances.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.BlockBuilder.#ctor">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Parser.SyntaxTree.BlockBuilder"/>
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.BlockBuilder.#ctor(FuManchu.Parser.SyntaxTree.Block)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Parser.SyntaxTree.BlockBuilder"/>
+            </summary>
+            <param name="original">The original block.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.BlockBuilder.Build">
+            <summary>
+            Creates a new block instance.
+            </summary>
+            <returns>The block instance.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.BlockBuilder.Reset">
+            <summary>
+            Resets the builder.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.BlockBuilder.Children">
+            <summary>
+            Gets the set of child nodes
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.BlockBuilder.Descriptor">
+            <summary>
+            Gets or sets the tag descriptor.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.BlockBuilder.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.BlockBuilder.Type">
+            <summary>
+            Gets or sets the block type.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.SyntaxTree.BlockType">
+            <summary>
+            Represents the possible block types.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.SyntaxTree.EquivalanceComparer">
+            <summary>
+            Compares two objects by equivalance.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.EquivalanceComparer.Equals(FuManchu.Parser.SyntaxTree.SyntaxTreeNode,FuManchu.Parser.SyntaxTree.SyntaxTreeNode)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.EquivalanceComparer.GetHashCode(FuManchu.Parser.SyntaxTree.SyntaxTreeNode)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Parser.SyntaxTree.Span">
+            <summary>
+            Represents a span.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.#ctor(FuManchu.Parser.SyntaxTree.SpanBuilder)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Parser.SyntaxTree.Span"/>
+            </summary>
+            <param name="builder">The span builder.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.Accept(FuManchu.Parser.IParserVisitor)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.ChangeStart(FuManchu.Text.SourceLocation)">
+            <summary>
+            Changes the start position of the current span.
+            </summary>
+            <param name="newStart">The new start location.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.EquivalentTo(FuManchu.Parser.SyntaxTree.SyntaxTreeNode)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.EquivalentTo(FuManchu.Parser.SyntaxTree.SyntaxTreeNode,System.Text.StringBuilder,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.ReplaceWith(FuManchu.Parser.SyntaxTree.SpanBuilder)">
+            <summary>
+            Replaces the content of the span with that built form the given builder.
+            </summary>
+            <param name="builder">The span builder.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.SetStart(FuManchu.Text.SourceLocation)">
+            <summary>
+            Sets the start of the span.
+            </summary>
+            <param name="newStart"></param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.Span.ToString">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.Collapsed">
+            <summary>
+            Gets whether the span is collapsed.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.Content">
+            <summary>
+            Gets the content of the span.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.IsBlock">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.Length">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.Kind">
+            <summary>
+            Gets the kind.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.Next">
+            <summary>
+            Gets the next span.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.Previous">
+            <summary>
+            Gets the previous span.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.Start">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.Span.Symbols">
+            <summary>
+            Gets the set of symbols.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.SyntaxTree.SpanBuilder">
+            <summary>
+            Builds span instances.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SpanBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Parser.SyntaxTree.SpanBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SpanBuilder.#ctor(FuManchu.Parser.SyntaxTree.Span)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Parser.SyntaxTree.SpanBuilder"/> class.
+            </summary>
+            <param name="original">The original span.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SpanBuilder.Accept(FuManchu.Tokenizer.ISymbol)">
+            <summary>
+            Accepts the specified symbol.
+            </summary>
+            <param name="symbol">The symbol.</param>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SpanBuilder.Build">
+            <summary>
+            Builds a new Span
+            </summary>
+            <returns>The Span instance.</returns>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SpanBuilder.ClearSymbols">
+            <summary>
+            Clears the symbols.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.SyntaxTree.SpanBuilder.Reset">
+            <summary>
+            Resets this instance.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.SpanBuilder.Collapsed">
+            <summary>
+            Gets or sets whether the span is collapsed.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.SpanBuilder.Kind">
+            <summary>
+            Gets or sets the kind.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.SpanBuilder.Start">
+            <summary>
+            Gets or sets the start.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Parser.SyntaxTree.SpanBuilder.Symbols">
+            <summary>
+            Gets the symbols.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.SyntaxTree.SpanKind">
+            <summary>
+            The possible kinds of span.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Parser.WhiteSpaceCollapsingParserVisitor">
+            <summary>
+            Collapses whitespace in a syntax tree.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Parser.WhiteSpaceCollapsingParserVisitor.CollapseNextWhiteSpace(FuManchu.Parser.SyntaxTree.Span)">
+            <summary>
+            Collapses the next whitespace instance.
+            </summary>
+            <param name="span">The tilde span.</param>
+        </member>
+        <member name="M:FuManchu.Parser.WhiteSpaceCollapsingParserVisitor.CollapseNextWhiteSpace(FuManchu.Parser.SyntaxTree.Block,FuManchu.Parser.SyntaxTree.SyntaxTreeNode)">
+            <summary>
+            Collapses the next whitespace element from the given block, offset by the child element.
+            </summary>
+            <param name="block">The block.</param>
+            <param name="element">The child element.</param>
+        </member>
+        <member name="M:FuManchu.Parser.WhiteSpaceCollapsingParserVisitor.CollapsePreviousWhiteSpace(FuManchu.Parser.SyntaxTree.Span)">
+            <summary>
+            Collapses the previous whitespace instance.
+            </summary>
+            <param name="span">The tilde span.</param>
+        </member>
+        <member name="M:FuManchu.Parser.WhiteSpaceCollapsingParserVisitor.CollapsePreviousWhiteSpace(FuManchu.Parser.SyntaxTree.Block,FuManchu.Parser.SyntaxTree.SyntaxTreeNode)">
+            <summary>
+            Collapses the previous whitespace element from the given block, offset by the child element.
+            </summary>
+            <param name="block">The block.</param>
+            <param name="element">The child element.</param>
+        </member>
+        <member name="M:FuManchu.Parser.WhiteSpaceCollapsingParserVisitor.VisitSpan(FuManchu.Parser.SyntaxTree.Span)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Parser.WhiteSpaceCollapsingParserVisitor.VisitTilde(FuManchu.Parser.SyntaxTree.Span)">
+            <summary>
+            Visits a ~ character which allows collapsing of whitespace.
+            </summary>
+            <param name="span">The tilde span.</param>
+        </member>
+        <member name="T:FuManchu.Renderer.BlockRenderer">
+            <summary>
+            Provides a base implementation of a block renderer.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Renderer.SyntaxTreeNodeRenderer`1">
+            <summary>
+            Provides a base implementation of a syntax tree renderer.
+            </summary>
+            <typeparam name="T">The node type.</typeparam>
+        </member>
+        <member name="T:FuManchu.Renderer.ISyntaxTreeNodeRenderer`1">
+            <summary>
+            Defines the required contract for implementing a syntax tree renderer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.ISyntaxTreeNodeRenderer`1.Render(`0,FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <summary>
+            Renders the specified syntax tree node.
+            </summary>
+            <param name="target">The target node.</param>
+            <param name="context">The context.</param>
+            <param name="writer">The writer.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.SyntaxTreeNodeRenderer`1.IsTruthy(System.Object)">
+            <summary>
+            Determines if the given value is truthy.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>True if the value is truthy, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.SyntaxTreeNodeRenderer`1.Render(`0,FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Renderer.SyntaxTreeNodeRenderer`1.GetArgumentsAndMappedParameters(FuManchu.Parser.SyntaxTree.Block,FuManchu.Renderer.RenderContext)">
+            <summary>
+            Gets the arguments and mapped parameters from the given node.
+            </summary>
+            <param name="block">The target block.</param>
+            <param name="context">The render context.</param>
+            <returns>The set of arguments and mapped parameters.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.SyntaxTreeNodeRenderer`1.Write(FuManchu.Renderer.RenderContext,System.IO.TextWriter,System.Object)">
+            <summary>
+            Writes the given value to the text writer.
+            </summary>
+            <param name="context">The render context.</param>
+            <param name="writer">The text writer.</param>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="T:FuManchu.Renderer.IBlockRenderer">
+            <summary>
+            Defines the required contract for implementing a block renderer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.IBlockRenderer.RenderChild(FuManchu.Parser.SyntaxTree.SyntaxTreeNode,FuManchu.Renderer.RenderContext)">
+            <summary>
+            Renders the child node.
+            </summary>
+            <param name="node">The node.</param>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.BlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Renderer.BlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,System.Object[],System.Collections.Generic.Dictionary{System.String,System.Object},FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <summary>
+            Renders the specified block.
+            </summary>
+            <param name="block">The block.</param>
+            <param name="arguments">The arguments.</param>
+            <param name="maps">The maps.</param>
+            <param name="context">The context.</param>
+            <param name="writer">The writer.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.BlockRenderer.RenderChild(FuManchu.Parser.SyntaxTree.SyntaxTreeNode,FuManchu.Renderer.RenderContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Renderer.BlockRenderer.RenderChildren(System.Collections.Generic.IEnumerable{FuManchu.Parser.SyntaxTree.SyntaxTreeNode},FuManchu.Renderer.RenderContext)">
+            <summary>
+            Renders the set of child nodes.
+            </summary>
+            <param name="children">The set of children.</param>
+            <param name="context">Te render context.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.BlockRenderer.ValidateTag(System.String,FuManchu.Tags.TagDescriptor,System.Object[],System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Validates a tag based on the descriptor.
+            </summary>
+            <param name="descriptor">The tag descriptor.</param>
+            <param name="arguments">The set of arguments.</param>
+            <param name="parameters">The set of parameters.</param>
+        </member>
+        <member name="T:FuManchu.Renderer.ConditionalBlockRenderer">
+            <summary>
+            Provides rendering of {{#if ...}} {{/if}} blocks, with support for {{#elseif}} and {{else}}
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.ConditionalBlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Renderer.ConditionalBlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,System.Object[],System.Collections.Generic.Dictionary{System.String,System.Object},FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Renderer.ConditionalBlockRenderer.ParseConditionalBlocks(FuManchu.Parser.SyntaxTree.Block)">
+            <summary>
+            Parses the conditional blocks.
+            </summary>
+            <param name="target">The target.</param>
+            <returns>The set of parsed conditional blocks.</returns>
+        </member>
+        <member name="T:FuManchu.Renderer.EnumerableBlockRenderer">
+            <summary>
+            Provides rendering of enumerations.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.EnumerableBlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,System.Object[],System.Collections.Generic.Dictionary{System.String,System.Object},FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Renderer.EnumerableBlockRenderer.RenderEnumerable(System.Collections.IEnumerable,FuManchu.Renderer.RenderContext,System.Collections.Generic.IEnumerable{FuManchu.Parser.SyntaxTree.SyntaxTreeNode},System.Collections.Generic.IEnumerable{FuManchu.Parser.SyntaxTree.SyntaxTreeNode})">
+            <summary>
+            Renders the enumerable content.
+            </summary>
+            <param name="enumerable">The enumerable instance.</param>
+            <param name="context">The render context.</param>
+            <param name="children">The child block to render for each item.</param>
+            <param name="alternateChildren">Alternative content to render when no content is available.</param>
+        </member>
+        <member name="T:FuManchu.Renderer.ExpressionSpanRenderer">
+            <summary>
+            Provides rendering of expressions.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Renderer.SpanRenderer">
+            <summary>
+            Provides a base implementation of a span renderer.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Renderer.ISpanRenderer">
+            <summary>
+            Defines the required contract for implementing a span renderer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.ExpressionSpanRenderer.Render(FuManchu.Parser.SyntaxTree.Span,FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Renderer.ImplicitBlockRenderer">
+            <summary>
+            Provides rendering of implicit block tags, e.g. {{#people}}{{/people}}.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.ImplicitBlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,System.Object[],System.Collections.Generic.Dictionary{System.String,System.Object},FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Renderer.PartialBlockRenderer">
+            <summary>
+            Renders a partial include.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.PartialBlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,System.Object[],System.Collections.Generic.Dictionary{System.String,System.Object},FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Renderer.RenderContextFactory">
+            <summary>
+            Provides factory methods for creating <see cref="T:FuManchu.Renderer.RenderContext"/> instances.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContextFactory.CreateRenderContext(FuManchu.Renderer.RenderingParserVisitor,System.Object)">
+            <summary>
+            Creates a <see cref="T:FuManchu.Renderer.RenderContext"/> using the renderer provided.
+            </summary>
+            <param name="renderer">The renderering parser visitor.</param>
+            <param name="model">The model.</param>
+            <returns>The render context.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContextFactory.CreateRenderContext(FuManchu.Renderer.RenderContext,System.Object)">
+            <summary>
+            Creates a child <see cref="T:FuManchu.Renderer.RenderContext"/> based on the parent context provided.
+            </summary>
+            <param name="parent">The parent render context.</param>
+            <param name="model">The child model.</param>
+            <returns>The parent render context.</returns>
+        </member>
+        <member name="T:FuManchu.Renderer.RenderContextScope">
+            <summary>
+            Represents a disposable scope around a context.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContextScope.#ctor(FuManchu.Renderer.RenderContext,System.Action)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Renderer.RenderContextScope"/>
+            </summary>
+            <param name="scopeContext">The scoped context.</param>
+            <param name="action">The dispose action.</param>
+        </member>
+        <member name="P:FuManchu.Renderer.RenderContextScope.ScopeContext">
+            <summary>
+            Gets or sets the scoped context.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Renderer.RenderingParserVisitor">
+            <summary>
+            Provides rendering of a Handlebars document.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderingParserVisitor.#ctor(System.IO.TextWriter,System.Object,FuManchu.Binding.IModelMetadataProvider)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Renderer.RenderingParserVisitor"/>
+            </summary>
+            <param name="writer">The text writer</param>
+            <param name="model">The document model.</param>
+            <param name="modelMetadataProvider">The model metadata provider.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderingParserVisitor.#ctor(System.IO.TextWriter,FuManchu.Renderer.RenderContext,FuManchu.Binding.IModelMetadataProvider)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Renderer.RenderingParserVisitor"/>
+            </summary>
+            <param name="writer">The text writer</param>
+            <param name="context">The render context.</param>
+            <param name="modelMetadataProvider">The model metadata provider.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderingParserVisitor.VisitBlock(FuManchu.Parser.SyntaxTree.Block)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Renderer.RenderingParserVisitor.VisitMetaCodeSpan(FuManchu.Parser.SyntaxTree.Span)">
+            <summary>
+            Visits a metacode span.
+            </summary>
+            <param name="span">The metacode span.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderingParserVisitor.VisitPartial(FuManchu.Parser.SyntaxTree.Block)">
+            <summary>
+            Visits a partial reference block.
+            </summary>
+            <param name="block">The block.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderingParserVisitor.VisitSpan(FuManchu.Parser.SyntaxTree.Span)">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Renderer.RenderingParserVisitor.ModelMetadataProvider">
+            <summary>
+            Gets the model metadata provider.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Renderer.RenderingParserVisitor.Service">
+            <summary>
+            Gets the Handlebars service.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Renderer.RenderContext">
+            <summary>
+            Represents a context for rendering a syntax tree node.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContext.#ctor(FuManchu.Parser.ParserVisitor{FuManchu.Renderer.RenderContext},FuManchu.Renderer.RenderContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Renderer.RenderContext"/> class.
+            </summary>
+            <param name="visitor">The visitor.</param>
+            <param name="parentRenderContext">The parent render context.</param>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContext.BeginScope(System.Object)">
+            <summary>
+            Begins a child scope given the specified model.
+            </summary>
+            <returns>The disposable used to revert the scope.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContext.GetVariable(System.String,System.Object)">
+            <summary>
+            Gets the variable with the given name.
+            </summary>
+            <param name="name">The variable name.</param>
+            <returns>The variable value.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContext.ResolveValue(FuManchu.Parser.SyntaxTree.Span)">
+            <summary>
+            Resolves the value represented by the given span.
+            </summary>
+            <param name="span">The span representing the expression.</param>
+            <returns>The resolved value.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContext.ResolveValueFromSymbols(FuManchu.Tokenizer.ISymbol[])">
+            <summary>
+            Resolves the value represented by the given set of symbols.
+            </summary>
+            <param name="symbols">The set of symbols.</param>
+            <returns>The resolved value.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContext.ResolveValue(System.String,System.Boolean)">
+            <summary>
+            Resolves the value for the given expression.
+            </summary>
+            <param name="expression">The expression.</param>
+            <param name="isVariableLookup">True if this is a variable lookup, otherwise false.</param>
+            <returns>The resolved value.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContext.ResolveValue(FuManchu.Renderer.RenderContext,FuManchu.Binding.TemplateData,System.String,System.Boolean)">
+            <summary>
+            Resolves the value for the given expression.
+            </summary>
+            <param name="context">The render context.</param>
+            <param name="templateData">The template data.</param>
+            <param name="expression">The expression.</param>
+            <param name="isVariableLookup">True if this is a variable lookup, otherwise false.</param>
+            <returns>The resolved value.</returns>
+        </member>
+        <member name="M:FuManchu.Renderer.RenderContext.SetVariable(System.String,System.Object)">
+            <summary>
+            Sets the variable with the given name.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The variable value.</param>
+        </member>
+        <member name="P:FuManchu.Renderer.RenderContext.EscapeEncoding">
+            <summary>
+            Gets or sets whether we are escaping text encoding.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Renderer.RenderContext.ModelMetadataProvider">
+            <summary>
+            Gets or sets the model metadata provider.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Renderer.RenderContext.Service">
+            <summary>
+            Gets or sets the Handlebars service.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Renderer.RenderContext.TemplateData">
+            <summary>
+            Gets or sets the template data.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Renderer.RenderContext.ParentRenderContext">
+            <summary>
+            Gets the parent render context.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Renderer.RenderContext.Visitor">
+            <summary>
+            Gets the parser visitor.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Renderer.TextSpanRenderer">
+            <summary>
+            Renders text to the output writer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.TextSpanRenderer.Render(FuManchu.Parser.SyntaxTree.Span,FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Renderer.ScopeBlockRenderer">
+            <summary>
+            Generates a scope around a property and renders the child content.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.ScopeBlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,System.Object[],System.Collections.Generic.Dictionary{System.String,System.Object},FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Renderer.UnlessBlockRenderer">
+            <summary>
+            Handles rendering {{#unless }} tags.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.UnlessBlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,System.Object[],System.Collections.Generic.Dictionary{System.String,System.Object},FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Renderer.WhiteSpaceSpanRenderer">
+            <summary>
+            Renders whitespace to the output writer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.WhiteSpaceSpanRenderer.Render(FuManchu.Parser.SyntaxTree.Span,FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.StateMachine`1">
+            <summary>
+            Represents a state machine.
+            </summary>
+            <typeparam name="T">The state machine.</typeparam>
+        </member>
+        <member name="M:FuManchu.StateMachine`1.Stay">
+            <summary>
+            Stays this at the current state.
+            </summary>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.StateMachine`1.Stay(`0)">
+            <summary>
+            Stays this at the current state.
+            </summary>
+            <param name="output">The output.</param>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.StateMachine`1.Stop">
+            <summary>
+            Stops this state machine.
+            </summary>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.StateMachine`1.Transition(FuManchu.StateMachine{`0}.State)">
+            <summary>
+            Transitions the specified new state.
+            </summary>
+            <param name="newState">The new state.</param>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.StateMachine`1.Transition(`0,FuManchu.StateMachine{`0}.State)">
+            <summary>
+            Transitions the specified new state.
+            </summary>
+            <param name="output">The output.</param>
+            <param name="newState">The new state.</param>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.StateMachine`1.Turn">
+            <summary>
+            Advances to the next state.
+            </summary>
+            <returns>The output.</returns>
+        </member>
+        <member name="P:FuManchu.StateMachine`1.StartState">
+            <summary>
+            Gets the start state.
+            </summary>
+        </member>
+        <member name="P:FuManchu.StateMachine`1.CurrentState">
+            <summary>
+            Gets or sets the current state.
+            </summary>
+        </member>
+        <member name="T:FuManchu.StateMachine`1.StateResult">
+            <summary>
+            Represents a state result.
+            </summary>
+        </member>
+        <member name="M:FuManchu.StateMachine`1.StateResult.#ctor(FuManchu.StateMachine{`0}.State)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.StateMachine`1.StateResult"/> class.
+            </summary>
+            <param name="next">The next state.</param>
+        </member>
+        <member name="M:FuManchu.StateMachine`1.StateResult.#ctor(`0,FuManchu.StateMachine{`0}.State)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.StateMachine`1.StateResult"/> class.
+            </summary>
+            <param name="output">The output.</param>
+            <param name="next">The next.</param>
+        </member>
+        <member name="P:FuManchu.StateMachine`1.StateResult.HasOutput">
+            <summary>
+            Gets or sets a value indicating whether this instance has output.
+            </summary>
+        </member>
+        <member name="P:FuManchu.StateMachine`1.StateResult.Output">
+            <summary>
+            Gets or sets the output.
+            </summary>
+        </member>
+        <member name="P:FuManchu.StateMachine`1.StateResult.Next">
+            <summary>
+            Gets or sets the next state.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Tags.ITagProvider">
+            <summary>
+            Defines the required contract for implementing a tag provider.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tags.ITagProvider.GetTags">
+            <summary>
+            Gets the set of available tags.
+            </summary>
+            <returns>The set of tag descriptors.</returns>
+        </member>
+        <member name="T:FuManchu.Tags.StandardTagProvider">
+            <summary>
+            Provides the standard set of Handlebars tags.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tags.StandardTagProvider.GetTags">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Tags.TagDescriptor">
+            <summary>
+            Represents a tag descriptor providing metadata about known tags.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tags.TagDescriptor.#ctor(System.String,FuManchu.Renderer.ISyntaxTreeNodeRenderer{FuManchu.Parser.SyntaxTree.Block},System.Int32,System.Nullable{System.Int32},System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Tags.TagDescriptor"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="renderer">The renderer.</param>
+            <param name="requiredArguments">The required number of arguments.</param>
+            <param name="maxArguments">The maximum number of arguments.</param>
+            <param name="allowMappedParamters">if set to <c>true</c> [allow mapped paramters].</param>
+            <param name="hasChildContent">if set to <c>true</c> [has child content].</param>
+        </member>
+        <member name="P:FuManchu.Tags.TagDescriptor.AllowMappedParameters">
+            <summary>
+            Gets a value indicating whether to allow mapped parameters.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tags.TagDescriptor.HasChildContent">
+            <summary>
+            Gets a value indicating whether this instance has child content.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tags.TagDescriptor.MaxArguments">
+            <summary>
+            Gets the count of maximum arguments.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tags.TagDescriptor.Name">
+            <summary>
+            Gets the name of the tag.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tags.TagDescriptor.Renderer">
+            <summary>
+            Gets syntax tree renderer.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tags.TagDescriptor.RequiredArguments">
+            <summary>
+            Gets the count of required arguments.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Tags.TagProvidersCollection">
+            <summary>
+            Represents the collection of available tag providers.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.#cctor">
+            <summary>
+            Initialises the <see cref="T:FuManchu.Tags.TagProvidersCollection"/> type.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.#ctor">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Tags.TagProvidersCollection"/>
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.#ctor(System.Collections.Generic.IEnumerable{FuManchu.Tags.ITagProvider})">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Tags.TagProvidersCollection"/>
+            </summary>
+            <param name="providers">The set of providers.</param>
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.Add(FuManchu.Tags.ITagProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.Contains(FuManchu.Tags.ITagProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.CopyTo(FuManchu.Tags.ITagProvider[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.Remove(FuManchu.Tags.ITagProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tags.TagProvidersCollection.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Tags.TagProvidersCollection.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Tags.TagProvidersCollection.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Text.IEncodedString">
+            <summary>
+            Defines the required contract for implementing an encoded string.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.IEncodedString.ToEncodedString">
+            <summary>
+            Returns the encoded string.
+            </summary>
+            <returns>The encoded string.</returns>
+        </member>
+        <member name="T:FuManchu.Text.ITextBuffer">
+            <summary>
+            Defines the required contract for implementing a text buffer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.ITextBuffer.Peek">
+            <summary>
+            Peeks at the next character in the text buffer.
+            </summary>
+            <returns>The read character.</returns>
+        </member>
+        <member name="M:FuManchu.Text.ITextBuffer.Read">
+            <summary>
+            Reads the next character and advances the read position.
+            </summary>
+            <returns>The read character.</returns>
+        </member>
+        <member name="P:FuManchu.Text.ITextBuffer.Length">
+            <summary>
+            Gets the length of the text buffer.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.ITextBuffer.Position">
+            <summary>
+            Gets or sets the read position of the text buffer.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Text.ITextDocument">
+            <summary>
+            Represents a text document.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.ITextDocument.Location">
+            <summary>
+            Gets the current location in the document.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Text.LineTrackingStringBuffer">
+            <summary>
+            Represents a string buffer with line tracking.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.LineTrackingStringBuffer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.LineTrackingStringBuffer"/> class.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.LineTrackingStringBuffer.Append(System.String)">
+            <summary>
+            Appends the specified content to the buffer.
+            </summary>
+            <param name="content">The content.</param>
+        </member>
+        <member name="M:FuManchu.Text.LineTrackingStringBuffer.AppendCore(System.Char)">
+            <summary>
+            Appends the specified character to the current line.
+            </summary>
+            <param name="character">The character.</param>
+        </member>
+        <member name="M:FuManchu.Text.LineTrackingStringBuffer.CharAt(System.Int32)">
+            <summary>
+            Gets the character at the given absolute index.
+            </summary>
+            <param name="absolute">The absolute.</param>
+            <returns>The character reference.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">absolute</exception>
+        </member>
+        <member name="M:FuManchu.Text.LineTrackingStringBuffer.FindLine(System.Int32)">
+            <summary>
+            Finds the line that contains the given index.
+            </summary>
+            <param name="absolute">The absolute.</param>
+            <returns>The line that contains the given index.</returns>
+        </member>
+        <member name="M:FuManchu.Text.LineTrackingStringBuffer.PushNewLine">
+            <summary>
+            Pushes a new line.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.LineTrackingStringBuffer.ScanLines(System.Int32,System.Int32)">
+            <summary>
+            Scans the lines to try and find the line that contains the given absolute index.
+            </summary>
+            <param name="absolute">The absolute.</param>
+            <param name="start">The start.</param>
+            <returns>The text line.</returns>
+        </member>
+        <member name="P:FuManchu.Text.LineTrackingStringBuffer.EndLocation">
+            <summary>
+            Gets the end location.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.LineTrackingStringBuffer.Length">
+            <summary>
+            Gets the length of the buffer.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Text.LineTrackingStringBuffer.CharacterReference">
+            <summary>
+            Represents a reference to a character.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.LineTrackingStringBuffer.CharacterReference.#ctor(System.Char,FuManchu.Text.SourceLocation)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.LineTrackingStringBuffer.CharacterReference"/> struct.
+            </summary>
+            <param name="character">The character.</param>
+            <param name="location">The location.</param>
+        </member>
+        <member name="P:FuManchu.Text.LineTrackingStringBuffer.CharacterReference.Character">
+            <summary>
+            Gets the character.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.LineTrackingStringBuffer.CharacterReference.Location">
+            <summary>
+            Gets the location.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Text.LookaheadToken">
+            <summary>
+            Provides a token for managing a lookahead action.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.LookaheadToken.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.LookaheadToken"/> class.
+            </summary>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:FuManchu.Text.LookaheadToken.Accept">
+            <summary>
+            Accepts this lookahead to prevent the rollback.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.LookaheadToken.Dispose">
+            <inheritdoc />>
+        </member>
+        <member name="M:FuManchu.Text.LookaheadToken.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:FuManchu.Text.RawString">
+            <summary>
+            Represents a raw string that doesn't support encoding.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.RawString.#ctor(System.Object)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Text.RawString"/>
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:FuManchu.Text.RawString.ToEncodedString">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Text.SeekableTextReader">
+            <summary>
+            Provides text reader services with seek actions.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.SeekableTextReader.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.SeekableTextReader"/> class.
+            </summary>
+            <param name="content">The content.</param>
+        </member>
+        <member name="M:FuManchu.Text.SeekableTextReader.#ctor(System.IO.TextReader)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.SeekableTextReader"/> class.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:FuManchu.Text.SeekableTextReader.#ctor(FuManchu.Text.ITextBuffer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.SeekableTextReader"/> class.
+            </summary>
+            <param name="buffer">The buffer.</param>
+        </member>
+        <member name="M:FuManchu.Text.SeekableTextReader.Peek">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Text.SeekableTextReader.Read">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Text.SeekableTextReader.UpdateState">
+            <summary>
+            Updates the state of the reader.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.SeekableTextReader.Buffer">
+            <summary>
+            Gets the buffer.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.SeekableTextReader.Length">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Text.SeekableTextReader.Location">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Text.SeekableTextReader.Position">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Text.SourceLocation">
+            <summary>
+            Represents a location in template source.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.SourceLocation"/> struct.
+            </summary>
+            <param name="absolute">The absolute.</param>
+            <param name="line">The line.</param>
+            <param name="character">The character.</param>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.Add(FuManchu.Text.SourceLocation,FuManchu.Text.SourceLocation)">
+            <summary>
+            Adds the two source locations together.
+            </summary>
+            <param name="left">The left source location.</param>
+            <param name="right">The right source location.</param>
+            <returns>The result source location.</returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.Subtract(FuManchu.Text.SourceLocation,FuManchu.Text.SourceLocation)">
+            <summary>
+            Subtracts the right source location from the left.
+            </summary>
+            <param name="left">The left source location.</param>
+            <param name="right">The right source location.</param>
+            <returns>The result source location.</returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.CompareTo(FuManchu.Text.SourceLocation)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.Equals(FuManchu.Text.SourceLocation)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.op_LessThan(FuManchu.Text.SourceLocation,FuManchu.Text.SourceLocation)">
+            <summary>
+            Implements the operator &lt;.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.op_GreaterThan(FuManchu.Text.SourceLocation,FuManchu.Text.SourceLocation)">
+            <summary>
+            Implements the operator &gt;.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.op_Equality(FuManchu.Text.SourceLocation,FuManchu.Text.SourceLocation)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.op_Inequality(FuManchu.Text.SourceLocation,FuManchu.Text.SourceLocation)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.op_Addition(FuManchu.Text.SourceLocation,FuManchu.Text.SourceLocation)">
+            <summary>
+            Implements the operator +.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocation.op_Subtraction(FuManchu.Text.SourceLocation,FuManchu.Text.SourceLocation)">
+            <summary>
+            Implements the operator -.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="P:FuManchu.Text.SourceLocation.Absolute">
+            <summary>
+            Gets the absolute index.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.SourceLocation.Character">
+            <summary>
+            Gets the character index.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.SourceLocation.Line">
+            <summary>
+            Gets the line index.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Text.SourceLocationTracker">
+            <summary>
+            Provides tracking of source location changes.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocationTracker.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.SourceLocationTracker"/> class.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocationTracker.#ctor(FuManchu.Text.SourceLocation)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.SourceLocationTracker"/> class.
+            </summary>
+            <param name="currentLocation">The current location.</param>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocationTracker.CalculateNewLocation(FuManchu.Text.SourceLocation,System.String)">
+            <summary>
+            Calculates the new location.
+            </summary>
+            <param name="lastPosition">The last position.</param>
+            <param name="content">The content.</param>
+            <returns>The new source location.</returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocationTracker.UpdateLocation(System.Char,System.Char)">
+            <summary>
+            Updates the location based on the character read.
+            </summary>
+            <param name="read">The read character.</param>
+            <param name="next">The next character.</param>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocationTracker.UpdateLocation(System.String)">
+            <summary>
+            Updates the location using the content read.
+            </summary>
+            <param name="content">The content.</param>
+            <returns>This tracker.</returns>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocationTracker.UpdateCharacterCore(System.Char,System.Char)">
+            <summary>
+            Updates the character and line indexes based on the changes.
+            </summary>
+            <param name="read">The read.</param>
+            <param name="next">The next.</param>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocationTracker.UpdateInternalState">
+            <summary>
+            Updates the internal state of the tracker.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.SourceLocationTracker.RecalculateSourceLocation">
+            <summary>
+            Recalculates the source location.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.SourceLocationTracker.CurrentLocation">
+            <summary>
+            Gets or sets the current location.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Text.TextDocumentReader">
+            <summary>
+            Provides read operations on a text document.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.TextDocumentReader.#ctor(FuManchu.Text.ITextDocument)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.TextDocumentReader"/> class.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:FuManchu.Text.TextDocumentReader.Peek">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Text.TextDocumentReader.Read">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Text.TextDocumentReader.Document">
+            <summary>
+            Gets the document.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.TextDocumentReader.Length">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Text.TextDocumentReader.Location">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Text.TextDocumentReader.Position">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Text.TextExtensions">
+            <summary>
+            Provides extensions for text services.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.TextExtensions.BeginLookahead(FuManchu.Text.ITextBuffer)">
+            <summary>
+            Begins the lookahead in the given buffer.
+            </summary>
+            <param name="self">The text buffer.</param>
+            <returns>The lookahead token.</returns>
+        </member>
+        <member name="M:FuManchu.Text.TextExtensions.ReadToEnd(FuManchu.Text.ITextBuffer)">
+            <summary>
+            Reads the remaining content in the buffer until the end.
+            </summary>
+            <param name="self">The text buffer.</param>
+            <returns>The read string.</returns>
+        </member>
+        <member name="M:FuManchu.Text.TextExtensions.Seek(FuManchu.Text.ITextBuffer,System.Int32)">
+            <summary>
+            Seeks the number of characters in the buffer.
+            </summary>
+            <param name="self">The text buffer.</param>
+            <param name="characters">The characters.</param>
+        </member>
+        <member name="T:FuManchu.Text.TextLine">
+            <summary>
+            Represents a line of text.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Text.TextLine.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Text.TextLine"/> class.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="index">The index.</param>
+        </member>
+        <member name="M:FuManchu.Text.TextLine.Contains(System.Int32)">
+            <summary>
+            Determines whether the text line contains the given index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>True if the text line contains the index, otherwise false.</returns>
+        </member>
+        <member name="P:FuManchu.Text.TextLine.Content">
+            <summary>
+            Gets the string builder.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.TextLine.End">
+            <summary>
+            Gets the end.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.TextLine.Index">
+            <summary>
+            Gets or sets the length.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.TextLine.Length">
+            <summary>
+            Gets the length.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Text.TextLine.Start">
+            <summary>
+            Gets or sets the start.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Tokenizer.HandlebarsHelpers">
+            <summary>
+            Provides helper methods for Handlebars syntax.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsHelpers.IsIdentifierStart(System.Char)">
+            <summary>
+            Determines whether the given character is the start of an identifier.
+            </summary>
+            <param name="character">The character.</param>
+            <returns>True if the character is the start of an identifier, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsHelpers.IsIdentifierPart(System.Char)">
+            <summary>
+            Determines whether the given character is part of an identifier.
+            </summary>
+            <param name="character">The character.</param>
+            <returns>True if the character can be considered part of an identifier, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsHelpers.IsIdentifierPartByUnicodeCategory(System.Char)">
+            <summary>
+            Determines whether the given character can be considered part of an identifier by the unicode category of the character.
+            </summary>
+            <param name="character">The character.</param>
+            <returns>True if the character can be considered part of an identifier, otherwise false.</returns>
+        </member>
+        <member name="T:FuManchu.Tokenizer.HandlebarsKeyword">
+            <summary>
+            Defines the possible built-in Handlerbars keywords.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Tokenizer.HandlebarsKeywordDetector">
+            <summary>
+            Provides mappings of strings to <see cref="T:FuManchu.Tokenizer.HandlebarsKeyword"/> instances.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsKeywordDetector.SymbolTypeForIdentifier(System.String)">
+            <summary>
+            Gets the keyword for the given symbol identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Handlebars keyword.</returns>
+        </member>
+        <member name="T:FuManchu.Tokenizer.HandlebarsSymbol">
+            <summary>
+            Represents a Handlerbars symbol.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Tokenizer.SymbolBase`1">
+            <summary>
+            Represents a base implementation of a symbol.
+            </summary>
+            <typeparam name="T">The symbol type.</typeparam>
+        </member>
+        <member name="T:FuManchu.Tokenizer.ISymbol">
+            <summary>
+            Defines the required contract for implementing a symbol.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.ISymbol.ChangeStart(FuManchu.Text.SourceLocation)">
+            <summary>
+            Changes the start of the symbol.
+            </summary>
+            <param name="newStart">The new start.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.ISymbol.OffsetStart(FuManchu.Text.SourceLocation)">
+            <summary>
+            Offsets the start of the symbol based on the document start.
+            </summary>
+            <param name="documentStart">The document start.</param>
+        </member>
+        <member name="P:FuManchu.Tokenizer.ISymbol.Content">
+            <summary>
+            Gets the content of the symbol.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.ISymbol.Start">
+            <summary>
+            Gets the start of the symbol.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.SymbolBase`1.#ctor(FuManchu.Text.SourceLocation,System.String,`0,System.Collections.Generic.IEnumerable{FuManchu.Error})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Tokenizer.SymbolBase`1"/> class.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="content">The content.</param>
+            <param name="type">The type.</param>
+            <param name="errors">The errors.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.SymbolBase`1.ChangeStart(FuManchu.Text.SourceLocation)">
+            <summary>
+            Changes the start of the symbol.
+            </summary>
+            <param name="newStart">The new start.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.SymbolBase`1.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tokenizer.SymbolBase`1.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tokenizer.SymbolBase`1.OffsetStart(FuManchu.Text.SourceLocation)">
+            <summary>
+            Offsets the start of the symbol based on the document start.
+            </summary>
+            <param name="documentStart">The document start.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.SymbolBase`1.ToString">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Tokenizer.SymbolBase`1.Start">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Tokenizer.SymbolBase`1.Content">
+            <inheritdoc />
+        </member>
+        <member name="P:FuManchu.Tokenizer.SymbolBase`1.Errors">
+            <summary>
+            Gets the errors generated because of this symbol.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.SymbolBase`1.Type">
+            <summary>
+            Gets the symbol type.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsSymbol.#ctor(System.Int32,System.Int32,System.Int32,System.String,FuManchu.Tokenizer.HandlebarsSymbolType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Tokenizer.HandlebarsSymbol"/> class.
+            </summary>
+            <param name="offset">The offset.</param>
+            <param name="line">The line.</param>
+            <param name="column">The column.</param>
+            <param name="content">The content.</param>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsSymbol.#ctor(FuManchu.Text.SourceLocation,System.String,FuManchu.Tokenizer.HandlebarsSymbolType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Tokenizer.HandlebarsSymbol"/> class.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="content">The content.</param>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsSymbol.#ctor(System.Int32,System.Int32,System.Int32,System.String,FuManchu.Tokenizer.HandlebarsSymbolType,System.Collections.Generic.IEnumerable{FuManchu.Error})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Tokenizer.HandlebarsSymbol"/> class.
+            </summary>
+            <param name="offset">The offset.</param>
+            <param name="line">The line.</param>
+            <param name="column">The column.</param>
+            <param name="content">The content.</param>
+            <param name="type">The type.</param>
+            <param name="errors">The errors.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsSymbol.#ctor(FuManchu.Text.SourceLocation,System.String,FuManchu.Tokenizer.HandlebarsSymbolType,System.Collections.Generic.IEnumerable{FuManchu.Error})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Tokenizer.HandlebarsSymbol"/> class.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="content">The content.</param>
+            <param name="type">The type.</param>
+            <param name="errors">The errors.</param>
+        </member>
+        <member name="P:FuManchu.Tokenizer.HandlebarsSymbol.Keyword">
+            <summary>
+            Gets or sets the keyword.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Tokenizer.HandlebarsSymbolType">
+            <summary>
+            Represents the possible symbol types for Handlerbars documents.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Tokenizer.HandlebarsTokenizer">
+            <summary>
+            Provides tokenizer services for Handlebars syntax.
+            </summary>
+        </member>
+        <member name="T:FuManchu.Tokenizer.Tokenizer`2">
+            <summary>
+            Provides a base implementation of a tokenizer.
+            </summary>
+            <typeparam name="TSymbol">The type of the symbol.</typeparam>
+            <typeparam name="TSymbolType">The type of the symbol type.</typeparam>
+        </member>
+        <member name="T:FuManchu.Tokenizer.ITokenizer">
+            <summary>
+            Defines the required contract for implementing a tokenizer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.ITokenizer.NextSymbol">
+            <summary>
+            Gets the next symbol.
+            </summary>
+            <returns>The symbol.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.#ctor(FuManchu.Text.ITextDocument)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Tokenizer.Tokenizer`2"/> class.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.CharOrWhiteSpace(System.Char)">
+            <summary>
+            Returns a predicate that determines if the given character is a character or whitespace (including new lines).
+            </summary>
+            <param name="character">The character.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.CreateSymbol(FuManchu.Text.SourceLocation,System.String,`1,System.Collections.Generic.IEnumerable{FuManchu.Error})">
+            <summary>
+            Creates the symbol.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="content">The content.</param>
+            <param name="type">The type.</param>
+            <param name="errors">The errors.</param>
+            <returns>The symbol.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.EndSymbol(`1)">
+            <summary>
+            Ends the symbol.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The symbol instance.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.EndSymbol(FuManchu.Text.SourceLocation,`1)">
+            <summary>
+            Ends the symbol.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="type">The type.</param>
+            <returns>The symbol instance.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.Lookahead(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Looks ahead in the source to determine if the given string is found.
+            </summary>
+            <param name="expected">The expected string.</param>
+            <param name="takeIfMatch">if set to <c>true</c> we should read the matched string into the buffer.</param>
+            <param name="caseSensitive">if set to <c>true</c> we should use a case-sensistive match.</param>
+            <returns>If the expected string was matched, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.MoveNext">
+            <summary>
+            Moves the next character in the source.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.NextSymbol">
+            <summary>
+            Reads the next symbol
+            </summary>
+            <returns>The next symbol.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.FuManchu#Tokenizer#ITokenizer#NextSymbol">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.Peek">
+            <summary>
+            Peeks the next character in the source.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.Reset">
+            <summary>
+            Resets this tokenizer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.ResumeSymbol(`0)">
+            <summary>
+            Resumes the symbol.
+            </summary>
+            <param name="previous">The previous.</param>
+            <exception cref="T:System.InvalidOperationException">Cannot resume symbol unless it was the previous symbol.</exception>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.Single(`1)">
+            <summary>
+            Takes a single instance of the given symbol type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The symbol</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.StartSymbol">
+            <summary>
+            Starts a symbol.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.TakeAll(System.String,System.Boolean)">
+            <summary>
+            Takes the given string if it is matched in the source stream.
+            </summary>
+            <param name="expected">The expected.</param>
+            <param name="caseSensitive">if set to <c>true</c> [case sensitive].</param>
+            <returns>True if the expected string was matched, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.TakeCurrent">
+            <summary>
+            Takes the current character and appends it to the buffer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.TakeString(System.String,System.Boolean)">
+            <summary>
+            Reads the given string from the source stream.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="caseSensitive">if set to <c>true</c> [case sensitive].</param>
+            <returns>True if the entire string was read, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.Tokenizer`2.TakeUntil(System.Func{System.Char,System.Boolean})">
+            <summary>
+            Takes the input from the source stream until the predicate is matched.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <returns>True if we are not at the end of the file, otherwise false.</returns>
+        </member>
+        <member name="P:FuManchu.Tokenizer.Tokenizer`2.Buffer">
+            <summary>
+            Gets the buffer.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.Tokenizer`2.CurrentCharacter">
+            <summary>
+            Gets the current character.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.Tokenizer`2.CurrentErrors">
+            <summary>
+            Gets the current errors.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.Tokenizer`2.CurrentLocation">
+            <summary>
+            Gets the current location.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.Tokenizer`2.CurrentStart">
+            <summary>
+            Gets the current start location.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.Tokenizer`2.EndOfFile">
+            <summary>
+            Gets a value indicating whether we are at the end of the source stream.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.Tokenizer`2.HaveContent">
+            <summary>
+            Gets a value indicating whether we have content.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.Tokenizer`2.Source">
+            <summary>
+            Gets the source.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.#ctor(FuManchu.Text.ITextDocument)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FuManchu.Tokenizer.HandlebarsTokenizer"/> class.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.BeginComment">
+            <summary>
+            Attempts to tokenize a comment.
+            </summary>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.BeginTag">
+            <summary>
+            Attempts to begin a tag by matching the opening braces.
+            </summary>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.BeginTagContent(System.Boolean)">
+            <summary>
+            Attempts to begin matching the content of a tag.
+            </summary>
+            <param name="raw">True if we are expected a raw tag.</param>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.ContinueComment(System.Boolean)">
+            <summary>
+            Tokenizes a comment.
+            </summary>
+            <param name="explicitTerminal">True if we should be expecting a terminal '--' squence to end the comment.</param>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.ContinueTagContent(System.Boolean)">
+            <summary>
+            Continues the content of the tag.
+            </summary>
+            <param name="raw">True if we are expected a raw tag.</param>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.EndTag(System.Boolean)">
+            <summary>
+            Attempts to end a tag by matching the closing braces.
+            </summary>
+            <param name="raw">True if we are expected to end a raw tag '}}}'</param>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.CreateSymbol(FuManchu.Text.SourceLocation,System.String,FuManchu.Tokenizer.HandlebarsSymbolType,System.Collections.Generic.IEnumerable{FuManchu.Error})">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.Data">
+            <summary>
+            Represents the default state of the tokenizer.
+            </summary>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.DecimalLiteral">
+            <summary>
+            Tokenizes a decimal literal.
+            </summary>
+            <returns>The state result</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.HexLiteral">
+            <summary>
+            Tokenizes a hex literal.
+            </summary>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.Identifier">
+            <summary>
+            Tokenizes an identifier.
+            </summary>
+            <returns>The state result</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.NumericLiteral">
+            <summary>
+            Tokenizes a numeric litera.
+            </summary>
+            <returns>The state result</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.QuotedLiteral(System.Char)">
+            <summary>
+            Tokenizes a quoted literal.
+            </summary>
+            <param name="quote">The quote character.</param>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.RealLiteral">
+            <summary>
+            Tokenizes a real literal.
+            </summary>
+            <returns>The state result</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.RealLiteralExponantPart">
+            <summary>
+            Tokenizes the exponent part of a real literal.
+            </summary>
+            <returns>The state result.</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.HandlebarsTokenizer.WhiteSpace">
+            <summary>
+            Tokenizes a block of whitespace.
+            </summary>
+            <returns>The state result.</returns>
+        </member>
+        <member name="P:FuManchu.Tokenizer.HandlebarsTokenizer.StartState">
+            <inheritdoc />
+        </member>
+        <member name="T:FuManchu.Tokenizer.TokenizerView`3">
+            <summary>
+            Provides a simplified abstraction of a tokenizer.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Tokenizer.TokenizerView`3.#ctor(`0)">
+            <summary>
+            Initialises a new instance of <see cref="T:FuManchu.Tokenizer.TokenizerView`3"/>
+            </summary>
+            <param name="tokenizer">The tokenizer.</param>
+        </member>
+        <member name="M:FuManchu.Tokenizer.TokenizerView`3.Next">
+            <summary>
+            Reads the next symbol from the document
+            </summary>
+            <returns>True if the symbol was read, otherwise false (end of file).</returns>
+        </member>
+        <member name="M:FuManchu.Tokenizer.TokenizerView`3.PutBack(`1)">
+            <summary>
+            Resets the source back to the beginning of the symbol.
+            </summary>
+            <param name="symbol">The symbol.</param>
+        </member>
+        <member name="P:FuManchu.Tokenizer.TokenizerView`3.Current">
+            <summary>
+            Gets the current symbol.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.TokenizerView`3.EndOfFile">
+            <summary>
+            Gets whether we are at the end of the source.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.TokenizerView`3.Source">
+            <summary>
+            Gets the source document.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tokenizer.TokenizerView`3.Tokenizer">
+            <summary>
+            Gets the tokenizer.
+            </summary>
+        </member>
+        <member name="T:FuManchu.TypeExtensions">
+            <summary>
+            Provides extension methods for common type operations.
+            </summary>
+        </member>
+        <member name="M:FuManchu.TypeExtensions.ExtractGenericInterface(System.Type,System.Type)">
+            <summary>
+            Extracts the generic interface matching the interface type.
+            </summary>
+            <param name="queryType">The query type.</param>
+            <param name="interfaceType">The interface type.</param>
+            <returns>The closed generic interface type.</returns>
+        </member>
+        <member name="M:FuManchu.TypeExtensions.IsNullableValueType(System.Type)">
+            <summary>
+            Gets whether the given type is a nullable value type.
+            </summary>
+            <param name="type">The type instance.</param>
+            <returns>True if the type is a nullable value type, otherwise false.</returns>
+        </member>
+    </members>
+</doc>

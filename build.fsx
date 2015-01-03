@@ -104,9 +104,8 @@ MyTarget "CopyToRelease" (fun _ ->
 )
 
 MyTarget "BuildApp_45" (fun _ -> buildApp net45Params)
-MyTarget "BuildApp_40" (fun _ -> buildApp net40Params)
-//MyTarget "TestApp_45" (fun _ -> buildTests net45Params)
-//MyTarget "TestApp_40" (fun _ -> buildTests net40Params)
+MyTarget "TestApp_45" (fun _ -> buildTests net45Params)
+MyTarget "RunTests_45" (fun _ -> runTests net45Params)
 
 Target "All" (fun _ ->
     trace "All finished!"
@@ -128,33 +127,9 @@ MyTarget "NuGet" (fun _ ->
         AccessKey = getBuildParamOrDefault "nugetkey" ""
         Publish = hasBuildParam "nugetkey"
         DependenciesByFramework = 
-          [ { FrameworkVersion = "net40";
+          [ { FrameworkVersion = "net45";
               Dependencies = [] } ] })
     "nuget/FuManchu.nuspec"
-)
-
-MyTarget "VersionBump" (fun _ ->
-    // Build updates the SharedAssemblyInfo.cs files.
-    let changedFiles = Fake.Git.FileStatus.getChangedFilesInWorkingCopy "" "HEAD" |> Seq.toList
-    if changedFiles |> Seq.isEmpty |> not then
-        for (status, file) in changedFiles do
-            printfn "File %s changed (%A)" file status
-        printf "version bump commit? (y,n): "
-        let line = System.Console.ReadLine()
-        if line = "y" then
-            StageAll ""
-            Commit "" (sprintf "Bump version to %s" release.NugetVersion)
-        
-            printf "create tag? (y,n): "
-            let line = System.Console.ReadLine()
-            if line = "y" then
-                Branches.tag "" release.NugetVersion
-                Branches.pushTag "" "origin" release.NugetVersion
-            
-            printf "push branch? (y,n): "
-            let line = System.Console.ReadLine()
-            if line = "y" then
-                Branches.push ""
 )
 
 Target "Release" (fun _ ->
@@ -167,17 +142,19 @@ Target "Release" (fun _ ->
   ==> "RestorePackages"
   ==> "SetVersions"
 "SetVersions"
-  ==> "BuildApp_40"
+  ==> "BuildApp_45"
 
 "All"
   ==> "Clean"
   ==> "RestorePackages"
   ==> "SetVersions"
-  ==> "BuildApp_40"
-  ==> "VersionBump"
+  ==> "BuildApp_45"
+  ==> "TestApp_45"
+  ==> "RunTests_45"
+
+"RunTests_45"
+  ==> "CopyToRelease"
   ==> "NuGet"
-//  ==> "GithubDoc"
-//  ==> "ReleaseGithubDoc"
   ==> "Release"
 
-RunTargetOrDefault "All"
+RunTargetOrDefault "RunTests_45"
