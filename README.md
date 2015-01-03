@@ -26,8 +26,13 @@ Next, add a namespace using:
 Then, you're good to go:
 
     Handlebars.Compile("<template-name>", "Hello {{world}}!");
-    Handlebars.Run("<template-name>", new { world = "World" });
+    string result = Handlebars.Run("<template-name>", new { world = "World" });
 
 There is also a shorthand:
 
-    Handlebars.CompileAndRun("<template-name>", "Hello {{world}}!", new { world = "World" });
+    string result = Handlebars.CompileAndRun("<template-name>", "Hello {{world}}!", new { world = "World" });
+
+Documentation
+-------------
+
+Documentation site is coming soon.
