@@ -5,5 +5,5 @@ build_script:
 version: 1.0.{build}
 test: off
 artifacts:
-  - path: bin
-  - path: release\nuget\*.nupkg
+- path: '**\*.nupkg'
+  name: NuGet Packages
