@@ -12,5 +12,5 @@ assembly_info:
 before_build:
 - nuget restore src\FuManchu.sln
 build:
-  project: src\FuManch.sln
+  project: src\FuManchu.sln
   verbosity: detailed
