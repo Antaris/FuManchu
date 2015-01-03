@@ -1,7 +1,7 @@
 FuManchu
 ========
 
-A .NET implementation of Handlebars, inspired by the Razor parsing framework and MVC model binding framework. This is a pure .NET implementation, without regular expressions or wrapping any JavaScript implementations.
+A .NET implementation of Handlebars, inspired by the Razor parsing framework and MVC model metadata framework. This is a pure .NET implementation, without regular expressions or wrapping any JavaScript implementations.
 
 Current Build Status
 --------------------
@@ -15,6 +15,19 @@ Releaser 1.0 - [![Build status](https://ci.appveyor.com/api/projects/status/yl1k
 Quick Start
 -----------
 
-````
+First thing, install FuManchu from Nuget:
 
-````
+    Install-Package FuManchu
+
+Next, add a namespace using:
+
+    using FuManchu;
+
+Then, you're good to go:
+
+    Handlebars.Compile("<template-name>", "Hello {{world}}!");
+    Handlebars.Run("<template-name>", new { world = "World" });
+
+There is also a shorthand:
+
+    Handlebars.CompileAndRun("<template-name>", "Hello {{world}}!", new { world = "World" });
