@@ -10,7 +10,7 @@ Master - [![Build status](https://ci.appveyor.com/api/projects/status/yl1kuo2q42
 
 Develop - [![Build status](https://ci.appveyor.com/api/projects/status/yl1kuo2q42i8e7j0/branch/develop?svg=true)](https://ci.appveyor.com/project/Antaris/fumanchu/branch/develop)
 
-Releaser 1.0 - [![Build status](https://ci.appveyor.com/api/projects/status/yl1kuo2q42i8e7j0/branch/release-1.0?svg=true)](https://ci.appveyor.com/project/Antaris/fumanchu/branch/release-1.0)
+Release 1.0 - [![Build status](https://ci.appveyor.com/api/projects/status/yl1kuo2q42i8e7j0/branch/release-1.0?svg=true)](https://ci.appveyor.com/project/Antaris/fumanchu/branch/release-1.0)
 
 Quick Start
 -----------
