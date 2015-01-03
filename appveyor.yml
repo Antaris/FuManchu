@@ -1,16 +1,9 @@
+init:
+  - git config --global core.autoclrf input
+build_script:
+  - build.cmd
 version: 1.0.{build}
-branches:
-  except:
-  - gh-pages
-skip_tags: true
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
-before_build:
-- nuget restore src\FuManchu.sln
-build:
-  project: src\FuManchu.sln
-  verbosity: detailed
+test: off
+artifacts:
+- path: '**\*.nupkg'
+  name: NuGet Packages
