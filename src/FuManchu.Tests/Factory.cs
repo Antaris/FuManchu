@@ -44,7 +44,18 @@
 
 		public Block Expression(params SyntaxTreeNode[] children)
 		{
-			return Block(BlockType.Expression, null, children);
+			string name = null;
+			var span = children.FirstOrDefault(c => !c.IsBlock && ((Span)c).Kind == SpanKind.Expression) as Span;
+			if (span != null)
+			{
+				var symbol = span.Symbols.OfType<HandlebarsSymbol>().FirstOrDefault(s => s.Type == HandlebarsSymbolType.Identifier);
+				if (symbol != null)
+				{
+					name = symbol.Content;
+				}
+			}
+
+			return Block(BlockType.Expression, name, children);
 		}
 
 		public Block Partial(params SyntaxTreeNode[] children)

@@ -26,6 +26,20 @@
 		string CompileAndRun(string name, string template, object model = null);
 
 		/// <summary>
+		/// Determines if the service has a registered helper.
+		/// </summary>
+		/// <param name="name">The name of the helper.</param>
+		/// <returns>True if the helper is registere, otherwise false.</returns>
+		bool HasRegisteredHelper(string name);
+
+		/// <summary>
+		/// Registers a helper with the given name.
+		/// </summary>
+		/// <param name="name">The name of the helper.</param>
+		/// <param name="helper">The helper delegate.</param>
+		void RegisterHelper(string name, Func<HelperOptions, string> helper);
+
+		/// <summary>
 		/// Registers a partial template with the given name.
 		/// </summary>
 		/// <param name="name">The name of the partial template.</param>
@@ -47,5 +61,12 @@
 		/// <param name="context">The render context.</param>
 		/// <returns>The template result.</returns>
 		string RunPartial(string name, RenderContext context);
+
+		/// <summary>
+		/// Runs a registered helper.
+		/// </summary>
+		/// <param name="name">The name of the helper.</param>
+		/// <param name="options">The options.</param>
+		string RunHelper(string name, HelperOptions options);
 	}
 }

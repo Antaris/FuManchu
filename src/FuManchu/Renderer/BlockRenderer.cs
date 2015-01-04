@@ -78,7 +78,7 @@
 		/// <param name="parameters">The set of parameters.</param>
 		public void ValidateTag(string name, TagDescriptor descriptor, object[] arguments, IDictionary<string, object> parameters)
 		{
-			if (descriptor == null)
+			if (descriptor == null || descriptor.IsImplicit)
 			{
 				// Can't validate the tag.
 				return;

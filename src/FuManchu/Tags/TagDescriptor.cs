@@ -65,6 +65,11 @@
 		public bool HasChildContent { get; private set; }
 
 		/// <summary>
+		/// Gets whether the tag is an implicit tag.
+		/// </summary>
+		public bool IsImplicit { get; internal set; }
+
+		/// <summary>
 		/// Gets the count of maximum arguments.
 		/// </summary>
 		public int MaxArguments { get; private set; }
