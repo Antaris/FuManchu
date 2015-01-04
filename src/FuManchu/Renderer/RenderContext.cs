@@ -52,6 +52,11 @@
 		public RenderContext ParentRenderContext { get; private set; }
 
 		/// <summary>
+		/// Gets the root render context.
+		/// </summary>
+		public RenderContext RootRenderContext { get; internal set; }
+
+		/// <summary>
 		/// Gets the parser visitor.
 		/// </summary>
 		public ParserVisitor<RenderContext> Visitor { get; private set; }
@@ -243,9 +248,16 @@
 		/// <returns>The resolved value.</returns>
 		public static object ResolveValue(RenderContext context, TemplateData templateData, string expression, bool isVariableLookup)
 		{
-			if (isVariableLookup)
+			if (isVariableLookup && !string.IsNullOrEmpty(expression) && !expression.StartsWith("root."))
 			{
 				return context.GetVariable(expression);
+			}
+			
+			if (isVariableLookup && !string.IsNullOrEmpty(expression) && expression.StartsWith("root."))
+			{
+				context = context.RootRenderContext ?? context;
+				templateData = context.TemplateData;
+				expression = expression.Substring(5);
 			}
 
 			var modelMetadata = ExpressionMetadataProvider.FromStringExpression(expression, templateData, context.ModelMetadataProvider);

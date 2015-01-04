@@ -204,6 +204,13 @@
 		/// <returns>The state result.</returns>
 		private StateResult ContinueTagContent(bool raw)
 		{
+			if (CurrentCharacter == '@')
+			{
+				TakeCurrent();
+				
+				return Stay(EndSymbol(HandlebarsSymbolType.At));
+			}
+
 			if (HandlebarsHelpers.IsIdentifierStart(CurrentCharacter))
 			{
 				return Identifier();

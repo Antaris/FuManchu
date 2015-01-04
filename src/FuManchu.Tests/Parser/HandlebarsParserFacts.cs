@@ -240,6 +240,24 @@
 				));
 		}
 
+		[Fact]
+		public void CanParseRootVariable()
+		{
+			var factory = new Factory();
+
+			ParserTest("{{@root.name}}", factory.Document(
+				factory.Expression(
+					factory.MetaCode("{{", T.OpenTag),
+					factory.Span(SpanKind.Expression,
+						factory.Symbol("@", T.At),
+						factory.Symbol("root", T.Identifier),
+						factory.Symbol(".", T.Dot),
+						factory.Symbol("name", T.Identifier)
+					),
+					factory.MetaCode("}}", T.CloseTag))
+				));
+		}
+
 		private void ParserTest(string content, Block document, TagProvidersCollection providers = null)
 		{
 			providers = providers ?? TagProvidersCollection.Default;
