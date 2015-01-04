@@ -103,6 +103,30 @@ MyTarget "CopyToRelease" (fun _ ->
     // Versioning?
 )
 
+MyTarget "VersionBump" (fun _ ->
+    // Build updates the SharedAssemblyInfo.cs files.
+    let changedFiles = Fake.Git.FileStatus.getChangedFilesInWorkingCopy "" "HEAD" |> Seq.toList
+    if changedFiles |> Seq.isEmpty |> not then
+        for (status, file) in changedFiles do
+            printfn "File %s changed (%A)" file status
+        printf "version bump commit? (y,n): "
+        let line = System.Console.ReadLine()
+        if line = "y" then
+            StageAll ""
+            Commit "" (sprintf "Bump version to %s" release.NugetVersion)
+        
+            printf "Create tag? (y,n): "
+            let line = System.Console.ReadLine()
+            if line = "y" then
+                Branches.tag "" release.NugetVersion
+                Branches.pushTag "" "origin" release.NugetVersion
+            
+            printf "Push branch? (y,n): "
+            let line = System.Console.ReadLine()
+            if line = "y" then
+                Branches.push ""
+)
+
 MyTarget "BuildApp_45" (fun _ -> buildApp net45Params)
 MyTarget "TestApp_45" (fun _ -> buildTests net45Params)
 MyTarget "RunTests_45" (fun _ -> runTests net45Params)

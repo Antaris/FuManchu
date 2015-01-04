@@ -431,6 +431,20 @@
             <param name="model">The model for the template.</param>
             <returns>The template result.</returns>
         </member>
+        <member name="M:FuManchu.IHandlebarsService.HasRegisteredHelper(System.String)">
+            <summary>
+            Determines if the service has a registered helper.
+            </summary>
+            <param name="name">The name of the helper.</param>
+            <returns>True if the helper is registere, otherwise false.</returns>
+        </member>
+        <member name="M:FuManchu.IHandlebarsService.RegisterHelper(System.String,System.Func{FuManchu.HelperOptions,System.String})">
+            <summary>
+            Registers a helper with the given name.
+            </summary>
+            <param name="name">The name of the helper.</param>
+            <param name="helper">The helper delegate.</param>
+        </member>
         <member name="M:FuManchu.IHandlebarsService.RegisterPartial(System.String,System.String)">
             <summary>
             Registers a partial template with the given name.
@@ -454,6 +468,13 @@
             <param name="context">The render context.</param>
             <returns>The template result.</returns>
         </member>
+        <member name="M:FuManchu.IHandlebarsService.RunHelper(System.String,FuManchu.HelperOptions)">
+            <summary>
+            Runs a registered helper.
+            </summary>
+            <param name="name">The name of the helper.</param>
+            <param name="options">The options.</param>
+        </member>
         <member name="M:FuManchu.HandlebarsService.#ctor">
             <summary>
             Initialises a new instance of <see cref="T:FuManchu.HandlebarsService"/>
@@ -469,6 +490,12 @@
             <inheritdoc />
         </member>
         <member name="M:FuManchu.HandlebarsService.CompilePartial(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.HasRegisteredHelper(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.RegisterHelper(System.String,System.Func{FuManchu.HelperOptions,System.String})">
             <inheritdoc />
         </member>
         <member name="M:FuManchu.HandlebarsService.RegisterPartial(System.String,System.Func{FuManchu.Renderer.RenderContext,System.String})">
@@ -497,6 +524,9 @@
             <inheritdoc />
         </member>
         <member name="M:FuManchu.HandlebarsService.RunPartial(System.String,FuManchu.Renderer.RenderContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.HandlebarsService.RunHelper(System.String,FuManchu.HelperOptions)">
             <inheritdoc />
         </member>
         <member name="M:FuManchu.HandlebarsService.CreateDocument(System.String)">
@@ -629,6 +659,46 @@
         <member name="P:FuManchu.Binding.ModelMetadata.RealModelType">
             <summary>
             Gets the runtime model type.
+            </summary>
+        </member>
+        <member name="T:FuManchu.HelperOptions">
+            <summary>
+            Represents options passed to Handlebars helpers.
+            </summary>
+        </member>
+        <member name="P:FuManchu.HelperOptions.Arguments">
+            <summary>
+            Gets the set of input arguments.
+            </summary>
+        </member>
+        <member name="P:FuManchu.HelperOptions.Data">
+            <summary>
+            Gets the input argument. This property exists for API compatability with HandlebarsJS
+            </summary>
+        </member>
+        <member name="P:FuManchu.HelperOptions.Hash">
+            <summary>
+            Gets the parameters collection. This property exists for API compatability with HandlebarsJS
+            </summary>
+        </member>
+        <member name="P:FuManchu.HelperOptions.Fn">
+            <summary>
+            Gets the render function. This property exists for API compatability with HandlebarsJS
+            </summary>
+        </member>
+        <member name="P:FuManchu.HelperOptions.Parameters">
+            <summary>
+            Gets the parameters collection.
+            </summary>
+        </member>
+        <member name="P:FuManchu.HelperOptions.Render">
+            <summary>
+            Gets or sets the render function.
+            </summary>
+        </member>
+        <member name="P:FuManchu.HelperOptions.RenderContext">
+            <summary>
+            Gets or sets the render context.
             </summary>
         </member>
         <member name="T:FuManchu.Parser.HandlebarsLanguageCharacteristics">
@@ -1878,6 +1948,23 @@
         <member name="M:FuManchu.Renderer.ExpressionSpanRenderer.Render(FuManchu.Parser.SyntaxTree.Span,FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
             <inheritdoc />
         </member>
+        <member name="T:FuManchu.Renderer.HelperBlockRenderer">
+            <summary>
+            Renders custom helper blocks.
+            </summary>
+        </member>
+        <member name="M:FuManchu.Renderer.HelperBlockRenderer.Render(FuManchu.Parser.SyntaxTree.Block,System.Object[],System.Collections.Generic.Dictionary{System.String,System.Object},FuManchu.Renderer.RenderContext,System.IO.TextWriter)">
+            <inheritdoc />
+        </member>
+        <member name="M:FuManchu.Renderer.HelperBlockRenderer.RenderHelperChildren(System.Collections.Generic.IEnumerable{FuManchu.Parser.SyntaxTree.SyntaxTreeNode},FuManchu.Renderer.RenderContext,System.Object)">
+            <summary>
+            Renders the content of a block helper.
+            </summary>
+            <param name="children">The children of the helper block.</param>
+            <param name="context">The render context.</param>
+            <param name="data">The new data model.</param>
+            <returns>The string content of the result.</returns>
+        </member>
         <member name="T:FuManchu.Renderer.ImplicitBlockRenderer">
             <summary>
             Provides rendering of implicit block tags, e.g. {{#people}}{{/people}}.
@@ -2070,6 +2157,11 @@
             Gets the parent render context.
             </summary>
         </member>
+        <member name="P:FuManchu.Renderer.RenderContext.RootRenderContext">
+            <summary>
+            Gets the root render context.
+            </summary>
+        </member>
         <member name="P:FuManchu.Renderer.RenderContext.Visitor">
             <summary>
             Gets the parser visitor.
@@ -2239,6 +2331,11 @@
         <member name="P:FuManchu.Tags.TagDescriptor.HasChildContent">
             <summary>
             Gets a value indicating whether this instance has child content.
+            </summary>
+        </member>
+        <member name="P:FuManchu.Tags.TagDescriptor.IsImplicit">
+            <summary>
+            Gets whether the tag is an implicit tag.
             </summary>
         </member>
         <member name="P:FuManchu.Tags.TagDescriptor.MaxArguments">
