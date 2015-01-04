@@ -48,11 +48,7 @@
 			var span = children.FirstOrDefault(c => !c.IsBlock && ((Span)c).Kind == SpanKind.Expression) as Span;
 			if (span != null)
 			{
-				var symbol = span.Symbols.OfType<HandlebarsSymbol>().FirstOrDefault(s => s.Type == HandlebarsSymbolType.Identifier);
-				if (symbol != null)
-				{
-					name = symbol.Content;
-				}
+				name = span.Content;
 			}
 
 			return Block(BlockType.Expression, name, children);

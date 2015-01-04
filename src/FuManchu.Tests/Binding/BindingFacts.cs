@@ -1,5 +1,6 @@
 ﻿namespace FuManchu.Tests.Binding
 {
+	using System.ComponentModel.Design;
 	using System.Dynamic;
 	using Xunit;
 
@@ -71,6 +72,45 @@
 			string result = service.CompileAndRun("my-template", template, model);
 
 			Assert.Equal(expected, result);
+		}
+
+		[Fact]
+		public void SupportsRootLookup()
+		{
+			var service = new HandlebarsService();
+			var model = new
+			            {
+				            property = "Hello",
+				            other = new
+				                    {
+					                    forename = "Matt",
+					                    surname = "Abbott",
+					                    job = new
+					                          {
+						                          title = "Developer"
+					                          }
+				                    }
+			            };
+
+			string template = "{{#with other}}{{@root.property}} {{forename}} {{surname}}, {{job.title}}{{/with}}";
+			string expected = "Hello Matt Abbott, Developer";
+
+			Assert.Equal(expected, service.CompileAndRun("test", template, model));
+		}
+
+		[Fact]
+		public void SupportsRootLookupInParameter()
+		{
+			var service = new HandlebarsService();
+			var model = new
+			{
+				property = "Hello"
+			};
+
+			string template = "{{#with @root.property}}{{this}}{{/with}}";
+			string expected = "Hello";
+
+			Assert.Equal(expected, service.CompileAndRun("test", template, model));
 		}
 	}
 
