@@ -1,0 +1,46 @@
+{{#extend "layout"}}
+  {{#replace "head"}}
+  <title>Getting Started - FuManchu Documenation</title>
+  {{/replace}}
+  {{#replace "title"}}FuManchu - Getting Started{{/replace}}
+
+  {{#replace "body"}}
+    <div class=" header segment">
+      <div class="container">
+        <div class="introduction">
+          <h1 class="ui header">
+            Getting Started with FuManchu
+            <div class="sub header">An introduction into getting your project up and running with FuManchu</div>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="main container">
+      <h2 class="ui dividing header"><a class="anchor" id="installing"></a>Installing FuManchu</h2>
+      <p>FuManchu is available via the <a href="http://nuget.org" target="_blank">NuGet.org</a> public feed, which you can easily install via the package manager, or typing the following in the package manager host:</p>
+      <pre><code class="code ps">Install-Package FuManchu</code></pre>
+
+      <h2 class="ui dividing header">Referencing and using FuManchu</h2>
+      <p>First things first, after installing the package (see above), you need to import the FuManchu namespace into your code file</p>
+      <pre>
+        <code class="code cs">
+// Import the FuManchu namespace.
+using FuManchu;
+        </code>
+      </pre>
+
+      <h3>Compiling your first template</h3>
+      <p>FuManchu provides the static <code>Handlebars</code> class which itself provides a default instance of the <code>IHandlebarsService</code> exposed as a singleton instance.</p>
+      <pre>
+        <code class="code cs">
+string template = "Hello {{name}}";
+
+// Compile your template.
+var templateFunc = Handlebars.Compile("name", template);
+// Execute your template with your model.
+string result = templateFunc(new { name = "Matt" });
+        </code>
+      </pre>
+    </div>
+  {{/replace}}
+{{/extend}}

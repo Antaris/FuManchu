@@ -29,10 +29,17 @@ module.exports = function (grunt) {
           partials: "src/partials/*.hbs"
         }
       }
+    },
+
+    watch: {
+      docs: {
+        files: "src/**/*.hbs",
+        tasks: [ "handlebarslayouts" ]
+      }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-handlebars-layouts');
 
   grunt.registerTask('default' [ 'handlebarslayouts' ]);

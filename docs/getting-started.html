@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+  <title>Getting Started - FuManchu Documenation</title>
+  
+    
+    <link rel="stylesheet" type="text/css" href="/FuManchu/bower_components/semantic-ui/dist/semantic.min.css" />
+    <link rel="stylesheet" type="text/css" href="/FuManchu/assets/vendor/highlight.css" />
+    <link rel="stylesheet" type="text/css" href="/FuManchu/assets/docs.css" />
+    
+  </head>
+
+  <body id="example">
+  <div class="ui fixed inverted main menu">
+  <div class="container">
+    <a class="launch item"><i class="content icon"></i> Menu</a>
+    <div class="item">FuManchu - Getting Started</div>
+    <a class="popup icon github item" data-content="View project on GitHub" href="https://github.com/Antaris/FuManchu" target="_blank">
+      <i class="alternate github icon"></i>
+    </a>
+  </div>
+</div>
+
+  <div class="pusher">
+  
+    <div class=" header segment">
+      <div class="container">
+        <div class="introduction">
+          <h1 class="ui header">
+            Getting Started with FuManchu
+            <div class="sub header">An introduction into getting your project up and running with FuManchu</div>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="main container">
+      <h2 class="ui dividing header"><a class="anchor" id="installing"></a>Installing FuManchu</h2>
+      <p>FuManchu is available via the <a href="http://nuget.org" target="_blank">NuGet.org</a> public feed, which you can easily install via the package manager, or typing the following in the package manager host:</p>
+      <pre><code class="code ps">Install-Package FuManchu</code></pre>
+
+      <h2 class="ui dividing header">Referencing and using FuManchu</h2>
+      <p>First things first, after installing the package (see above), you need to import the FuManchu namespace into your code file</p>
+      <pre>
+        <code class="code cs">
+// Import the FuManchu namespace.
+using FuManchu;
+        </code>
+      </pre>
+
+      <h3>Compiling your first template</h3>
+      <p>FuManchu provides the static <code>Handlebars</code> class which itself provides a default instance of the <code>IHandlebarsService</code> exposed as a singleton instance.</p>
+      <pre>
+        <code class="code cs">
+string template = "Hello ";
+
+// Compile your template.
+var templateFunc = Handlebars.Compile("name", template);
+// Execute your template with your model.
+string result = templateFunc(new { name = "Matt" });
+        </code>
+      </pre>
+    </div>
+  
+  </div>
+
+  
+  <script type="text/javascript" src="/FuManchu/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/FuManchu/bower_components/semantic-ui/dist/semantic.min.js"></script>
+  <script type="text/javascript" src="/FuManchu/assets/vendor/highlight.pack.js"></script>
+  <script type="text/javascript" src="/FuManchu/assets/docs.js"></script>
+  
+  </body>
+</html>
