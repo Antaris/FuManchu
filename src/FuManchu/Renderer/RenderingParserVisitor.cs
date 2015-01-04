@@ -4,9 +4,11 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
+	using System.Linq.Expressions;
 	using FuManchu.Binding;
 	using FuManchu.Parser;
 	using FuManchu.Parser.SyntaxTree;
+	using FuManchu.Tags;
 	using FuManchu.Text;
 	using FuManchu.Tokenizer;
 
@@ -23,6 +25,8 @@
 			{ SpanKind.Expression, new ExpressionSpanRenderer() }
 		};
 		private IHandlebarsService _handlebarsService;
+
+		private readonly HelperBlockRenderer _helperBlockRenderer = new HelperBlockRenderer();
 
 		/// <summary>
 		/// Initialises a new instance of <see cref="RenderingParserVisitor"/>
@@ -76,11 +80,25 @@
 		{
 			if (block.Descriptor != null)
 			{
-				block.Descriptor.Renderer.Render(block, Scope, _textWriter);
+				ISyntaxTreeNodeRenderer<Block> renderer = block.Descriptor.Renderer;
+				if (block.Descriptor.IsImplicit)
+				{
+					if (Service != null && !string.IsNullOrEmpty(block.Name) && Service.HasRegisteredHelper(block.Name))
+					{
+						// Override the renderer to use the helper block renderer.
+						renderer = _helperBlockRenderer;
+					}
+				}
+
+				renderer.Render(block, Scope, _textWriter);
 			}
 			else if (block.Type == BlockType.Partial && Service != null)
 			{
 				VisitPartial(block);
+			}
+			else if (block.Type == BlockType.Expression && Service != null && Service.HasRegisteredHelper(block.Name))
+			{
+				_helperBlockRenderer.Render(block, Scope, _textWriter);
 			}
 			else
 			{

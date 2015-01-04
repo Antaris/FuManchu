@@ -61,6 +61,9 @@
 				Service = parent.Service
 			};
 
+			// Set the root context 
+			context.RootRenderContext = parent.RootRenderContext ?? parent;
+
 			return context;
 		}
 	}
