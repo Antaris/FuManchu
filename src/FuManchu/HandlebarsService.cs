@@ -16,6 +16,7 @@
 	/// </summary>
 	public class HandlebarsService : IHandlebarsService
 	{
+		private readonly ConcurrentDictionary<string, Func<HelperOptions, string>> _helpers = new ConcurrentDictionary<string, Func<HelperOptions, string>>(); 
 		private readonly ConcurrentDictionary<string, Func<RenderContext, string>> _partials = new ConcurrentDictionary<string, Func<RenderContext, string>>();
 		private readonly ConcurrentDictionary<string, Func<object, string>> _templates = new ConcurrentDictionary<string, Func<object, string>>(); 
 
@@ -113,6 +114,22 @@
 			};
 		}
 
+		/// <inheritdoc />
+		public bool HasRegisteredHelper(string name)
+		{
+			return _helpers.ContainsKey(name);
+		}
+
+		/// <inheritdoc />
+		public void RegisterHelper(string name, Func<HelperOptions, string> helper)
+		{
+			Func<HelperOptions, string> temp;
+			if (!_helpers.TryGetValue(name, out temp))
+			{
+				_helpers.TryAdd(name, helper);
+			}
+		}
+
 		/// <summary>
 		/// Registers a partial template with the given name.
 		/// </summary>
@@ -180,6 +197,18 @@
 			}
 
 			throw new ArgumentException("No partial template called '" + name + "' has been compiled.");
+		}
+
+		/// <inheritdoc />
+		public string RunHelper(string name, HelperOptions options)
+		{
+			Func<HelperOptions, string> func;
+			if (_helpers.TryGetValue(name, out func))
+			{
+				return func(options);
+			}
+
+			throw new ArgumentException("No helper called '" + name + "' has been registered.");
 		}
 
 		/// <summary>

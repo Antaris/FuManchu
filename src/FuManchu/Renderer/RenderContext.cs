@@ -180,7 +180,7 @@
 
 					case HandlebarsSymbolType.StringLiteral:
 					{
-						return symbol.Content.Substring(1, symbol.Content.Length - 1);
+						return symbol.Content.Substring(1, symbol.Content.Length - 2);
 					}
 
 					case HandlebarsSymbolType.Identifier:

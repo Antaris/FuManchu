@@ -62,6 +62,7 @@
     <Compile Include="HandlebarsService.cs" />
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="Binding\Metadata\ModelMetadata.cs" />
+    <Compile Include="HelperOptions.cs" />
     <Compile Include="IHandlebarsService.cs" />
     <Compile Include="Parser\HandlebarsLanguageCharacteristics.cs" />
     <Compile Include="Parser\HandlebarsParser.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Renderer\ConditionalBlockRenderer.cs" />
     <Compile Include="Renderer\EnumerableBlockRenderer.cs" />
     <Compile Include="Renderer\ExpressionSpanRenderer.cs" />
+    <Compile Include="Renderer\HelperBlockRenderer.cs" />
     <Compile Include="Renderer\IBlockRenderer.cs" />
     <Compile Include="Parser\IParserVisitor.cs" />
     <Compile Include="Renderer\ImplicitBlockRenderer.cs" />

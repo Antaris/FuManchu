@@ -100,9 +100,12 @@
 			       ?? CreateImplictTagDescriptor(tagName);
 		}
 
-		public TagDescriptor CreateImplictTagDescriptor(string tagName)
+		public static TagDescriptor CreateImplictTagDescriptor(string tagName)
 		{
-			return new TagDescriptor(tagName, new ImplicitBlockRenderer(), requiredArguments: 0, maxArguments: 0, allowMappedParamters: false, hasChildContent: true);
+			return new TagDescriptor(tagName, new ImplicitBlockRenderer(), requiredArguments: 0, maxArguments: 0, allowMappedParamters: false, hasChildContent: true)
+			       {
+				       IsImplicit = true
+			       };
 		}
 
 		/// <inheritdoc />
