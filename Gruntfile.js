@@ -1,5 +1,11 @@
 module.exports = function (grunt) {
 
+  var rootContext = {
+    basePath: "/FuManchu/",
+    bowerPath: "/FuManchu/bower_components/",
+    docsPath: "/FuManchu/docs/"
+  };
+
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
@@ -10,6 +16,7 @@ module.exports = function (grunt) {
           "docs/*.html": "src/pages/*.hbs"
         },
         options: {
+          context: rootContext,
           partials: "src/partials/*.hbs"
         }
       },
@@ -18,6 +25,7 @@ module.exports = function (grunt) {
           "index.html": "src/pages/index.hbs"
         },
         options: {
+          context: rootContext,
           partials: "src/partials/*.hbs"
         }
       }
