@@ -112,6 +112,24 @@
 
 			Assert.Equal(expected, service.CompileAndRun("test", template, model));
 		}
+
+		[Fact]
+		public void SupportsRootLookupThroughPartial()
+		{
+			var service = new HandlebarsService();
+
+			string template = "Your name is {{>person_name}}";
+			var model = new { world = "World", person = new { forename = "Matthew", surname = "Abbott" } };
+
+			string partial = "{{@root.person.forename}} {{@root.person.surname}}";
+			service.RegisterPartial("person_name", partial);
+
+			service.Compile("hello-world", template);
+			string result = service.Run("hello-world", model);
+			string expected = "Your name is Matthew Abbott";
+			
+			Assert.Equal(expected, result);
+		}
 	}
 
 	public class Person
