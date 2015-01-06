@@ -227,7 +227,7 @@ Expression tags are simple `{{value}}` type tags that allow you to render conten
 	var model = new {
 		person = new {
 			forename = "Matt",
-			surname = "Aggott",
+			surname = "Abbott",
 			age = 30,
 			job = new {
 				title = "Developer"
