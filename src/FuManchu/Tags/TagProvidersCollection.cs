@@ -94,8 +94,14 @@
 			_providers.CopyTo(array, arrayIndex);
 		}
 
-		public TagDescriptor GetDescriptor(string tagName)
+		public TagDescriptor GetDescriptor(string tagName, bool isNegatedSection)
 		{
+			if (isNegatedSection)
+			{
+				// Negated sections (blocks) cannot be used with built-in tags.
+				return CreateImplictTagDescriptor(tagName);
+			}
+
 			return _providers.AsQueryable().SelectMany(p => p.GetTags()).FirstOrDefault(p => string.Equals(p.Name, tagName, StringComparison.OrdinalIgnoreCase))
 			       ?? CreateImplictTagDescriptor(tagName);
 		}

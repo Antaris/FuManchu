@@ -30,5 +30,15 @@
 
 			RenderTest(template, expected, model);
 		}
+
+		[Fact]
+		public void RendersInvertedImplicitBlockExpression()
+		{
+			string template = "{{^person}}You have no power here!{{/person}}";
+			string expected = "You have no power here!";
+			var model = new { person = (object)null };
+
+			RenderTest(template, expected, model);
+		}
 	}
 }

@@ -70,5 +70,16 @@
 
 			RenderTest("<ul>{{#each items}}<li>{{name}}</li>{{else}}<li>No items</li>{{/each}}</ul>", "<ul><li>No items</li></ul>", model);
 		}
+
+		[Fact]
+		public void CanRenderAlternativeWhenNoItemsUsingNegation()
+		{
+			var model = new
+			{
+				items = new Object[0]
+			};
+
+			RenderTest("<ul>{{#each items}}<li>{{name}}</li>{{^}}<li>No items</li>{{/each}}</ul>", "<ul><li>No items</li></ul>", model);
+		}
 	}
 }
