@@ -153,7 +153,7 @@
 			var encoded = value as IEncodedString;
 			if (encoded == null)
 			{
-				output = WebUtility.HtmlEncode(value.ToString());
+				output = context.EscapeEncoding ? value.ToString() : WebUtility.HtmlEncode(value.ToString());
 			}
 			else
 			{

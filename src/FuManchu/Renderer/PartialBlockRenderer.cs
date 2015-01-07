@@ -1,11 +1,9 @@
 ﻿namespace FuManchu.Renderer
 {
-	using System;
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
 	using FuManchu.Parser.SyntaxTree;
-	using FuManchu.Text;
 
 	/// <summary>
 	/// Renders a partial include.
@@ -35,12 +33,12 @@
 			{
 				using (var scope = context.BeginScope(model))
 				{
-					Write(scope.ScopeContext, writer, new RawString(context.Service.RunPartial(name, scope.ScopeContext)));
+					Write(scope.ScopeContext, writer, new SafeString(context.Service.RunPartial(name, scope.ScopeContext)));
 				}
 			}
 			else
 			{
-				Write(context, writer, new RawString(context.Service.RunPartial(name, context)));
+				Write(context, writer, new SafeString(context.Service.RunPartial(name, context)));
 			}
 		}
 	}

@@ -127,13 +127,16 @@
 					break;
 				}
 				case HandlebarsSymbolType.RawCloseTag:
+				case HandlebarsSymbolType.CloseTag:
 				{
 					// Tell the render context that it is no longer in escaped mode.
 					Scope.EscapeEncoding = false;
 					break;
 				}
-				case HandlebarsSymbolType.Tilde:
+				case HandlebarsSymbolType.Ampersand:
 				{
+					// tell the render context that it is rendering in escaped mode.
+					Scope.EscapeEncoding = true;
 
 					break;
 				}

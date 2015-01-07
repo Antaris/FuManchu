@@ -216,7 +216,7 @@
 		/// <summary>
 		/// Parses an expression.
 		/// </summary>
-		public void AtExpressionTag()
+		public void AtExpressionTag(HandlebarsSymbolType? expectedPrefixSymbol = null)
 		{
 			string tagName = Context.CurrentBlock.Name;
 
@@ -230,6 +230,14 @@
 				if (Optional(HandlebarsSymbolType.Tilde))
 				{
 					// Output the tilde.
+					Output(SpanKind.MetaCode);
+				}
+
+				if (expectedPrefixSymbol != null && Required(expectedPrefixSymbol.Value, true))
+				{
+					//Accept the prefix symbol and move next.
+					AcceptAndMoveNext();
+					// Output the prefix symbol.
 					Output(SpanKind.MetaCode);
 				}
 
@@ -434,6 +442,19 @@
 				NextToken();
 				// We're at a partial include tag {{>body}}
 				AtPartialTag();
+			}
+			else if (CurrentSymbol.Type == HandlebarsSymbolType.Ampersand)
+			{
+				// Put the opening tag back.
+				PutBack(CurrentSymbol);
+				if (tilde != null)
+				{
+					PutBack(tilde);
+				}
+				PutBack(current);
+				NextToken();
+				// Handle an expression tag.
+				AtExpressionTag(HandlebarsSymbolType.Ampersand);
 			}
 			else
 			{

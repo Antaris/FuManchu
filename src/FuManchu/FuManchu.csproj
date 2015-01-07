@@ -117,7 +117,7 @@
     <Compile Include="Text\ITextDocument.cs" />
     <Compile Include="Text\LineTrackingStringBuffer.cs" />
     <Compile Include="Text\LookaheadToken.cs" />
-    <Compile Include="Text\RawString.cs" />
+    <Compile Include="SafeString.cs" />
     <Compile Include="Text\SeekableTextReader.cs" />
     <Compile Include="Text\SourceLocation.cs" />
     <Compile Include="Text\SourceLocationTracker.cs" />
