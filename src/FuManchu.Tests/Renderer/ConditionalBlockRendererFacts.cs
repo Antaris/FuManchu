@@ -23,6 +23,15 @@
 		}
 
 		[Fact]
+		public void CanRenderElseBlockUsingNegation()
+		{
+			string template = "{{#if this}}True!{{^}}False!{{/if}}";
+			string expected = "False!";
+
+			RenderTest(template, expected, false);
+		}
+
+		[Fact]
 		public void CanRenderElseIfBlock()
 		{
 			string template = "{{#if value1}}Value 1{{#elseif value2}}Value 2{{/if}}";

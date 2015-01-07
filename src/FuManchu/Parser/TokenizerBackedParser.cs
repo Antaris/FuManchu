@@ -478,15 +478,14 @@
 		/// </summary>
 		/// <param name="expected">The expected.</param>
 		/// <param name="errorIfNotFound">if set to <c>true</c> [error if not found].</param>
-		/// <param name="errorBase">The error base.</param>
 		/// <returns>True if the token was found, otherwise false.</returns>
-		protected internal bool Required(TSymbolType expected, bool errorIfNotFound, Func<string, string> errorBase)
+		protected internal bool Required(TSymbolType expected, bool errorIfNotFound)
 		{
 			bool found = At(expected);
 			if (!found && errorIfNotFound)
 			{
 				string error = "Expected: " + expected.ToString();
-				Context.OnError(CurrentLocation, errorBase(error));
+				Context.OnError(CurrentLocation, error);
 			}
 			return found;
 		}

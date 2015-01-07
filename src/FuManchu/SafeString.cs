@@ -1,17 +1,19 @@
-﻿namespace FuManchu.Text
+﻿namespace FuManchu
 {
+	using FuManchu.Text;
+
 	/// <summary>
-	/// Represents a raw string that doesn't support encoding.
+	/// Represents a safe string that doesn't support encoding, it is already considered to be encoded.
 	/// </summary>
-	public class RawString : IEncodedString
+	public class SafeString : IEncodedString
 	{
 		private readonly object _value;
 
 		/// <summary>
-		/// Initialises a new instance of <see cref="RawString"/>
+		/// Initialises a new instance of <see cref="SafeString"/>
 		/// </summary>
 		/// <param name="value">The value.</param>
-		public RawString(object value)
+		public SafeString(object value)
 		{
 			_value = value;
 		}

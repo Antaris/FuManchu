@@ -21,7 +21,7 @@
 		/// <summary>
 		/// Parses a block tag.
 		/// </summary>
-		public void AtBlockTag()
+		public void AtBlockTag(HandlebarsSymbolType expectedPrefixSymbol = HandlebarsSymbolType.Hash)
 		{
 			var parent = Context.CurrentBlock;
 
@@ -43,10 +43,13 @@
 					Output(SpanKind.MetaCode);
 				}
 
-				// Accept the hash tag.
-				AcceptAndMoveNext();
-				// Output that tag as metacode.
-				Output(SpanKind.MetaCode);
+				if (Required(expectedPrefixSymbol, true))
+				{
+					// Accept the prefix symbol type. tag.
+					AcceptAndMoveNext();
+					// Output that tag as metacode.
+					Output(SpanKind.MetaCode);
+				}
 
 				// Accept everything until either the close of the tag, or the first element of whitespace.
 				AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag);
@@ -55,7 +58,7 @@
 
 				// Get the tag name and set it for the block.
 				tagName = LastSpanContent();
-				descriptor = Context.TagProviders.GetDescriptor(tagName);
+				descriptor = Context.TagProviders.GetDescriptor(tagName, expectedPrefixSymbol == HandlebarsSymbolType.Negate);
 
 				Context.CurrentBlock.Name = tagName;
 				Context.CurrentBlock.Descriptor = descriptor;
@@ -216,7 +219,7 @@
 		/// <summary>
 		/// Parses an expression.
 		/// </summary>
-		public void AtExpressionTag()
+		public void AtExpressionTag(HandlebarsSymbolType? expectedPrefixSymbol = null, SpanKind expectedPrefixSpanKind = SpanKind.MetaCode)
 		{
 			string tagName = Context.CurrentBlock.Name;
 
@@ -233,6 +236,14 @@
 					Output(SpanKind.MetaCode);
 				}
 
+				if (expectedPrefixSymbol != null && Required(expectedPrefixSymbol.Value, true))
+				{
+					//Accept the prefix symbol and move next.
+					AcceptAndMoveNext();
+					// Output the prefix symbol.
+					Output(expectedPrefixSpanKind);
+				}
+
 				// Accept everything until either the close of the tag, or the first element of whitespace.
 				AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
 				// Output the first part as an expression.
@@ -242,7 +253,7 @@
 				Context.CurrentBlock.Name = name;
 
 				// Special case - else expressions become tag elements themselves.
-				if (name == "else")
+				if (name == "else" || name == "^")
 				{
 					// Change the tag type to ensure this is matched as a tag element.
 					Context.CurrentBlock.Type = BlockType.TagElement;
@@ -434,6 +445,56 @@
 				NextToken();
 				// We're at a partial include tag {{>body}}
 				AtPartialTag();
+			}
+			else if (CurrentSymbol.Type == HandlebarsSymbolType.Negate)
+			{
+				var current2 = CurrentSymbol;
+				// Step foward and see if this is a block or expression.
+				NextToken();
+				if (CurrentSymbol.Type == HandlebarsSymbolType.CloseTag)
+				{
+					// This is an expression.	
+					PutBack(CurrentSymbol);
+
+					// Put the opening tag back.
+					PutBack(current2);
+					if (tilde != null)
+					{
+						PutBack(tilde);
+					}
+					PutBack(current);
+					NextToken();
+					// We're at a negated block tag {{^hello}} etc.
+					AtExpressionTag(HandlebarsSymbolType.Negate, SpanKind.Expression);
+				}
+				else
+				{
+					PutBack(CurrentSymbol);
+
+					// Put the opening tag back.
+					PutBack(current2);
+					if (tilde != null)
+					{
+						PutBack(tilde);
+					}
+					PutBack(current);
+					NextToken();
+					// We're at a negated block tag {{^hello}} etc.
+					AtBlockTag(HandlebarsSymbolType.Negate);
+				}
+			}
+			else if (CurrentSymbol.Type == HandlebarsSymbolType.Ampersand)
+			{
+				// Put the opening tag back.
+				PutBack(CurrentSymbol);
+				if (tilde != null)
+				{
+					PutBack(tilde);
+				}
+				PutBack(current);
+				NextToken();
+				// Handle an expression tag.
+				AtExpressionTag(HandlebarsSymbolType.Ampersand);
 			}
 			else
 			{

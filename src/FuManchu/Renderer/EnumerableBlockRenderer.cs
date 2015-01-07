@@ -28,7 +28,7 @@
 			var elseChildren = new List<SyntaxTreeNode>();
 
 			// Determine if there is an alternate {{else}} block which denotes content to display when there are no items.
-			var elseNode = children.Find(n => n.IsBlock && ((Block)n).Name == "else");
+			var elseNode = children.Find(n => n.IsBlock && (((Block)n).Name == "else" || ((Block)n).Name == "^"));
 			if (elseNode != null)
 			{
 				int elseIndex = children.IndexOf(elseNode);

@@ -26,6 +26,7 @@
 			TestTokenizerSymbols("{{!", T.OpenTag, T.Bang);
 			TestTokenizerSymbols("{{>", T.OpenTag, T.RightArrow);
 			TestTokenizerSymbols("{{^", T.OpenTag, T.Negate);
+			TestTokenizerSymbols("{{&", T.OpenTag, T.Ampersand);
 		}
 
 		[Fact]
@@ -53,6 +54,18 @@
 		public void RecognisesMapsInTag()
 		{
 			TestTokenizerSymbols("{{#helper one=two three=four}}", T.OpenTag, T.Hash, T.Identifier, T.WhiteSpace, T.Identifier, T.Assign, T.Identifier, T.WhiteSpace, T.Identifier, T.Assign, T.Identifier, T.CloseTag);
+		}
+
+		[Fact]
+		public void RecognizesInvertedSection()
+		{
+			TestTokenizerSymbols("{{^people}}", T.OpenTag, T.Negate, T.Identifier, T.CloseTag);
+		}
+
+		[Fact]
+		public void RecognizesInversionAsElse()
+		{
+			TestTokenizerSymbols("{{^}}", T.OpenTag, T.Negate, T.CloseTag);
 		}
 
 		[Fact]
@@ -103,6 +116,16 @@
 				S(3, 0, 3, "\n\ncomment text here\n\n", T.Comment),
 				S(24, 4, 0, "}}", T.CloseTag)
 			);
+		}
+
+		[Fact]
+		public void RecognisesEscapedExpressionTagUsingAmpersand()
+		{
+			TestTokenizer("{{&name}}",
+				S(0, 0, 0, "{{", T.OpenTag),
+				S(2, 0, 2, "&", T.Ampersand),
+				S(3, 0, 3, "name", T.Identifier),
+				S(7, 0, 7, "}}", T.CloseTag));
 		}
 	}
 }

@@ -33,5 +33,15 @@
 
 			RenderTest(template, expected, model);
 		}
+
+		[Fact]
+		public void CanCreateAlternativeContentUsingElseTagUsingNegation()
+		{
+			string template = "{{#with person}}Name: {{forename}} {{surname}}, {{#with job}}({{title}}){{^}}Unemployed :-({{/with}}{{/with}}";
+			string expected = "Name: Matthew Abbott, Unemployed :-(";
+			var model = new { person = new { forename = "Matthew", surname = "Abbott" } };
+
+			RenderTest(template, expected, model);
+		}
 	}
 }

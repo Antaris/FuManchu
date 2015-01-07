@@ -32,8 +32,8 @@ let projectDescription = "FuManchu - Handlebars for .NET"
 let authors = ["Matthew Abbott"]
 let page_author = "Matthew Abbott"
 let mail = "matthew.abbott@outlook.com"
-let version = "1.1.0.0"
-let version_nuget = "1.1.0.0"
+let version = "1.2.0.0"
+let version_nuget = "1.2.0.0"
 let commitHash = Information.getCurrentSHA1(".")
 
 let buildDir = "./build/"
