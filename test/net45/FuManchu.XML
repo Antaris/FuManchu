@@ -1025,13 +1025,12 @@
             Puts the current back in the input stream.
             </summary>
         </member>
-        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Required(`2,System.Boolean,System.Func{System.String,System.String})">
+        <member name="M:FuManchu.Parser.TokenizerBackedParser`3.Required(`2,System.Boolean)">
             <summary>
             Determines if the current token is of the given required type.
             </summary>
             <param name="expected">The expected.</param>
             <param name="errorIfNotFound">if set to <c>true</c> [error if not found].</param>
-            <param name="errorBase">The error base.</param>
             <returns>True if the token was found, otherwise false.</returns>
         </member>
         <member name="M:FuManchu.Parser.TokenizerBackedParser`3.ReadWhile(System.Func{`1,System.Boolean})">
@@ -1095,7 +1094,7 @@
             Gets the tokenizer.
             </summary>
         </member>
-        <member name="M:FuManchu.Parser.HandlebarsParser.AtBlockTag">
+        <member name="M:FuManchu.Parser.HandlebarsParser.AtBlockTag(FuManchu.Tokenizer.HandlebarsSymbolType)">
             <summary>
             Parses a block tag.
             </summary>
@@ -1110,7 +1109,7 @@
             Parses a comment tag.
             </summary>
         </member>
-        <member name="M:FuManchu.Parser.HandlebarsParser.AtExpressionTag">
+        <member name="M:FuManchu.Parser.HandlebarsParser.AtExpressionTag(System.Nullable{FuManchu.Tokenizer.HandlebarsSymbolType},FuManchu.Parser.SyntaxTree.SpanKind)">
             <summary>
             Parses an expression.
             </summary>
@@ -2561,18 +2560,18 @@
             </summary>
             <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         </member>
-        <member name="T:FuManchu.Text.RawString">
+        <member name="T:FuManchu.SafeString">
             <summary>
-            Represents a raw string that doesn't support encoding.
+            Represents a safe string that doesn't support encoding, it is already considered to be encoded.
             </summary>
         </member>
-        <member name="M:FuManchu.Text.RawString.#ctor(System.Object)">
+        <member name="M:FuManchu.SafeString.#ctor(System.Object)">
             <summary>
-            Initialises a new instance of <see cref="T:FuManchu.Text.RawString"/>
+            Initialises a new instance of <see cref="T:FuManchu.SafeString"/>
             </summary>
             <param name="value">The value.</param>
         </member>
-        <member name="M:FuManchu.Text.RawString.ToEncodedString">
+        <member name="M:FuManchu.SafeString.ToEncodedString">
             <inheritdoc />
         </member>
         <member name="T:FuManchu.Text.SeekableTextReader">
