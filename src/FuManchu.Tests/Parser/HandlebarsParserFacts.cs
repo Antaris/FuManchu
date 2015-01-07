@@ -258,6 +258,24 @@
 				));
 		}
 
+		[Fact]
+		public void CanParseEscapedExpressionUsingAmpersand()
+		{
+			var factory = new Factory();
+
+			ParserTest("{{&person.name}}", factory.Document(
+				factory.Expression(
+					factory.MetaCode("{{", T.OpenTag),
+					factory.MetaCode("&", T.Ampersand),
+					factory.Span(SpanKind.Expression,
+						factory.Symbol("person", T.Identifier),
+						factory.Symbol(".", T.Dot),
+						factory.Symbol("name", T.Identifier)
+					),
+					factory.MetaCode("}}", T.CloseTag))
+				));
+		}
+
 		private void ParserTest(string content, Block document, TagProvidersCollection providers = null)
 		{
 			providers = providers ?? TagProvidersCollection.Default;

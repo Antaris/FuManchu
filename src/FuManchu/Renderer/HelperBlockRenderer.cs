@@ -39,7 +39,7 @@
 
 			string result = context.Service.RunHelper(block.Name, options);
 
-			Write(context, writer, new RawString(result));
+			Write(context, writer, new SafeString(result));
 		}
 
 		/// <summary>

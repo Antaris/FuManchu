@@ -20,7 +20,7 @@
 
 			string content = target == null || target.Content == null ? string.Empty : target.Content;
 
-			Write(context, writer, new RawString(content));
+			Write(context, writer, new SafeString(content));
 		}
 	}
 }
