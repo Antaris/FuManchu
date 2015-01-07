@@ -57,6 +57,18 @@
 		}
 
 		[Fact]
+		public void RecognizesInvertedSection()
+		{
+			TestTokenizerSymbols("{{^people}}", T.OpenTag, T.Negate, T.Identifier, T.CloseTag);
+		}
+
+		[Fact]
+		public void RecognizesInversionAsElse()
+		{
+			TestTokenizerSymbols("{{^}}", T.OpenTag, T.Negate, T.CloseTag);
+		}
+
+		[Fact]
 		public void RecognisesStringsInTag()
 		{
 			TestTokenizerSymbols(

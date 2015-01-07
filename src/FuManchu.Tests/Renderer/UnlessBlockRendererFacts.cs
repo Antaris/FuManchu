@@ -33,5 +33,15 @@
 			var model = new { license = true };
 			RenderTest(template, expected, model);
 		}
+
+		[Fact]
+		public void CanRenderElseTagContentUsingNegation()
+		{
+			string template = "{{#unless license}}<h3 class=\"warning\">WARNING: This entry does not have a license!</h3>{{^}}<h3>You have a license</h3>{{/unless}}";
+			string expected = "<h3>You have a license</h3>";
+
+			var model = new { license = true };
+			RenderTest(template, expected, model);
+		}
 	}
 }

@@ -98,6 +98,38 @@
 		}
 
 		[Fact]
+		public void CanParseIfElseTagUsingNegation()
+		{
+			var factory = new Factory();
+
+			ParserTest("{{#if condition}}True!{{^}}False!{{/if}}", factory.Document(
+				factory.Tag("if",
+					factory.TagElement("if",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.MetaCode("#", T.Hash),
+						factory.Expression(factory.Symbol("if", T.Keyword)),
+						factory.WhiteSpace(1),
+						factory.Parameter("condition"),
+						factory.MetaCode("}}", T.CloseTag)
+					),
+					factory.Text("True!"),
+					factory.TagElement("^",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.Expression(factory.Symbol("^", T.Negate)),
+						factory.MetaCode("}}", T.CloseTag)
+					),
+					factory.Text("False!"),
+					factory.TagElement("if",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.MetaCode("/", T.Hash),
+						factory.Expression(factory.Symbol("if", T.Keyword)),
+						factory.MetaCode("}}", T.CloseTag)
+					)
+				)
+			));
+		}
+
+		[Fact]
 		public void CanParseIfElseIfTag()
 		{
 			var factory = new Factory();
@@ -274,6 +306,28 @@
 					),
 					factory.MetaCode("}}", T.CloseTag))
 				));
+		}
+
+		[Fact]
+		public void CanParseNegatedSection()
+		{
+			var factory = new Factory();
+
+			var document = factory.Document(
+			factory.Tag("person",
+				factory.TagElement("person",
+					factory.MetaCode("{{", T.OpenTag),
+					factory.MetaCode("^", T.Negate),
+					factory.Expression(factory.Symbol("person", T.Identifier)),
+					factory.MetaCode("}}", T.CloseTag)),
+				factory.Text("Text"),
+				factory.TagElement("person",
+					factory.MetaCode("{{", T.OpenTag),
+					factory.MetaCode("/", T.Slash),
+					factory.Expression(factory.Symbol("person", T.Identifier)),
+					factory.MetaCode("}}", T.CloseTag))));
+
+			ParserTest("{{^person}}Text{{/person}}", document);
 		}
 
 		private void ParserTest(string content, Block document, TagProvidersCollection providers = null)

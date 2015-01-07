@@ -61,7 +61,7 @@
 				if (node.IsBlock)
 				{
 					var block = (Block)node;
-					if (block.Type == BlockType.TagElement && (block.Name == "if" || block.Name == "elseif" || block.Name == "else"))
+					if (block.Type == BlockType.TagElement && (block.Name == "if" || block.Name == "elseif" || block.Name == "else" || block.Name == "^"))
 					{
 						if (current != null)
 						{
