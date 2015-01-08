@@ -1,3 +1,6 @@
+#### 1.3.0
+* Added missing Handlebars.RegisterHelper method
+
 #### 1.2.0
 * Added support for html escaping using {{&...}} experssions. These are equivalent to {{{...}}} expressions.
 * Renamed RawString to SafeString to align with HandlebarsJS API, and moved to base FuManchu namespace.
