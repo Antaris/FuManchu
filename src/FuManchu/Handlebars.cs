@@ -51,6 +51,16 @@
 		}
 
 		/// <summary>
+		/// Registers a helper function.
+		/// </summary>
+		/// <param name="name">The name of the helper.</param>
+		/// <param name="helper">The helper delegate.</param>
+		public static void RegisterHelper(string name, Func<HelperOptions, string> helper)
+		{
+			_handlebarsService.Value.RegisterHelper(name, helper);
+		}
+
+		/// <summary>
 		/// Registers a partial template with the given name.
 		/// </summary>
 		/// <param name="name">The name of the partial template.</param>
