@@ -376,6 +376,13 @@
             <param name="model">The model for the template.</param>
             <returns>The template result.</returns>
         </member>
+        <member name="M:FuManchu.Handlebars.RegisterHelper(System.String,System.Func{FuManchu.HelperOptions,System.String})">
+            <summary>
+            Registers a helper function.
+            </summary>
+            <param name="name">The name of the helper.</param>
+            <param name="helper">The helper delegate.</param>
+        </member>
         <member name="M:FuManchu.Handlebars.RegisterPartial(System.String,System.String)">
             <summary>
             Registers a partial template with the given name.
