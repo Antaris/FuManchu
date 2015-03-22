@@ -25,9 +25,15 @@
 		/// </summary>
 		public HandlebarsService()
 		{
+			Operators = new OperatorCollection(OperatorCollection.Default);
 			TagProviders = new TagProvidersCollection(TagProvidersCollection.Default);
 			ModelMetadataProvider = new DefaultModelMetadataProvider();
 		}
+
+		/// <summary>
+		/// The collection of operators.
+		/// </summary>
+		public OperatorCollection Operators { get; private set; }
 
 		/// <summary>
 		/// The collection of tag providers.

@@ -58,6 +58,7 @@
     <Compile Include="Renderer\EnumerableBlockRendererFacts.cs" />
     <Compile Include="Renderer\ExpressionSpanRendererFacts.cs" />
     <Compile Include="Renderer\ImplictBlockRendererFacts.cs" />
+    <Compile Include="Renderer\IsBlockRendererFacts.cs" />
     <Compile Include="Renderer\ParserVisitorFactsBase.cs" />
     <Compile Include="Renderer\PartialBlockRendererFacts.cs" />
     <Compile Include="Renderer\RenderingParserVisitorFacts.cs" />

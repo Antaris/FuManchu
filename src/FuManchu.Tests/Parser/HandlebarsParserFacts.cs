@@ -330,6 +330,84 @@
 			ParserTest("{{^person}}Text{{/person}}", document);
 		}
 
+		[Fact]
+		public void CanParseIsTag_WithSingleArgument()
+		{
+			var factory = new Factory();
+
+			var document = factory.Document(
+				factory.Tag("is",
+					factory.TagElement("is",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.MetaCode("#", T.Hash),
+						factory.Expression(factory.Symbol("is", T.Keyword)),
+						factory.WhiteSpace(1),
+						factory.Parameter(factory.Symbol("x", T.Identifier)),
+						factory.MetaCode("}}", T.CloseTag)),
+					factory.Text("True"),
+					factory.TagElement("is",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.MetaCode("/", T.Slash),
+						factory.Expression(factory.Symbol("is", T.Keyword)),
+						factory.MetaCode("}}", T.CloseTag))));
+
+			ParserTest("{{#is x}}True{{/is}}", document);
+		}
+
+		[Fact]
+		public void CanParseIsTag_WithTwoArguments()
+		{
+			var factory = new Factory();
+
+			var document = factory.Document(
+				factory.Tag("is",
+					factory.TagElement("is",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.MetaCode("#", T.Hash),
+						factory.Expression(factory.Symbol("is", T.Keyword)),
+						factory.WhiteSpace(1),
+						factory.Parameter(factory.Symbol("x", T.Identifier)),
+						factory.WhiteSpace(1),
+						factory.Parameter(factory.Symbol("y", T.Identifier)),
+						factory.MetaCode("}}", T.CloseTag)),
+					factory.Text("True"),
+					factory.TagElement("is",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.MetaCode("/", T.Slash),
+						factory.Expression(factory.Symbol("is", T.Keyword)),
+						factory.MetaCode("}}", T.CloseTag))));
+
+			ParserTest("{{#is x y}}True{{/is}}", document);
+		}
+
+		[Fact]
+		public void CanParseIsTag_WithTwoArgumentsAndOperator()
+		{
+			var factory = new Factory();
+
+			var document = factory.Document(
+				factory.Tag("is",
+					factory.TagElement("is",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.MetaCode("#", T.Hash),
+						factory.Expression(factory.Symbol("is", T.Keyword)),
+						factory.WhiteSpace(1),
+						factory.Parameter(factory.Symbol("x", T.Identifier)),
+						factory.WhiteSpace(1),
+						factory.Parameter(factory.Symbol("\"==\"", T.StringLiteral)),
+						factory.WhiteSpace(1),
+						factory.Parameter(factory.Symbol("y", T.Identifier)),
+						factory.MetaCode("}}", T.CloseTag)),
+					factory.Text("True"),
+					factory.TagElement("is",
+						factory.MetaCode("{{", T.OpenTag),
+						factory.MetaCode("/", T.Slash),
+						factory.Expression(factory.Symbol("is", T.Keyword)),
+						factory.MetaCode("}}", T.CloseTag))));
+
+			ParserTest("{{#is x \"==\" y}}True{{/is}}", document);
+		}
+
 		private void ParserTest(string content, Block document, TagProvidersCollection providers = null)
 		{
 			providers = providers ?? TagProvidersCollection.Default;

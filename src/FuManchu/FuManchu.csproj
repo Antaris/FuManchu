@@ -64,6 +64,13 @@
     <Compile Include="Binding\Metadata\ModelMetadata.cs" />
     <Compile Include="HelperOptions.cs" />
     <Compile Include="IHandlebarsService.cs" />
+    <Compile Include="Operators\EqualityOperator.cs" />
+    <Compile Include="Operators\GreaterThanOperator.cs" />
+    <Compile Include="Operators\IOperatorProvider.cs" />
+    <Compile Include="Operators\NegatedEqualityOperator.cs" />
+    <Compile Include="Operators\OperatorBase.cs" />
+    <Compile Include="Operators\OperatorsCollection.cs" />
+    <Compile Include="Operators\StandardOperatorProvider.cs" />
     <Compile Include="Parser\HandlebarsLanguageCharacteristics.cs" />
     <Compile Include="Parser\HandlebarsParser.cs" />
     <Compile Include="Parser\LanguageCharacteristics.cs" />
@@ -93,6 +100,9 @@
     <Compile Include="Renderer\IBlockRenderer.cs" />
     <Compile Include="Parser\IParserVisitor.cs" />
     <Compile Include="Renderer\ImplicitBlockRenderer.cs" />
+    <Compile Include="Renderer\IsBlockRenderer.cs" />
+    <Compile Include="Operators\DelegateOperator.cs" />
+    <Compile Include="Operators\IOperator.cs" />
     <Compile Include="Renderer\ISpanRenderer.cs" />
     <Compile Include="Renderer\ISyntaxTreeNodeRenderer.cs" />
     <Compile Include="Renderer\PartialBlockRenderer.cs" />

@@ -9,6 +9,11 @@
 	public interface IHandlebarsService
 	{
 		/// <summary>
+		/// Gets the operators collection.
+		/// </summary>
+		OperatorCollection Operators { get; }
+
+		/// <summary>
 		/// Compiles a Handlebars template
 		/// </summary>
 		/// <param name="name">The name of the template.</param>
