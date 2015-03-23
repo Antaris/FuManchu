@@ -67,6 +67,7 @@
     <Compile Include="Operators\EqualityOperator.cs" />
     <Compile Include="Operators\GreaterThanOperator.cs" />
     <Compile Include="Operators\IOperatorProvider.cs" />
+    <Compile Include="Operators\LessThanOperator.cs" />
     <Compile Include="Operators\NegatedEqualityOperator.cs" />
     <Compile Include="Operators\OperatorBase.cs" />
     <Compile Include="Operators\OperatorsCollection.cs" />

@@ -17,6 +17,8 @@
 			yield return new NegatedEqualityOperator(true);		// !==
 			yield return new GreaterThanOperator();				// > 
 			yield return new GreaterThanOperator(true);			// >=
+			yield return new LessThanOperator();				// <
+			yield return new LessThanOperator(true);			// <=
 		}
 	}
 }
