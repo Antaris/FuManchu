@@ -14,7 +14,8 @@
 			{ "unless", HandlebarsKeyword.Unless },
 			{ "else", HandlebarsKeyword.Else },
 			{ "with", HandlebarsKeyword.With },
-			{ "this", HandlebarsKeyword.This }
+			{ "this", HandlebarsKeyword.This },
+			{ "is", HandlebarsKeyword.Is }
 		};
 
 		/// <summary>

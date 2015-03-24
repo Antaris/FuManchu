@@ -127,5 +127,47 @@
 				S(3, 0, 3, "name", T.Identifier),
 				S(7, 0, 7, "}}", T.CloseTag));
 		}
+
+		[Fact]
+		public void RecognisesIsTag()
+		{
+			TestTokenizer("{{#is x}}",
+				S(0, 0, 0, "{{", T.OpenTag),
+				S(2, 0, 2, "#", T.Hash),
+				S(3, 0, 3, "is", T.Keyword),
+				S(5, 0, 5, " ", T.WhiteSpace),
+				S(6, 0, 6, "x", T.Identifier),
+				S(7, 0, 7, "}}", T.CloseTag));
+		}
+
+		[Fact]
+		public void RecognisesIsTagWithTwoArguments()
+		{
+			TestTokenizer("{{#is x y}}",
+				S(0, 0, 0, "{{", T.OpenTag),
+				S(2, 0, 2, "#", T.Hash),
+				S(3, 0, 3, "is", T.Keyword),
+				S(5, 0, 5, " ", T.WhiteSpace),
+				S(6, 0, 6, "x", T.Identifier),
+				S(7, 0, 7, " ", T.WhiteSpace),
+				S(8, 0, 8, "y", T.Identifier),
+				S(9, 0, 9, "}}", T.CloseTag));
+		}
+
+		[Fact]
+		public void RecognisesIsTagWithTwoArgumentsAndOperator()
+		{
+			TestTokenizer("{{#is x \"==\" y}}",
+				S(0, 0, 0, "{{", T.OpenTag),
+				S(2, 0, 2, "#", T.Hash),
+				S(3, 0, 3, "is", T.Keyword),
+				S(5, 0, 5, " ", T.WhiteSpace),
+				S(6, 0, 6, "x", T.Identifier),
+				S(7, 0, 7, " ", T.WhiteSpace),
+				S(8, 0, 8, "\"==\"", T.StringLiteral),
+				S(12, 0, 12, " ", T.WhiteSpace),
+				S(13, 0, 13, "y", T.Identifier),
+				S(14, 0, 14, "}}", T.CloseTag));
+		}
 	}
 }

@@ -14,6 +14,7 @@
 		internal static readonly TagDescriptor Unless = new TagDescriptor("unless", new UnlessBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
 		internal static readonly TagDescriptor Each = new TagDescriptor("each", new EnumerableBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
 		internal static readonly TagDescriptor With = new TagDescriptor("with", new ScopeBlockRenderer(), 1, maxArguments: 1, allowMappedParamters: false, hasChildContent: true);
+		internal static readonly TagDescriptor Is = new TagDescriptor("is", new IsBlockRenderer(), 1, 3, false, hasChildContent: true);
 
 		/// <inheritdoc />
 		public IEnumerable<TagDescriptor> GetTags()
@@ -29,6 +30,9 @@
 
 			// Scope tags.
 			yield return With;
+
+			// Is tag.
+			yield return Is;
 		}
 	}
 }
