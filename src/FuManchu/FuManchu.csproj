@@ -65,13 +65,15 @@
     <Compile Include="HelperOptions.cs" />
     <Compile Include="IHandlebarsService.cs" />
     <Compile Include="Operators\EqualityOperator.cs" />
-    <Compile Include="Operators\GreaterThanOperator.cs" />
+    <Compile Include="Operators\InOperator.cs" />
     <Compile Include="Operators\IOperatorProvider.cs" />
-    <Compile Include="Operators\LessThanOperator.cs" />
     <Compile Include="Operators\NegatedEqualityOperator.cs" />
+    <Compile Include="Operators\NumericOperation.cs" />
+    <Compile Include="Operators\NumericOperator.cs" />
     <Compile Include="Operators\OperatorBase.cs" />
     <Compile Include="Operators\OperatorsCollection.cs" />
     <Compile Include="Operators\StandardOperatorProvider.cs" />
+    <Compile Include="Operators\ValueTypeExpressionGenerator.cs" />
     <Compile Include="Parser\HandlebarsLanguageCharacteristics.cs" />
     <Compile Include="Parser\HandlebarsParser.cs" />
     <Compile Include="Parser\LanguageCharacteristics.cs" />

@@ -10,15 +10,16 @@
 		/// <inheritdoc />
 		public IEnumerable<IOperator> GetOperators()
 		{
-			yield return new EqualityOperator();				// ==
-			yield return new EqualityOperator(true);			// ===
-			yield return new NegatedEqualityOperator();			// !=
-			yield return new NegatedEqualityOperator("not");	// not
-			yield return new NegatedEqualityOperator(true);		// !==
-			yield return new GreaterThanOperator();				// > 
-			yield return new GreaterThanOperator(true);			// >=
-			yield return new LessThanOperator();				// <
-			yield return new LessThanOperator(true);			// <=
+			/* == */	yield return new EqualityOperator();
+			/* === */	yield return new EqualityOperator(true);
+			/* != */	yield return new NegatedEqualityOperator();
+			/* not */	yield return new NegatedEqualityOperator("not");
+			/* !== */	yield return new NegatedEqualityOperator(true);
+			/* >= */	yield return new NumericOperator(NumericOperation.GreaterThanEqualTo);
+			/* > */		yield return new NumericOperator(NumericOperation.GreaterThan);
+			/* <= */	yield return new NumericOperator(NumericOperation.LessThanEqualTo);
+			/* < */		yield return new NumericOperator(NumericOperation.LessThan);
+			/* in */	yield return new InOperator();
 		}
 	}
 }

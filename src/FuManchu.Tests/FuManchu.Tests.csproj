@@ -54,8 +54,12 @@
     <Compile Include="Factory.cs" />
     <Compile Include="HandlebarsServiceFacts.cs" />
     <Compile Include="Operators\EqualityOperatorFacts.cs" />
+    <Compile Include="Operators\InOperatorFacts.cs" />
+    <Compile Include="Operators\NegatedEqualityOperatorFacts.cs" />
+    <Compile Include="Operators\NumericOperatorFacts.cs" />
     <Compile Include="Operators\OperatorFactsBase.cs" />
     <Compile Include="Operators\StrictEqualityOperatorFacts.cs" />
+    <Compile Include="Operators\StrictNegatedEqualityOperatorFacts.cs" />
     <Compile Include="Parser\HandlebarsParserFacts.cs" />
     <Compile Include="Parser\WhiteSpaceCollapsingParserVisitorFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
