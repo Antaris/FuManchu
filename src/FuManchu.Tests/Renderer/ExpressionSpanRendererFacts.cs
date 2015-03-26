@@ -30,5 +30,17 @@
 
 			RenderTest(template, expected, "<h1>Hello World</h1>");
 		}
+
+		[Fact]
+		public void RendersSubExpressionContent()
+		{
+			string template = "{{helper (helper2 \"matt\")}}";
+			string expected = "MATT";
+
+			HandlebarsService.RegisterHelper("helper2", o => o.Data);
+			HandlebarsService.RegisterHelper("helper", o => o.Data.ToUpper());
+
+			RenderTest(template, expected);
+		}
 	}
 }

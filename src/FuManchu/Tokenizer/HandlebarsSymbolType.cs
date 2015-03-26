@@ -31,6 +31,8 @@
 		Ampersand,				// &
 		Dash,					// -
 		At,						// @
+		OpenParenthesis,		// (
+		CloseParenthesis,		// )
 
 		OpenTag,				// {{
 		RawOpenTag,				// {{{

@@ -2,8 +2,6 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Security;
-	using System.Xml;
 	using FuManchu.Parser;
 	using FuManchu.Text;
 
@@ -12,6 +10,8 @@
 	/// </summary>
 	public class HandlebarsTokenizer : Tokenizer<HandlebarsSymbol, HandlebarsSymbolType>
 	{
+		private int __openSubExpressions = 0;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="HandlebarsTokenizer"/> class.
 		/// </summary>
@@ -276,8 +276,29 @@
 					TakeCurrent();
 					return Stay(EndSymbol(HandlebarsSymbolType.Assign));
 				}
+				case '(':
+				{
+					// We're at the start of a sub-expression.
+					return Transition(() => SubExpression(raw));
+				}
+				case ')':
+				{
+					if (__openSubExpressions == 0)
+					{
+						CurrentErrors.Add(new Error("Unexpected character: " + CurrentCharacter, CurrentLocation));
+						return Transition(Stop);
+					}
+
+					// We've reached the end of a sub-expression.
+					return Transition(() => EndSubExpression(raw));
+				}
 				case '}':
 				{
+					if (__openSubExpressions > 0)
+					{
+						CurrentErrors.Add(new Error("Unexpected character: " + CurrentCharacter, CurrentLocation));
+						return Transition(Stop);
+					}
 					// We've reached a closing tag, so transition away.
 					return Transition(() => EndTag(raw));
 				}
@@ -333,6 +354,36 @@
 
 			// We're done processing this '}}' sequence, so let's finish here and return to the Data state.
 			return Transition(EndSymbol(HandlebarsSymbolType.CloseTag), Data);
+		}
+
+		/// <summary>
+		/// Begins parsing a sub-expression.
+		/// </summary>
+		/// <param name="raw">True if we are currently parsing a raw tag.</param>
+		/// <returns>The state result.</returns>
+		private StateResult SubExpression(bool raw)
+		{
+			__openSubExpressions++;
+
+			// Take the current ( symbol.
+			TakeCurrent();
+
+			return Transition(EndSymbol(HandlebarsSymbolType.OpenParenthesis), () => ContinueTagContent(raw));
+		}
+
+		/// <summary>
+		/// Ends the parsing of a sub-expression.
+		/// </summary>
+		/// <param name="raw">True if we are currently parsing a raw tag.</param>
+		/// <returns>The state result.</returns>
+		private StateResult EndSubExpression(bool raw)
+		{
+			__openSubExpressions--;
+
+			// Taken the current ) symbol.
+			TakeCurrent();
+
+			return Transition(EndSymbol(HandlebarsSymbolType.CloseParenthesis), () => ContinueTagContent(raw));
 		}
 		#endregion
 

@@ -239,7 +239,7 @@
 			using (Context.StartBlock(BlockType.ExpressionBody))
 			{
 				// Accept everything until either the close of the tag, or the first element of whitespace.
-				AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+				AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde, HandlebarsSymbolType.OpenParenthesis);
 				// Output the first part as an expression.
 				Output(SpanKind.Expression);
 
@@ -257,7 +257,7 @@
 					updateTagElementType = true;
 				}
 
-				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)
+				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde && CurrentSymbol.Type != HandlebarsSymbolType.CloseParenthesis)
 				{
 					if (CurrentSymbol.Type == HandlebarsSymbolType.WhiteSpace)
 					{
@@ -267,19 +267,25 @@
 						Output(SpanKind.WhiteSpace);
 					}
 
+					if (CurrentSymbol.Type == HandlebarsSymbolType.OpenParenthesis)
+					{
+						// Start parsing a sub-expression.
+						AtSubExpression();
+					}
+
 					if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
 					{
 						// We're in a parameterised argument (e.g. one=two
 						AcceptAndMoveNext();
 						// Accept everything until the next whitespace or closing tag.
-						AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+						AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde, HandlebarsSymbolType.CloseParenthesis);
 						// Output this as a map.
 						Output(SpanKind.Map);
 					}
 					else
 					{
 						// Accept everything until the next whitespace or closing tag.
-						AcceptUntil(HandlebarsSymbolType.Assign, HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
+						AcceptUntil(HandlebarsSymbolType.Assign, HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde, HandlebarsSymbolType.CloseParenthesis);
 						if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
 						{
 							continue;
@@ -341,6 +347,31 @@
 				AcceptAndMoveNext();
 				// Output this as metacode.
 				Output(SpanKind.MetaCode);
+			}
+		}
+
+		/// <summary>
+		/// Parses a sub-expression.
+		/// </summary>
+		public void AtSubExpression()
+		{
+			using (Context.StartBlock(BlockType.SubExpression))
+			{
+				if (Required(HandlebarsSymbolType.OpenParenthesis, true))
+				{
+					AcceptAndMoveNext();
+					// Output the ( symbol.
+					Output(SpanKind.MetaCode);
+				}
+
+				AtExpressionBody();
+
+				if (Required(HandlebarsSymbolType.CloseParenthesis, true))
+				{
+					AcceptAndMoveNext();
+					// Output the ) symbol.
+					Output(SpanKind.MetaCode);;
+				}
 			}
 		}
 

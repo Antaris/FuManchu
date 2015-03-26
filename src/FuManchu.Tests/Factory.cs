@@ -50,6 +50,14 @@
 			return Block(BlockType.Expression, name, children);
 		}
 
+		public Block SubExpression(params SyntaxTreeNode[] children)
+		{
+			var body = children.FirstOrDefault(c => c.IsBlock && ((Block)c).Type == BlockType.ExpressionBody) as Block;
+			string name = (body != null) ? body.Name : null;
+
+			return Block(BlockType.SubExpression, name, children);
+		}
+
 		public Block ExpressionBody(params SyntaxTreeNode[] children)
 		{
 			string name = null;
