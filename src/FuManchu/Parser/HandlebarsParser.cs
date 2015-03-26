@@ -51,47 +51,14 @@
 					Output(SpanKind.MetaCode);
 				}
 
-				// Accept everything until either the close of the tag, or the first element of whitespace.
-				AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag);
-				// Output the first part as an expression.
-				Output(SpanKind.Expression);
+				// Parse the content of the element as an expression body.
+				AtExpressionBody();
 
-				// Get the tag name and set it for the block.
-				tagName = LastSpanContent();
-				descriptor = Context.TagProviders.GetDescriptor(tagName, expectedPrefixSymbol == HandlebarsSymbolType.Negate);
-
-				Context.CurrentBlock.Name = tagName;
-				Context.CurrentBlock.Descriptor = descriptor;
-
-				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)
+				if (Context.CurrentBlock.Name != null)
 				{
-					if (CurrentSymbol.Type == HandlebarsSymbolType.WhiteSpace)
-					{
-						// Accept all the whitespace.
-						AcceptAll(HandlebarsSymbolType.WhiteSpace);
-						// Take all the whitespace, and output that.
-						Output(SpanKind.WhiteSpace);
-					}
-
-					if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
-					{
-						// We're in a parameterised argument (e.g. one=two
-						AcceptAndMoveNext();
-						// Accept everything until the next whitespace or closing tag.
-						AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
-						// Output this as a map.
-						Output(SpanKind.Map);
-					}
-					else
-					{
-						// Accept everything until the next whitespace or closing tag.
-						AcceptUntil(HandlebarsSymbolType.Assign, HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
-						if (CurrentSymbol.Type != HandlebarsSymbolType.Assign)
-						{
-							// Output this as a parameter.
-							Output(SpanKind.Parameter);
-						}
-					}
+					tagName = Context.CurrentBlock.Name;
+					descriptor = Context.TagProviders.GetDescriptor(tagName, expectedPrefixSymbol == HandlebarsSymbolType.Negate);
+					Context.CurrentBlock.Descriptor = descriptor;
 				}
 
 				if (Optional(HandlebarsSymbolType.Tilde))
@@ -244,19 +211,50 @@
 					Output(expectedPrefixSpanKind);
 				}
 
+				// Parse the expression body.
+				AtExpressionBody();
+
+				if (Optional(HandlebarsSymbolType.Tilde))
+				{
+					// Output the tilde.
+					Output(SpanKind.MetaCode);
+				}
+
+				// Accept the closing tag.
+				AcceptAndMoveNext();
+				// Output this as metacode.
+				Output(SpanKind.MetaCode);
+			}
+		}
+
+		/// <summary>
+		/// Handles parsing an expression body.
+		/// </summary>
+		public void AtExpressionBody()
+		{
+			string name;
+			bool updateTagElementType = false;
+			bool isNegated = LastSpanContent() == "^";
+
+			using (Context.StartBlock(BlockType.ExpressionBody))
+			{
 				// Accept everything until either the close of the tag, or the first element of whitespace.
 				AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
 				// Output the first part as an expression.
 				Output(SpanKind.Expression);
 
-				string name = LastSpanContent();
+				name = LastSpanContent();
+
+				if (isNegated && string.IsNullOrWhiteSpace(name))
+				{
+					name = "^";
+				}
 				Context.CurrentBlock.Name = name;
 
 				// Special case - else expressions become tag elements themselves.
-				if (name == "else" || name == "^")
+				if (name == "else" || isNegated)
 				{
-					// Change the tag type to ensure this is matched as a tag element.
-					Context.CurrentBlock.Type = BlockType.TagElement;
+					updateTagElementType = true;
 				}
 
 				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)
@@ -291,17 +289,18 @@
 					}
 				}
 
-				if (Optional(HandlebarsSymbolType.Tilde))
+				if (Context.CurrentBlock.Children.Count == 0)
 				{
-					// Output the tilde.
-					Output(SpanKind.MetaCode);
+					// The block has no children, so ignore it.
+					Context.CurrentBlock.Ignore = true;
 				}
-
-				// Accept the closing tag.
-				AcceptAndMoveNext();
-				// Output this as metacode.
-				Output(SpanKind.MetaCode);
 			}
+
+			if (updateTagElementType)
+			{
+				Context.CurrentBlock.Type = BlockType.TagElement;
+			}
+			Context.CurrentBlock.Name = name;
 		}
 
 		/// <summary>
@@ -329,42 +328,8 @@
 				// Output that tag as metacode.
 				Output(SpanKind.MetaCode);
 
-				// Accept everything until either the close of the tag, or the first element of whitespace.
-				AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
-				// Output the first part as an expression.
-				Output(SpanKind.Expression);
-
-				while (CurrentSymbol.Type != HandlebarsSymbolType.CloseTag && CurrentSymbol.Type != HandlebarsSymbolType.RawCloseTag && CurrentSymbol.Type != HandlebarsSymbolType.Tilde)
-				{
-					if (CurrentSymbol.Type == HandlebarsSymbolType.WhiteSpace)
-					{
-						// Accept all the whitespace.
-						AcceptAll(HandlebarsSymbolType.WhiteSpace);
-						// Take all the whitespace, and output that.
-						Output(SpanKind.WhiteSpace);
-					}
-
-					if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
-					{
-						// We're in a parameterised argument (e.g. one=two
-						AcceptAndMoveNext();
-						// Accept everything until the next whitespace or closing tag.
-						AcceptUntil(HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
-						// Output this as a map.
-						Output(SpanKind.Map);
-					}
-					else
-					{
-						// Accept everything until the next whitespace or closing tag.
-						AcceptUntil(HandlebarsSymbolType.Assign, HandlebarsSymbolType.WhiteSpace, HandlebarsSymbolType.CloseTag, HandlebarsSymbolType.RawCloseTag, HandlebarsSymbolType.Tilde);
-						if (CurrentSymbol.Type == HandlebarsSymbolType.Assign)
-						{
-							continue;
-						}
-						// Output this as a map.
-						Output(SpanKind.Parameter);
-					}
-				}
+				// Parse the inner as an expression body.
+				AtExpressionBody();
 
 				if (Optional(HandlebarsSymbolType.Tilde))
 				{

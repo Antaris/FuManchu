@@ -31,8 +31,10 @@
 			ParserTest("{{hello}}", factory.Document(
 				factory.Expression(
 					factory.MetaCode("{{", T.OpenTag),
-					factory.Expression(
-						factory.Symbol("hello", T.Identifier)
+					factory.ExpressionBody(
+						factory.Expression(
+							factory.Symbol("hello", T.Identifier)
+						)
 					),
 					factory.MetaCode("}}", T.CloseTag)
 				)
@@ -49,9 +51,11 @@
 					factory.TagElement("if",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("if", T.Keyword)),
-						factory.WhiteSpace(1),
-						factory.Parameter("condition"),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("if", T.Keyword)),
+							factory.WhiteSpace(1),
+							factory.Parameter("condition")
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					),
 					factory.Text("True!"),
@@ -75,15 +79,19 @@
 					factory.TagElement("if",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("if", T.Keyword)),
-						factory.WhiteSpace(1),
-						factory.Parameter("condition"),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("if", T.Keyword)),
+							factory.WhiteSpace(1),
+							factory.Parameter("condition")
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					),
 					factory.Text("True!"),
 					factory.TagElement("else",
 						factory.MetaCode("{{", T.OpenTag),
-						factory.Expression(factory.Symbol("else", T.Keyword)),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("else", T.Keyword))
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					),
 					factory.Text("False!"),
@@ -107,9 +115,11 @@
 					factory.TagElement("if",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("if", T.Keyword)),
-						factory.WhiteSpace(1),
-						factory.Parameter("condition"),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("if", T.Keyword)),
+							factory.WhiteSpace(1),
+							factory.Parameter("condition")
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					),
 					factory.Text("True!"),
@@ -139,24 +149,30 @@
 					factory.TagElement("if",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("if", T.Keyword)),
-						factory.WhiteSpace(1),
-						factory.Parameter("condition"),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("if", T.Keyword)),
+							factory.WhiteSpace(1),
+							factory.Parameter("condition")
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					),
 					factory.Text("True!"),
 					factory.TagElement("elseif",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("elseif", T.Keyword)),
-						factory.WhiteSpace(1),
-						factory.Parameter("what"),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("elseif", T.Keyword)),
+							factory.WhiteSpace(1),
+							factory.Parameter("what")
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					),
 					factory.Text("Maybe?"),
 					factory.TagElement("else",
 						factory.MetaCode("{{", T.OpenTag),
-						factory.Expression(factory.Symbol("else", T.Keyword)),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("else", T.Keyword))
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					),
 					factory.Text("False!"),
@@ -180,11 +196,13 @@
 					factory.TagElement("list",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("list", T.Identifier)),
-						factory.WhiteSpace(1),
-						factory.Parameter("people"),
-						factory.WhiteSpace(1),
-						factory.Map("class", "\"value\"", T.StringLiteral),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("list", T.Identifier)),
+							factory.WhiteSpace(1),
+							factory.Parameter("people"),
+							factory.WhiteSpace(1),
+							factory.Map("class", "\"value\"", T.StringLiteral)
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					)
 				)	
@@ -201,13 +219,15 @@
 					factory.TagElement("list",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("list", T.Identifier)),
-						factory.WhiteSpace(1),
-						factory.Parameter("people"),
-						factory.WhiteSpace(1),
-						factory.Map("class", "\"value\"", T.StringLiteral),
-						factory.WhiteSpace(1),
-						factory.Map("age", "10.5", T.RealLiteral),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("list", T.Identifier)),
+							factory.WhiteSpace(1),
+							factory.Parameter("people"),
+							factory.WhiteSpace(1),
+							factory.Map("class", "\"value\"", T.StringLiteral),
+							factory.WhiteSpace(1),
+							factory.Map("age", "10.5", T.RealLiteral)
+						),
 						factory.MetaCode("}}", T.CloseTag)
 					)
 				)
@@ -224,32 +244,34 @@
 					factory.TagElement("list",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("list", T.Identifier)),
-						factory.WhiteSpace(1),
-						factory.Parameter(
-							factory.Symbol("model", T.Identifier),
-							factory.Symbol(".", T.Dot),
-							factory.Symbol("people", T.Identifier)
-							),
-						factory.WhiteSpace(1),
-						factory.Map("class",
-							() => new ISymbol[]
-							      {
-								      factory.Symbol("model", T.Identifier),
-								      factory.Symbol(".", T.Dot),
-								      factory.Symbol("cssClass", T.Identifier)
-							      }),
-						factory.WhiteSpace(1),
-						factory.Map("age",
-							() => new ISymbol[]
-							      {
-								      factory.Symbol(".", T.Dot),
-								      factory.Symbol("/", T.Slash),
-								      factory.Symbol("model", T.Identifier),
-								      factory.Symbol(".", T.Dot),
-								      factory.Symbol("ages", T.Identifier)
-							      }
-							),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("list", T.Identifier)),
+							factory.WhiteSpace(1),
+							factory.Parameter(
+								factory.Symbol("model", T.Identifier),
+								factory.Symbol(".", T.Dot),
+								factory.Symbol("people", T.Identifier)
+								),
+							factory.WhiteSpace(1),
+							factory.Map("class",
+								() => new ISymbol[]
+									  {
+										  factory.Symbol("model", T.Identifier),
+										  factory.Symbol(".", T.Dot),
+										  factory.Symbol("cssClass", T.Identifier)
+									  }),
+							factory.WhiteSpace(1),
+							factory.Map("age",
+								() => new ISymbol[]
+									  {
+										  factory.Symbol(".", T.Dot),
+										  factory.Symbol("/", T.Slash),
+										  factory.Symbol("model", T.Identifier),
+										  factory.Symbol(".", T.Dot),
+										  factory.Symbol("ages", T.Identifier)
+									  }
+								)						
+						),
 						factory.MetaCode("}}", T.CloseTag)
 						)
 					)
@@ -264,10 +286,12 @@
 			var factory = new Factory();
 
 			ParserTest("{{>body}}", factory.Document(
-				factory.Partial(
+				factory.Partial("body",
 					factory.MetaCode("{{", T.OpenTag),
 					factory.MetaCode(">", T.RightArrow),
-					factory.Span(SpanKind.Expression, factory.Symbol("body", T.Identifier)),
+					factory.ExpressionBody(
+						factory.Span(SpanKind.Expression, factory.Symbol("body", T.Identifier))
+					),
 					factory.MetaCode("}}", T.CloseTag))
 				));
 		}
@@ -280,11 +304,13 @@
 			ParserTest("{{@root.name}}", factory.Document(
 				factory.Expression(
 					factory.MetaCode("{{", T.OpenTag),
-					factory.Span(SpanKind.Expression,
-						factory.Symbol("@", T.At),
-						factory.Symbol("root", T.Identifier),
-						factory.Symbol(".", T.Dot),
-						factory.Symbol("name", T.Identifier)
+					factory.ExpressionBody(
+						factory.Span(SpanKind.Expression,
+							factory.Symbol("@", T.At),
+							factory.Symbol("root", T.Identifier),
+							factory.Symbol(".", T.Dot),
+							factory.Symbol("name", T.Identifier)
+						)
 					),
 					factory.MetaCode("}}", T.CloseTag))
 				));
@@ -299,10 +325,12 @@
 				factory.Expression(
 					factory.MetaCode("{{", T.OpenTag),
 					factory.MetaCode("&", T.Ampersand),
+					factory.ExpressionBody(
 					factory.Span(SpanKind.Expression,
 						factory.Symbol("person", T.Identifier),
 						factory.Symbol(".", T.Dot),
 						factory.Symbol("name", T.Identifier)
+						)
 					),
 					factory.MetaCode("}}", T.CloseTag))
 				));
@@ -318,7 +346,9 @@
 				factory.TagElement("person",
 					factory.MetaCode("{{", T.OpenTag),
 					factory.MetaCode("^", T.Negate),
-					factory.Expression(factory.Symbol("person", T.Identifier)),
+					factory.ExpressionBody(
+						factory.Expression(factory.Symbol("person", T.Identifier))
+					),
 					factory.MetaCode("}}", T.CloseTag)),
 				factory.Text("Text"),
 				factory.TagElement("person",
@@ -340,9 +370,11 @@
 					factory.TagElement("is",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("is", T.Keyword)),
-						factory.WhiteSpace(1),
-						factory.Parameter(factory.Symbol("x", T.Identifier)),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("is", T.Keyword)),
+							factory.WhiteSpace(1),
+							factory.Parameter(factory.Symbol("x", T.Identifier))
+						),
 						factory.MetaCode("}}", T.CloseTag)),
 					factory.Text("True"),
 					factory.TagElement("is",
@@ -364,11 +396,13 @@
 					factory.TagElement("is",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("is", T.Keyword)),
-						factory.WhiteSpace(1),
-						factory.Parameter(factory.Symbol("x", T.Identifier)),
-						factory.WhiteSpace(1),
-						factory.Parameter(factory.Symbol("y", T.Identifier)),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("is", T.Keyword)),
+							factory.WhiteSpace(1),
+							factory.Parameter(factory.Symbol("x", T.Identifier)),
+							factory.WhiteSpace(1),
+							factory.Parameter(factory.Symbol("y", T.Identifier))
+						),
 						factory.MetaCode("}}", T.CloseTag)),
 					factory.Text("True"),
 					factory.TagElement("is",
@@ -390,13 +424,15 @@
 					factory.TagElement("is",
 						factory.MetaCode("{{", T.OpenTag),
 						factory.MetaCode("#", T.Hash),
-						factory.Expression(factory.Symbol("is", T.Keyword)),
-						factory.WhiteSpace(1),
-						factory.Parameter(factory.Symbol("x", T.Identifier)),
-						factory.WhiteSpace(1),
-						factory.Parameter(factory.Symbol("\"==\"", T.StringLiteral)),
-						factory.WhiteSpace(1),
-						factory.Parameter(factory.Symbol("y", T.Identifier)),
+						factory.ExpressionBody(
+							factory.Expression(factory.Symbol("is", T.Keyword)),
+							factory.WhiteSpace(1),
+							factory.Parameter(factory.Symbol("x", T.Identifier)),
+							factory.WhiteSpace(1),
+							factory.Parameter(factory.Symbol("\"==\"", T.StringLiteral)),
+							factory.WhiteSpace(1),
+							factory.Parameter(factory.Symbol("y", T.Identifier))
+						),
 						factory.MetaCode("}}", T.CloseTag)),
 					factory.Text("True"),
 					factory.TagElement("is",

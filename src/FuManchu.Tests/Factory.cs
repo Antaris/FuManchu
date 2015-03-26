@@ -44,6 +44,14 @@
 
 		public Block Expression(params SyntaxTreeNode[] children)
 		{
+			var body = children.FirstOrDefault(c => c.IsBlock && ((Block)c).Type == BlockType.ExpressionBody) as Block;
+			string name = (body != null) ? body.Name : null;
+
+			return Block(BlockType.Expression, name, children);
+		}
+
+		public Block ExpressionBody(params SyntaxTreeNode[] children)
+		{
 			string name = null;
 			var span = children.FirstOrDefault(c => !c.IsBlock && ((Span)c).Kind == SpanKind.Expression) as Span;
 			if (span != null)
@@ -51,12 +59,12 @@
 				name = span.Content;
 			}
 
-			return Block(BlockType.Expression, name, children);
+			return Block(BlockType.ExpressionBody, name, children);
 		}
 
-		public Block Partial(params SyntaxTreeNode[] children)
+		public Block Partial(string name, params SyntaxTreeNode[] children)
 		{
-			return Block(BlockType.Partial, null, children);
+			return Block(BlockType.Partial, name, children);
 		}
 
 		public Span Span(SpanKind kind, params ISymbol[] symbols)

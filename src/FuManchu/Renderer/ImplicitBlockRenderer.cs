@@ -21,7 +21,7 @@
 			// Get the TagElement block.
 			var tagElement = (Block)children[0];
 			// Determine if the block prefix symbol (either # or ^) is a caret.
-			bool isNegatedSection = tagElement.Children.Cast<Span>().Where(s => s.Kind == SpanKind.MetaCode).ToArray()[1].Content == "^";
+			bool isNegatedSection = tagElement.Children.OfType<Span>().Where(s => s.Kind == SpanKind.MetaCode).ToArray()[1].Content == "^";
 
 			children.RemoveAt(0);
 			children.RemoveAt(children.Count - 1);

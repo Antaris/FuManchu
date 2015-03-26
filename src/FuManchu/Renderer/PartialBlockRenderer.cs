@@ -19,14 +19,7 @@
 				return;
 			}
 
-			var span = block.Children.FirstOrDefault(c => !c.IsBlock && ((Span)c).Kind == SpanKind.Expression) as Span;
-			if (span == null)
-			{
-				// Malformed tag?
-				return;
-			}
-
-			string name = span.Content;
+			string name = block.Name;
 			object model = arguments.FirstOrDefault();
 
 			if (model != null)

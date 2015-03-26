@@ -96,28 +96,33 @@
 			var arguments = new List<object>();
 			var maps = new Dictionary<string, object>();
 
-			var items = block.Children.OfType<Span>().Where(c => c.Kind == SpanKind.Parameter || c.Kind == SpanKind.Map);
-
-			foreach (var span in items)
+			// Get the expression body.
+			var body = block.Children.OfType<Block>().Where(c => c.Type == BlockType.ExpressionBody).FirstOrDefault();
+			if (body != null)
 			{
-				if (span.Kind == SpanKind.Parameter)
-				{
-					arguments.Add(context.ResolveValue(span));
-				}
-				else
-				{
-					var symbols = span.Symbols.Cast<HandlebarsSymbol>().ToList();
-					string key = symbols[0].Content;
+				var items = body.Children.OfType<Span>().Where(c => c.Kind == SpanKind.Parameter || c.Kind == SpanKind.Map);
 
-					object value = context.ResolveValue(span);
-
-					if (maps.ContainsKey(key))
+				foreach (var span in items)
+				{
+					if (span.Kind == SpanKind.Parameter)
 					{
-						maps[key] = value;
+						arguments.Add(context.ResolveValue(span));
 					}
 					else
 					{
-						maps.Add(key, value);
+						var symbols = span.Symbols.Cast<HandlebarsSymbol>().ToList();
+						string key = symbols[0].Content;
+
+						object value = context.ResolveValue(span);
+
+						if (maps.ContainsKey(key))
+						{
+							maps[key] = value;
+						}
+						else
+						{
+							maps.Add(key, value);
+						}
 					}
 				}
 			}

@@ -39,6 +39,11 @@
 		public TagDescriptor Descriptor { get; set; }
 
 		/// <summary>
+		/// Gets or sets whether the block will be ignored.
+		/// </summary>
+		public bool Ignore { get; set; }
+
+		/// <summary>
 		/// Gets or sets the name.
 		/// </summary>
 		public string Name { get; set; }

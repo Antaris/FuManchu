@@ -11,6 +11,7 @@
 		Tag,
 		TagElement,
 		Expression,
+		ExpressionBody,
 		Partial
 	}
 }

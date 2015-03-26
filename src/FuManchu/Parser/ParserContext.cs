@@ -153,7 +153,10 @@
 			if (_blockStack.Count > 1)
 			{
 				var block = _blockStack.Pop();
-				_blockStack.Peek().Children.Add(block.Build());
+				if (!block.Ignore)
+				{
+					_blockStack.Peek().Children.Add(block.Build());
+				}
 			}
 			else
 			{
