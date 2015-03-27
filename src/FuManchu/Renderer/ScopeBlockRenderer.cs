@@ -33,7 +33,7 @@
 				// Create a scope around the arguments.
 				using (var scope = context.BeginScope(arguments[0]))
 				{
-					RenderChildren(children, scope.ScopeContext);
+					RenderChildren(children, scope.Context);
 				}
 			}
 			else if (elseChildren.Count > 0)

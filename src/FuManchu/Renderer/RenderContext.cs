@@ -65,12 +65,12 @@
 		/// Begins a child scope given the specified model.
 		/// </summary>
 		/// <returns>The disposable used to revert the scope.</returns>
-		public RenderContextScope BeginScope(object model)
+		public ContextScope<RenderContext> BeginScope(object model)
 		{
 			var context = RenderContextFactory.CreateRenderContext(this, model);
 			Visitor.SetScope(context);
 
-			return new RenderContextScope(context, () => Visitor.RevertScope());
+			return new ContextScope<RenderContext>(context, () => Visitor.RevertScope());
 		}
 
 		/// <summary>

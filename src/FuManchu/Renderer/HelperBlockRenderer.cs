@@ -52,11 +52,12 @@
 		private string RenderHelperChildren(IEnumerable<SyntaxTreeNode> children, RenderContext context, object data)
 		{
 			RenderContext targetContext = context;
-			RenderContextScope scope = null;
+			ContextScope<RenderContext> scope = null;
+
 			if (data != null)
 			{
 				scope = context.BeginScope(data);
-				targetContext = scope.ScopeContext;
+				targetContext = scope.Context;
 			}
 
 			using (var writer = new StringWriter())

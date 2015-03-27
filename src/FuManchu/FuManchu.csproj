@@ -56,6 +56,7 @@
     <Compile Include="Binding\TemplateDataEvaluator.cs" />
     <Compile Include="Binding\TemplateDataInfo.cs" />
     <Compile Include="Binding\TryGetValueProvider.cs" />
+    <Compile Include="ContextScope.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Handlebars.cs" />
@@ -110,7 +111,6 @@
     <Compile Include="Renderer\ISyntaxTreeNodeRenderer.cs" />
     <Compile Include="Renderer\PartialBlockRenderer.cs" />
     <Compile Include="Renderer\RenderContextFactory.cs" />
-    <Compile Include="Renderer\RenderContextScope.cs" />
     <Compile Include="Renderer\RenderingParserVisitor.cs" />
     <Compile Include="Renderer\RenderContext.cs" />
     <Compile Include="Renderer\SpanRenderer.cs" />
@@ -121,6 +121,7 @@
     <Compile Include="Renderer\WhiteSpaceSpanRenderer.cs" />
     <Compile Include="StateMachine.cs" />
     <Compile Include="StateResult.cs" />
+    <Compile Include="SubExpressions\SubExpressionContext.cs" />
     <Compile Include="Tags\ITagProvider.cs" />
     <Compile Include="Tags\StandardTagProvider.cs" />
     <Compile Include="Tags\TagDescriptor.cs" />

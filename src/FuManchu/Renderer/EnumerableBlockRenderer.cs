@@ -63,14 +63,14 @@
 
 					using (var scope = context.BeginScope(item))
 					{
-						scope.ScopeContext.SetVariable("first", (index == 0));
-						scope.ScopeContext.SetVariable("last", (index == maxIndex));
-						scope.ScopeContext.SetVariable("index", index);
-						scope.ScopeContext.SetVariable("key", key);
+						scope.Context.SetVariable("first", (index == 0));
+						scope.Context.SetVariable("last", (index == maxIndex));
+						scope.Context.SetVariable("index", index);
+						scope.Context.SetVariable("key", key);
 
 						foreach (var child in children)
 						{
-							RenderChild(child, scope.ScopeContext);
+							RenderChild(child, scope.Context);
 						}
 					}
 					index++;
@@ -88,13 +88,13 @@
 
 					using (var scope = context.BeginScope(item))
 					{
-						scope.ScopeContext.SetVariable("first", (index == 0));
-						scope.ScopeContext.SetVariable("last", (index == maxIndex));
-						scope.ScopeContext.SetVariable("index", index);
+						scope.Context.SetVariable("first", (index == 0));
+						scope.Context.SetVariable("last", (index == maxIndex));
+						scope.Context.SetVariable("index", index);
 
 						foreach (var child in children)
 						{
-							RenderChild(child, scope.ScopeContext);
+							RenderChild(child, scope.Context);
 						}
 					}
 				}

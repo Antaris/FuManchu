@@ -26,7 +26,7 @@
 			{
 				using (var scope = context.BeginScope(model))
 				{
-					Write(scope.ScopeContext, writer, new SafeString(context.Service.RunPartial(name, scope.ScopeContext)));
+					Write(scope.Context, writer, new SafeString(context.Service.RunPartial(name, scope.Context)));
 				}
 			}
 			else
