@@ -62,7 +62,7 @@
 			};
 
 			// Set the root context 
-			context.RootRenderContext = parent.RootRenderContext ?? parent;
+			context.RootContext = parent.RootContext ?? parent;
 
 			return context;
 		}
