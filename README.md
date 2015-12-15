@@ -1,6 +1,8 @@
 FuManchu
 ========
 
+[![Join the chat at https://gitter.im/Antaris/FuManchu](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Antaris/FuManchu?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A .NET implementation of Handlebars, inspired by the Razor parsing framework and MVC model metadata framework. This is a pure .NET implementation, without regular expressions or wrapping any JavaScript implementations.
 
 Current Build Status
