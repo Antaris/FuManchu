@@ -7,7 +7,7 @@ if not exist .nuget/Build/NuGet.CommandLine/tools/NuGet.exe (
 )
 
 echo Resolve build dependencies
-".nuget/Build/NuGet.CommandLine/tools/NuGet.exe" "install" "packages.config" "-OutputDirectory" ".nuget/Build" "-ExcludeVersion" 
+".nuget/NuGet.exe" "install" "packages.config" "-OutputDirectory" ".nuget/Build" "-ExcludeVersion" 
 
 SET TARGET="Release"
 

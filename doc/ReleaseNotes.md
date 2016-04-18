@@ -1,3 +1,11 @@
+#### 1.4.0
+* Added support for {{#is...}} helper tags based on Dan Harper's Handlebars-Helpers library (https://github.com/danharper/Handlebars-Helpers)
+* Added support for compiling against CoreCLR using `net451` and `dotnet5.4` TFMs
+* Added support for resolving unknown expression values using the `UnknownValueResolver` delegate.
+* Changed `Func<object, string>` instances to `HandlebarTemplate` to simplify the delegate types used for templates.
+* Changed `Func<RenderContext, string>` instances to `HandlebarPartialTemplate` to simplify the delegate types used for partial templates.
+* Changed `Func<HelperOptions, string>` instances to `HandlebarHelper` to simplify the delegate types used for helpers.
+
 #### 1.3.0
 * Added missing Handlebars.RegisterHelper method
 
