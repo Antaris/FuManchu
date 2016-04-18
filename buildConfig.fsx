@@ -32,8 +32,8 @@ let projectDescription = "FuManchu - Handlebars for .NET"
 let authors = ["Matthew Abbott"]
 let page_author = "Matthew Abbott"
 let mail = "matthew.abbott@outlook.com"
-let version = "1.3.0.0"
-let version_nuget = "1.3.0.0"
+let version = "1.4.0.0"
+let version_nuget = "1.4.0.0"
 let commitHash = Information.getCurrentSHA1(".")
 
 let buildDir = "./build/"
@@ -59,8 +59,8 @@ if isMono then monoArguments <- "--runtime-v4.0 --debug"
 
 let github_url = sprintf "http:/github.com/%s/%s" github_user github_project
 
-let nuget = findToolInSubPath "NuGet.exe" "./.nuget/Build/NuGet.CommandLine/tools/NuGet.exe"
-System.IO.File.Copy(nuget, "./src/.nuget/NuGet.exe", true)
+let nuget = findToolInSubPath "NuGet.exe" "./.nuget/NuGet.exe"
+//System.IO.File.Copy(nuget, "./src/.nuget/NuGet.exe", true)
 
 let release = ReleaseNotesHelper.parseReleaseNotes (File.ReadLines "doc/ReleaseNotes.md")
 

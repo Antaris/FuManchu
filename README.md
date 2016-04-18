@@ -44,7 +44,7 @@ Let's define a template and pass it to the service:
     string template = "Hello {{name}}";
     var templateFunc = Handlebars.Compile("name", template);
 
-The `Compile` function returns a `Func<object, string>` delegate which you can call, passing in your model to return you're result.
+The `Compile` function returns a `HandlebarTemplate` delegate which you can call, passing in your model to return you're result.
 
     string result = templateFunc(new { name = "Matt" });
 
