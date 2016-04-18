@@ -89,5 +89,23 @@
 
 			Assert.Equal(expected, service.CompileAndRun("test", template, model));
 		}
+
+		[Fact]
+		public void CanRunUnknownValueResolver()
+		{
+			var service = new HandlebarsService();
+
+			UnknownValueResolver resolver = (e) => (e == "name" ? "Matthew Abbott" : null);
+
+			string template = "Your full name is: {{name}}";
+			string expected = "Your full name is: Matthew Abbott";
+
+			var model = new
+			{
+				
+			};
+
+			Assert.Equal(expected, service.CompileAndRun("test", template, model, resolver));
+		}
 	}
 }

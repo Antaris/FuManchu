@@ -20,6 +20,7 @@
 			Type modelType = null;
 			Func<object> modelAccessor = null;
 			string propertyName = null;
+			bool valid = (templateDataInfo != null);
 
 			if (templateDataInfo != null)
 			{
@@ -49,7 +50,12 @@
 				}
 			}
 
-			return GetMetadataFromProvider(modelAccessor, modelType ?? typeof(string), propertyName, containerType, provider);
+			var metadata =  GetMetadataFromProvider(modelAccessor, modelType ?? typeof(string), propertyName, containerType, provider);
+			if (!valid)
+			{
+				metadata.Valid = false;
+			}
+			return metadata;
 		}
 
 		private static ModelMetadata GetMetadataFromProvider(Func<object> modelAccessor, Type modelType, string propertyName, Type containerType, IModelMetadataProvider provider)

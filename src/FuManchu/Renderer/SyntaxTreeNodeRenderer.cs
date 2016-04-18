@@ -6,6 +6,7 @@
 	using System.IO;
 	using System.Linq;
 	using System.Net;
+    using System.Reflection;
 	using FuManchu.Parser.SyntaxTree;
 	using FuManchu.Text;
 	using FuManchu.Tokenizer;
@@ -52,6 +53,16 @@
 				}
 			}
 
+#if DOTNET5_4
+            // MA - This needs to be improved once GetTypeCode is supported via CoreFX
+            if (value.GetType().GetTypeInfo().IsValueType)
+            {
+				if ((int)(Convert.ChangeType(value, typeof(int))) == 0)
+				{
+					return false;
+				}
+            }
+#else
 			switch (Type.GetTypeCode(value.GetType()))
 			{
 				case TypeCode.Boolean:
@@ -78,8 +89,9 @@
 					return ((float)value == 0.0F);
 				}
 			}
+#endif
 
-			return true;
+            return true;
 		}
 
 		/// <inheritdoc />

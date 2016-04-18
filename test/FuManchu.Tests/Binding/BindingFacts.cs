@@ -1,6 +1,5 @@
 ﻿namespace FuManchu.Tests.Binding
 {
-	using System.ComponentModel.Design;
 	using System.Dynamic;
 	using Xunit;
 

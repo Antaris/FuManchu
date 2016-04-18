@@ -13,8 +13,9 @@
 		/// </summary>
 		/// <param name="renderer">The renderering parser visitor.</param>
 		/// <param name="model">The model.</param>
+		/// <param name="unknownValueResolver">The value resolver for handling unknown values.</param>
 		/// <returns>The render context.</returns>
-		public static RenderContext CreateRenderContext(RenderingParserVisitor renderer, object model = null)
+		public static RenderContext CreateRenderContext(RenderingParserVisitor renderer, object model = null, UnknownValueResolver unknownValueResolver = null)
 		{
 			if (renderer == null)
 			{
@@ -29,7 +30,8 @@
 					ModelMetadata = (model == null) ? null : renderer.ModelMetadataProvider.GetMetadataForType(() => model, model.GetType())
 				},
 				ModelMetadataProvider = renderer.ModelMetadataProvider,
-				Service = renderer.Service
+				Service = renderer.Service,
+                UnknownValueResolver = unknownValueResolver
 			};
 
 			return context;
@@ -58,7 +60,8 @@
 					ModelMetadata = (model == null) ? null : parent.ModelMetadataProvider.GetMetadataForType(() => model, model.GetType())
 				},
 				ModelMetadataProvider = parent.ModelMetadataProvider,
-				Service = parent.Service
+				Service = parent.Service,
+                UnknownValueResolver = parent.UnknownValueResolver
 			};
 
 			// Set the root context 

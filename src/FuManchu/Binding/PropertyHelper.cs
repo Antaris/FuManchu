@@ -78,10 +78,11 @@
 			var getMethod = propertyInfo.GetMethod;
 
 			var typeInput = getMethod.DeclaringType;
+            var typeInputInfo = typeInput.GetTypeInfo();
 			var typeOutput = getMethod.ReturnType;
 
 			Delegate callPropertyGetterDelegate;
-			if (typeInput.IsValueType)
+			if (typeInputInfo.IsValueType)
 			{
 				var delegateType = typeof(ByRefFunc<,>).MakeGenericType(typeInput, typeOutput);
 				var propertyGetterAsFunc = getMethod.CreateDelegate(delegateType);

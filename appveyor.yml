@@ -2,7 +2,7 @@ init:
   - git config --global core.autoclrf input
 build_script:
   - build.cmd
-version: 1.3.{build}
+version: 1.4.{build}
 test: off
 artifacts:
 - path: '**\*.nupkg'

@@ -10,13 +10,19 @@
 		/// <inheritdoc />
 		protected override ModelMetadata CreateMetadataPrototype(Type containerType, Type modelType, string propertyName)
 		{
-			return new ModelMetadata(this, containerType, null, modelType, propertyName);
+			return new ModelMetadata(this, containerType, null, modelType, propertyName)
+			{
+				Valid = false
+			};
 		}
 
 		/// <inheritdoc />
 		protected override ModelMetadata CreateMetadataFromPrototype(ModelMetadata prototype, Func<object> modelAccessor)
 		{
-			return new ModelMetadata(this, prototype.ContainerType, modelAccessor, prototype.ModelType, prototype.PropertyName);
+			return new ModelMetadata(this, prototype.ContainerType, modelAccessor, prototype.ModelType, prototype.PropertyName)
+			{
+				Valid = true
+			};
 		}
 	}
 }

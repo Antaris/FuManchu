@@ -102,7 +102,7 @@
 				return CreateImplictTagDescriptor(tagName);
 			}
 
-			return _providers.AsQueryable().SelectMany(p => p.GetTags()).FirstOrDefault(p => string.Equals(p.Name, tagName, StringComparison.OrdinalIgnoreCase))
+			return _providers.SelectMany(p => p.GetTags()).FirstOrDefault(p => string.Equals(p.Name, tagName, StringComparison.OrdinalIgnoreCase))
 			       ?? CreateImplictTagDescriptor(tagName);
 		}
 

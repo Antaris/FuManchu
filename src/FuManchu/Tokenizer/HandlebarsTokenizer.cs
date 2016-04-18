@@ -2,8 +2,6 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Security;
-	using System.Xml;
 	using FuManchu.Parser;
 	using FuManchu.Text;
 
