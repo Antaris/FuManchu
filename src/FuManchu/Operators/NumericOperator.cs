@@ -36,7 +36,7 @@
 			var xType = x.GetType();
 			var yType = y.GetType();
 
-			if (xType.IsValueType) 
+			if (xType.GetTypeInfo().IsValueType) 
 			{
 				object yConverted = null;
 				try

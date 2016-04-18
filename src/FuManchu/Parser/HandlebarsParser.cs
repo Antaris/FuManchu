@@ -2,7 +2,6 @@
 {
 	using System;
 	using System.Linq;
-	using System.Runtime.Remoting.Services;
 	using FuManchu.Parser.SyntaxTree;
 	using FuManchu.Tags;
 	using FuManchu.Tokenizer;

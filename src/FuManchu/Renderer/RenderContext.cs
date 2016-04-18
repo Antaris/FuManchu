@@ -56,6 +56,11 @@
 		/// </summary>
 		public RenderContext RootRenderContext { get; internal set; }
 
+        /// <summary>
+        /// Gets the unknown value resolver.
+        /// </summary>
+        public UnknownValueResolver UnknownValueResolver { get; set; }
+
 		/// <summary>
 		/// Gets the parser visitor.
 		/// </summary>
@@ -246,7 +251,7 @@
 		/// <param name="expression">The expression.</param>
 		/// <param name="isVariableLookup">True if this is a variable lookup, otherwise false.</param>
 		/// <returns>The resolved value.</returns>
-		public static object ResolveValue(RenderContext context, TemplateData templateData, string expression, bool isVariableLookup)
+		public object ResolveValue(RenderContext context, TemplateData templateData, string expression, bool isVariableLookup)
 		{
 			if (isVariableLookup && !string.IsNullOrEmpty(expression) && !expression.StartsWith("root."))
 			{
@@ -261,10 +266,14 @@
 			}
 
 			var modelMetadata = ExpressionMetadataProvider.FromStringExpression(expression, templateData, context.ModelMetadataProvider);
-			if (modelMetadata == null)
+			if (modelMetadata == null || !modelMetadata.Valid)
 			{
+				if (context.UnknownValueResolver != null)
+				{
+					return context.UnknownValueResolver(expression);
+				}
 				return null;
-			}
+            }
 			return modelMetadata.Model;
 		}
 

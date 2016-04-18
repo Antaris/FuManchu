@@ -15,7 +15,7 @@
 			RunTest(op, 2, 1, true);
 			RunTest(op, 2.0m, 1, true);
 			RunTest(op, 2.0f, 1, true);
-			RunTest(op, 2l, 1, true);
+			RunTest(op, 2L, 1, true);
 			RunTest(op, 2ul, 1, true);
 			RunTest(op, 2u, 1, true);
 		}
@@ -28,7 +28,7 @@
 			RunTest(op, 2, 2, false);
 			RunTest(op, 2.0m, 2, false);
 			RunTest(op, 2.0f, 2, false);
-			RunTest(op, 2l, 2, false);
+			RunTest(op, 2L, 2, false);
 			RunTest(op, 2ul, 2, false);
 			RunTest(op, 2u, 2, false);
 		}
@@ -41,7 +41,7 @@
 			RunTest(op, 2, "1", true);
 			RunTest(op, 2.0m, "1", true);
 			RunTest(op, 2.0f, "1", true);
-			RunTest(op, 2l, "1", true);
+			RunTest(op, 2L, "1", true);
 			RunTest(op, 2ul, "1", true);
 			RunTest(op, 2u, "1", true);
 		}
@@ -54,7 +54,7 @@
 			RunTest(op, 2, "hello", false);
 			RunTest(op, 2.0m, "hello", false);
 			RunTest(op, 2.0f, "hello", false);
-			RunTest(op, 2l, "hello", false);
+			RunTest(op, 2L, "hello", false);
 			RunTest(op, 2ul, "hello", false);
 			RunTest(op, 2u, "hello", false);
 		}
@@ -93,7 +93,7 @@
 			RunTest(op, 2, 2, true);
 			RunTest(op, 2.0m, 2, true);
 			RunTest(op, 2.0f, 2, true);
-			RunTest(op, 2l, 2, true);
+			RunTest(op, 2L, 2, true);
 			RunTest(op, 2ul, 2, true);
 			RunTest(op, 2u, 2, true);
 		}
@@ -106,7 +106,7 @@
 			RunTest(op, 2, 3, false);
 			RunTest(op, 2.0m, 3, false);
 			RunTest(op, 2.0f, 3, false);
-			RunTest(op, 2l, 3, false);
+			RunTest(op, 2L, 3, false);
 			RunTest(op, 2ul, 3, false);
 			RunTest(op, 2u, 3, false);
 		}
@@ -119,7 +119,7 @@
 			RunTest(op, 2, "2", true);
 			RunTest(op, 2.0m, "2", true);
 			RunTest(op, 2.0f, "2", true);
-			RunTest(op, 2l, "2", true);
+			RunTest(op, 2L, "2", true);
 			RunTest(op, 2ul, "2", true);
 			RunTest(op, 2u, "2", true);
 		}
@@ -132,7 +132,7 @@
 			RunTest(op, 2, "hello", false);
 			RunTest(op, 2.0m, "hello", false);
 			RunTest(op, 2.0f, "hello", false);
-			RunTest(op, 2l, "hello", false);
+			RunTest(op, 2L, "hello", false);
 			RunTest(op, 2ul, "hello", false);
 			RunTest(op, 2u, "hello", false);
 		}
@@ -171,7 +171,7 @@
 			RunTest(op, 1, 2, true);
 			RunTest(op, 1.0m, 2, true);
 			RunTest(op, 1.0f, 2, true);
-			RunTest(op, 1l, 2, true);
+			RunTest(op, 1L, 2, true);
 			RunTest(op, 1ul, 2, true);
 			RunTest(op, 1u, 2, true);
 		}
@@ -184,7 +184,7 @@
 			RunTest(op, 2, 2, false);
 			RunTest(op, 2.0m, 2, false);
 			RunTest(op, 2.0f, 2, false);
-			RunTest(op, 2l, 2, false);
+			RunTest(op, 2L, 2, false);
 			RunTest(op, 2ul, 2, false);
 			RunTest(op, 2u, 2, false);
 		}
@@ -197,7 +197,7 @@
 			RunTest(op, 1, "2", true);
 			RunTest(op, 1.0m, "2", true);
 			RunTest(op, 1.0f, "2", true);
-			RunTest(op, 1l, "2", true);
+			RunTest(op, 1L, "2", true);
 			RunTest(op, 1ul, "2", true);
 			RunTest(op, 1u, "2", true);
 		}
@@ -210,7 +210,7 @@
 			RunTest(op, 2, "hello", false);
 			RunTest(op, 2.0m, "hello", false);
 			RunTest(op, 2.0f, "hello", false);
-			RunTest(op, 2l, "hello", false);
+			RunTest(op, 2L, "hello", false);
 			RunTest(op, 2ul, "hello", false);
 			RunTest(op, 2u, "hello", false);
 		}
@@ -249,7 +249,7 @@
 			RunTest(op, 2, 2, true);
 			RunTest(op, 2.0m, 2, true);
 			RunTest(op, 2.0f, 2, true);
-			RunTest(op, 2l, 2, true);
+			RunTest(op, 2L, 2, true);
 			RunTest(op, 2ul, 2, true);
 			RunTest(op, 2u, 2, true);
 		}
@@ -262,7 +262,7 @@
 			RunTest(op, 3, 2, false);
 			RunTest(op, 3.0m, 2, false);
 			RunTest(op, 3.0f, 2, false);
-			RunTest(op, 3l, 2, false);
+			RunTest(op, 3L, 2, false);
 			RunTest(op, 3ul, 2, false);
 			RunTest(op, 3u, 2, false);
 		}
@@ -275,7 +275,7 @@
 			RunTest(op, 2, "2", true);
 			RunTest(op, 2.0m, "2", true);
 			RunTest(op, 2.0f, "2", true);
-			RunTest(op, 2l, "2", true);
+			RunTest(op, 2L, "2", true);
 			RunTest(op, 2ul, "2", true);
 			RunTest(op, 2u, "2", true);
 		}
@@ -288,7 +288,7 @@
 			RunTest(op, 2, "hello", false);
 			RunTest(op, 2.0m, "hello", false);
 			RunTest(op, 2.0f, "hello", false);
-			RunTest(op, 2l, "hello", false);
+			RunTest(op, 2L, "hello", false);
 			RunTest(op, 2ul, "hello", false);
 			RunTest(op, 2u, "hello", false);
 		}

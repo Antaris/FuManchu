@@ -16,9 +16,9 @@
 	/// </summary>
 	public class HandlebarsService : IHandlebarsService
 	{
-		private readonly ConcurrentDictionary<string, Func<HelperOptions, string>> _helpers = new ConcurrentDictionary<string, Func<HelperOptions, string>>(); 
-		private readonly ConcurrentDictionary<string, Func<RenderContext, string>> _partials = new ConcurrentDictionary<string, Func<RenderContext, string>>();
-		private readonly ConcurrentDictionary<string, Func<object, string>> _templates = new ConcurrentDictionary<string, Func<object, string>>(); 
+		private readonly ConcurrentDictionary<string, HandlebarHelper> _helpers = new ConcurrentDictionary<string, HandlebarHelper>();
+		private readonly ConcurrentDictionary<string, HandlebarPartialTemplate> _partials = new ConcurrentDictionary<string, HandlebarPartialTemplate>();
+		private readonly ConcurrentDictionary<string, HandlebarTemplate> _templates = new ConcurrentDictionary<string, HandlebarTemplate>();
 
 		/// <summary>
 		/// Initialises a new instance of <see cref="HandlebarsService"/>
@@ -45,8 +45,8 @@
 		/// </summary>
 		public IModelMetadataProvider ModelMetadataProvider { get; set; }
 
-		/// <inheritdoc />
-		public Func<object, string> Compile(string template)
+        /// <inheritdoc />
+        public HandlebarTemplate Compile(string template)
 		{
 			var document = CreateDocument(template);
 
@@ -54,11 +54,11 @@
 			var whitespace = new WhiteSpaceCollapsingParserVisitor();
 			document.Accept(whitespace);
 
-			return (model) =>
+			return (model, resolver) =>
 			       {
 				       using (var writer = new StringWriter())
 				       {
-					       var render = new RenderingParserVisitor(writer, model, ModelMetadataProvider ?? new DefaultModelMetadataProvider())
+					       var render = new RenderingParserVisitor(writer, model, ModelMetadataProvider ?? new DefaultModelMetadataProvider(), resolver)
 					                    {
 						                    Service = this
 					                    };
@@ -72,9 +72,9 @@
 		}
 
 		/// <inheritdoc />
-		public Func<object, string> Compile(string name, string template)
+		public HandlebarTemplate Compile(string name, string template)
 		{
-			Func<object, string> func;
+            HandlebarTemplate func;
 			if (_templates.TryGetValue(name, out func))
 			{
 				return func;
@@ -87,15 +87,15 @@
 		}
 
 		/// <inheritdoc />
-		public string CompileAndRun(string name, string template, object model = null)
+		public string CompileAndRun(string name, string template, object model = null, UnknownValueResolver unknownValueResolver = null)
 		{
-			Func<object, string> func = (string.IsNullOrEmpty(name)) ? Compile(template) : Compile(name, template);
+            HandlebarTemplate func = (string.IsNullOrEmpty(name)) ? Compile(template) : Compile(name, template);
 
-			return func(model);
+			return func(model, unknownValueResolver);
 		}
 
 		/// <inheritdoc />
-		public Func<RenderContext, string> CompilePartial(string template)
+		public HandlebarPartialTemplate CompilePartial(string template)
 		{
 			var document = CreateDocument(template);
 
@@ -127,9 +127,9 @@
 		}
 
 		/// <inheritdoc />
-		public void RegisterHelper(string name, Func<HelperOptions, string> helper)
+		public void RegisterHelper(string name, HandlebarHelper helper)
 		{
-			Func<HelperOptions, string> temp;
+			HandlebarHelper temp;
 			if (!_helpers.TryGetValue(name, out temp))
 			{
 				_helpers.TryAdd(name, helper);
@@ -141,19 +141,19 @@
 		/// </summary>
 		/// <param name="name">The name of the partial template.</param>
 		/// <param name="func">The partial delegate.</param>
-		public void RegisterPartial(string name, Func<RenderContext, string> func)
+		public void RegisterPartial(string name, HandlebarPartialTemplate partial)
 		{
-			Func<RenderContext, string> temp;
+			HandlebarPartialTemplate temp;
 			if (!_partials.TryGetValue(name, out temp))
 			{
-				_partials.TryAdd(name, func);
+				_partials.TryAdd(name, partial);
 			}
 		}
 
 		/// <inheritdoc />
 		public void RegisterPartial(string name, string template)
 		{
-			Func<RenderContext, string> func;
+			HandlebarPartialTemplate func;
 			if (!_partials.TryGetValue(name, out func))
 			{
 				func = CompilePartial(template);
@@ -167,7 +167,7 @@
 		/// <param name="name">The name of the compiled template.</param>
 		public void RemoveCompiledTemplate(string name)
 		{
-			Func<object, string> func;
+            HandlebarTemplate func;
 			_templates.TryRemove(name, out func);
 		}
 
@@ -177,17 +177,17 @@
 		/// <param name="name">The name of the compiled partial template.</param>
 		public void RemoveCompiledPartial(string name)
 		{
-			Func<RenderContext, string> func;
+			HandlebarPartialTemplate func;
 			_partials.TryRemove(name, out func);
 		}
 
 		/// <inheritdoc />
-		public string Run(string name, object model = null)
+		public string Run(string name, object model = null, UnknownValueResolver unknownValueResolver = null)
 		{
-			Func<object, string> func;
+            HandlebarTemplate func;
 			if (_templates.TryGetValue(name, out func))
 			{
-				return func(model);
+				return func(model, unknownValueResolver);
 			}
 
 			throw new ArgumentException("No template called '" + name + "' has been compiled.");
@@ -196,7 +196,7 @@
 		/// <inheritdoc />
 		public string RunPartial(string name, RenderContext context)
 		{
-			Func<RenderContext, string> func;
+			HandlebarPartialTemplate func;
 			if (_partials.TryGetValue(name, out func))
 			{
 				return func(context);
@@ -208,7 +208,7 @@
 		/// <inheritdoc />
 		public string RunHelper(string name, HelperOptions options)
 		{
-			Func<HelperOptions, string> func;
+			HandlebarHelper func;
 			if (_helpers.TryGetValue(name, out func))
 			{
 				return func(options);

@@ -123,6 +123,11 @@
 		public IModelMetadataProvider Provider { get { return _provider; } }
 
 		/// <summary>
+		/// Gets or sets whether the metadata is valid.
+		/// </summary>
+		public bool Valid { get; set; }
+
+		/// <summary>
 		/// Gets the runtime model type.
 		/// </summary>
 		public Type RealModelType

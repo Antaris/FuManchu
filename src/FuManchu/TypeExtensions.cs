@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Linq;
+    using System.Reflection;
 
 	/// <summary>
 	/// Provides extension methods for common type operations.
@@ -17,7 +18,7 @@
 		public static Type ExtractGenericInterface(this Type queryType, Type interfaceType)
 		{
 			Func<Type, bool> matchesInterface =
-				t => t.IsGenericType && t.GetGenericTypeDefinition() == interfaceType;
+				t => t.GetTypeInfo().IsGenericType && t.GetGenericTypeDefinition() == interfaceType;
 			return (matchesInterface(queryType)) ?
 				queryType :
 				queryType.GetInterfaces().FirstOrDefault(matchesInterface);

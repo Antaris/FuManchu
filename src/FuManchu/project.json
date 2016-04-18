@@ -1,0 +1,29 @@
+{
+  "description": "FuManchu is a text templating engine based on HandlebarsJS",
+  "tags": [
+    "fumanchu",
+    "handlebars"
+  ],
+  "version": "1.3.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Antaris/FuManchu"
+  },
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "xmlDoc": true
+  },
+  "frameworks": {
+    "net451": { },
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Collections.Concurrent": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Threading": "4.0.11-beta-23516"
+      }
+    }
+  }
+}

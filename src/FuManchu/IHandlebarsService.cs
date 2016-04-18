@@ -13,13 +13,13 @@
 		/// </summary>
 		OperatorCollection Operators { get; }
 
-		/// <summary>
-		/// Compiles a Handlebars template
-		/// </summary>
-		/// <param name="name">The name of the template.</param>
-		/// <param name="template">The handlebars template.</param>
-		/// <returns>The compiled template as an executable delegate.</returns>
-		Func<object, string> Compile(string name, string template);
+        /// <summary>
+        /// Compiles a Handlebars template
+        /// </summary>
+        /// <param name="name">The name of the template.</param>
+        /// <param name="template">The handlebars template.</param>
+        /// <returns>The compiled template as an executable delegate.</returns>
+        HandlebarTemplate Compile(string name, string template);
 
 		/// <summary>
 		/// Compiles and runs the given Handlebars template.
@@ -27,8 +27,9 @@
 		/// <param name="name">The name of the template.</param>
 		/// <param name="template">The handlebars template.</param>
 		/// <param name="model">The model for the template.</param>
+		/// <param name="unknownValueResolver">The resolver used to handle unknown values.</param>
 		/// <returns>The template result.</returns>
-		string CompileAndRun(string name, string template, object model = null);
+		string CompileAndRun(string name, string template, object model = null, UnknownValueResolver unknownValueResolver = null);
 
 		/// <summary>
 		/// Determines if the service has a registered helper.
@@ -42,7 +43,7 @@
 		/// </summary>
 		/// <param name="name">The name of the helper.</param>
 		/// <param name="helper">The helper delegate.</param>
-		void RegisterHelper(string name, Func<HelperOptions, string> helper);
+		void RegisterHelper(string name, HandlebarHelper helper);
 
 		/// <summary>
 		/// Registers a partial template with the given name.
@@ -56,8 +57,9 @@
 		/// </summary>
 		/// <param name="name">The name of the template.</param>
 		/// <param name="model">The model for the template.</param>
+		/// <param name="unknownValueResolver">The resolver used to handle unknown values.</param>
 		/// <returns>The template result.</returns>
-		string Run(string name, object model = null);
+		string Run(string name, object model = null, UnknownValueResolver unknownValueResolver = null);
 
 		/// <summary>
 		/// Runs a pre-compiled partial template.

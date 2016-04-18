@@ -34,12 +34,12 @@
 		/// <param name="writer">The text writer</param>
 		/// <param name="model">The document model.</param>
 		/// <param name="modelMetadataProvider">The model metadata provider.</param>
-		public RenderingParserVisitor(TextWriter writer, object model, IModelMetadataProvider modelMetadataProvider)
+		public RenderingParserVisitor(TextWriter writer, object model, IModelMetadataProvider modelMetadataProvider, UnknownValueResolver unknownValueResolver)
 		{
 			_textWriter = writer;
 			ModelMetadataProvider = modelMetadataProvider;
 
-			var context = RenderContextFactory.CreateRenderContext(this, model);
+            var context = RenderContextFactory.CreateRenderContext(this, model, unknownValueResolver);
 			SetScope(context);
 		}
 

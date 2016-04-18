@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Binding\EfficientTypePropertyKey.cs" />
@@ -58,8 +58,11 @@
     <Compile Include="Binding\TryGetValueProvider.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="HandlebarHelper.cs" />
+    <Compile Include="HandlebarPartialTemplate.cs" />
     <Compile Include="Handlebars.cs" />
     <Compile Include="HandlebarsService.cs" />
+    <Compile Include="HandlebarTemplate.cs" />
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="Binding\Metadata\ModelMetadata.cs" />
     <Compile Include="HelperOptions.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="Tokenizer\Tokenizer.cs" />
     <Compile Include="Tokenizer\TokenizerView.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="UnknownValueResolver.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

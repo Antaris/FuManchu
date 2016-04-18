@@ -33,7 +33,7 @@
 		/// <param name="name">The name of the template.</param>
 		/// <param name="template">The handlebars template.</param>
 		/// <returns>The compiled template as an executable delegate.</returns>
-		public static Func<object, string> Compile(string name, string template)
+		public static HandlebarTemplate Compile(string name, string template)
 		{
 			return _handlebarsService.Value.Compile(name, template);
 		}
@@ -45,9 +45,9 @@
 		/// <param name="template">The handlebars template.</param>
 		/// <param name="model">The model for the template.</param>
 		/// <returns>The template result.</returns>
-		public static string CompileAndRun(string name, string template, object model = null)
+		public static string CompileAndRun(string name, string template, object model = null, UnknownValueResolver unknownValueResolver = null)
 		{
-			return _handlebarsService.Value.CompileAndRun(name, template, model);
+			return _handlebarsService.Value.CompileAndRun(name, template, model, unknownValueResolver);
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@
 		/// </summary>
 		/// <param name="name">The name of the helper.</param>
 		/// <param name="helper">The helper delegate.</param>
-		public static void RegisterHelper(string name, Func<HelperOptions, string> helper)
+		public static void RegisterHelper(string name, HandlebarHelper helper)
 		{
 			_handlebarsService.Value.RegisterHelper(name, helper);
 		}
@@ -76,9 +76,9 @@
 		/// <param name="name">The name of the template.</param>
 		/// <param name="model">The model for the template.</param>
 		/// <returns>The template result.</returns>
-		public static string Run(string name, object model = null)
+		public static string Run(string name, object model = null, UnknownValueResolver unknownValueResolver = null)
 		{
-			return _handlebarsService.Value.Run(name, model);
+			return _handlebarsService.Value.Run(name, model, unknownValueResolver);
 		}
 
 		/// <summary>
