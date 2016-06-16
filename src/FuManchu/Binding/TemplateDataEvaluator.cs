@@ -76,7 +76,7 @@
 			{
 				success = dict.TryGetValue(key, out value);
 			}
-			else
+			else if (indexableObject != null)
 			{
 				var tryDelegate = TryGetValueProvider.CreateInstance(indexableObject.GetType());
 				if (tryDelegate != null)

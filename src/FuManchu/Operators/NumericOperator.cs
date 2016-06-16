@@ -10,16 +10,16 @@
 	{
 		private readonly NumericOperation _operation;
 		private readonly static Type _generatorType = typeof(ValueTypeExpressionGenerator);
-		private readonly static MethodInfo _greaterThanMethod = _generatorType.GetMethod("GreaterThan");
-		private readonly static MethodInfo _greaterThanEqualToMethod = _generatorType.GetMethod("GreaterThanEqualTo");
-		private readonly static MethodInfo _lessThanMethod = _generatorType.GetMethod("LessThan");
-		private readonly static MethodInfo _lessThanEqualToMethod = _generatorType.GetMethod("LessThanEqualTo");
+		private readonly static MethodInfo _greaterThanMethod = _generatorType.GetTypeInfo().GetMethod("GreaterThan");
+		private readonly static MethodInfo _greaterThanEqualToMethod = _generatorType.GetTypeInfo().GetMethod("GreaterThanEqualTo");
+		private readonly static MethodInfo _lessThanMethod = _generatorType.GetTypeInfo().GetMethod("LessThan");
+		private readonly static MethodInfo _lessThanEqualToMethod = _generatorType.GetTypeInfo().GetMethod("LessThanEqualTo");
 
-		/// <summary>
-		/// Initialises a new instance of <see cref="NumericOperatorBase"/>
-		/// </summary>
-		/// <param name="name">The name of the numeric operator.</param>
-		public NumericOperator(NumericOperation operation)
+        /// <summary>
+        /// Initialises a new instance of <see cref="NumericOperator"/>
+        /// </summary>
+        /// <param name="operation">The name of the numeric operator.</param>
+        public NumericOperator(NumericOperation operation)
 			: base(GetName(operation))
 		{
 			_operation = operation;
@@ -50,7 +50,7 @@
 				return (bool)func.DynamicInvoke(x, yConverted);
 			}
 
-			if (xType == yType || xType.IsAssignableFrom(yType))
+			if (xType == yType || xType.GetTypeInfo().IsAssignableFrom(yType))
 			{
 				var xComparable = x as IComparable;
 				if (xComparable != null)

@@ -82,6 +82,7 @@
 		/// Gets the variable with the given name.
 		/// </summary>
 		/// <param name="name">The variable name.</param>
+        /// <param name="default">[Optional] The default value for the variable.</param>
 		/// <returns>The variable value.</returns>
 		public object GetVariable(string name, object @default = null)
 		{

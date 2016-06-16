@@ -73,6 +73,7 @@
 		/// <summary>
 		/// Validates a tag based on the descriptor.
 		/// </summary>
+        /// <param name="name">The tag name.</param>
 		/// <param name="descriptor">The tag descriptor.</param>
 		/// <param name="arguments">The set of arguments.</param>
 		/// <param name="parameters">The set of parameters.</param>

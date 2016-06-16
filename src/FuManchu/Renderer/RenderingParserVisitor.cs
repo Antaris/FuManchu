@@ -28,13 +28,14 @@
 
 		private readonly HelperBlockRenderer _helperBlockRenderer = new HelperBlockRenderer();
 
-		/// <summary>
-		/// Initialises a new instance of <see cref="RenderingParserVisitor"/>
-		/// </summary>
-		/// <param name="writer">The text writer</param>
-		/// <param name="model">The document model.</param>
-		/// <param name="modelMetadataProvider">The model metadata provider.</param>
-		public RenderingParserVisitor(TextWriter writer, object model, IModelMetadataProvider modelMetadataProvider, UnknownValueResolver unknownValueResolver)
+        /// <summary>
+        /// Initialises a new instance of <see cref="RenderingParserVisitor"/>
+        /// </summary>
+        /// <param name="writer">The text writer</param>
+        /// <param name="model">The document model.</param>
+        /// <param name="modelMetadataProvider">The model metadata provider.</param>
+        /// <param name="unknownValueResolver">The resolver to use to handle unknown keys.</param>
+        public RenderingParserVisitor(TextWriter writer, object model, IModelMetadataProvider modelMetadataProvider, UnknownValueResolver unknownValueResolver)
 		{
 			_textWriter = writer;
 			ModelMetadataProvider = modelMetadataProvider;

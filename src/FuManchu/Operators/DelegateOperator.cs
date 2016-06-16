@@ -13,6 +13,7 @@
 		/// <summary>
 		/// Initialises a new instance of <see cref="DelegateOperator"/>
 		/// </summary>
+        /// <param name="name">The operator name.</param>
 		/// <param name="operator">The operator delegate.</param>
 		public DelegateOperator(string name, Func<object, object, bool> @operator)
 		{

@@ -136,12 +136,12 @@
 			}
 		}
 
-		/// <summary>
-		/// Registers a partial template with the given name.
-		/// </summary>
-		/// <param name="name">The name of the partial template.</param>
-		/// <param name="func">The partial delegate.</param>
-		public void RegisterPartial(string name, HandlebarPartialTemplate partial)
+        /// <summary>
+        /// Registers a partial template with the given name.
+        /// </summary>
+        /// <param name="name">The name of the partial template.</param>
+        /// <param name="partial">The partial delegate.</param>
+        public void RegisterPartial(string name, HandlebarPartialTemplate partial)
 		{
 			HandlebarPartialTemplate temp;
 			if (!_partials.TryGetValue(name, out temp))
