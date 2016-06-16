@@ -34,18 +34,18 @@
 
 			if (dictionaryType != null)
 			{
-				var typeArguments = dictionaryType.GetGenericArguments();
+				var typeArguments = dictionaryType.GetTypeInfo().GetGenericArguments();
 				var keyType = typeArguments[0];
 				var returnType = typeArguments[1];
 
-				if (keyType.IsAssignableFrom(typeof(string)))
+				if (keyType.GetTypeInfo().IsAssignableFrom(typeof(string)))
 				{
 					var implemenationMethod = _strongTryGetValueImplInfo.MakeGenericMethod(keyType, returnType);
 					result = (TryGetValueDelegate)implemenationMethod.CreateDelegate(typeof(TryGetValueDelegate));
 				}
 			}
 
-			if (result == null && typeof(IDictionary).IsAssignableFrom(targetType))
+			if (result == null && typeof(IDictionary).GetTypeInfo().IsAssignableFrom(targetType))
 			{
 				result = TryGetValueFromNonGenericDictionary;
 			}

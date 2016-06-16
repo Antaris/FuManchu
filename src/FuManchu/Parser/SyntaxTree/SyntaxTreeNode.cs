@@ -49,6 +49,8 @@
 		/// Determines if the given node is equivalent to the current node.
 		/// </summary>
 		/// <param name="node">The other node.</param>
+        /// <param name="builder">The string builder.</param>
+        /// <param name="level">The current node level.</param>
 		/// <returns>True if the nodes are equivalent otherwise false.</returns>
 		public abstract bool EquivalentTo(SyntaxTreeNode node, StringBuilder builder, int level);
 

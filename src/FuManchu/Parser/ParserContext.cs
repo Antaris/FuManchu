@@ -22,6 +22,7 @@
 		/// <param name="source">The source.</param>
 		/// <param name="parser">The parser.</param>
 		/// <param name="errorSink">The error sink.</param>
+        /// <param name="providers">The set of tag providers.</param>
 		public ParserContext(ITextDocument source, ParserBase parser, ParserErrorSink errorSink, TagProvidersCollection providers)
 		{
 			Source = new TextDocumentReader(source);
@@ -225,6 +226,7 @@
 		/// Starts a block.
 		/// </summary>
 		/// <param name="blockType">Type of the block.</param>
+        /// <param name="name">[Optional] The block name.</param>
 		/// <returns>The disposable used to end the block.</returns>
 		public IDisposable StartBlock(BlockType? blockType = null, string name = null)
 		{

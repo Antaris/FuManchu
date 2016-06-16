@@ -42,6 +42,7 @@
     <Compile Include="Binding\BindingFacts.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="HandlebarsServiceFacts.cs" />
+    <Compile Include="Issues\Issue15.cs" />
     <Compile Include="Operators\EqualityOperatorFacts.cs" />
     <Compile Include="Operators\InOperatorFacts.cs" />
     <Compile Include="Operators\NegatedEqualityOperatorFacts.cs" />

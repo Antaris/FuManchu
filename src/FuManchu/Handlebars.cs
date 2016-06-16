@@ -44,6 +44,7 @@
 		/// <param name="name">The name of the template.</param>
 		/// <param name="template">The handlebars template.</param>
 		/// <param name="model">The model for the template.</param>
+        /// <param name="unknownValueResolver">The resolver used to handle unknown keys.</param>
 		/// <returns>The template result.</returns>
 		public static string CompileAndRun(string name, string template, object model = null, UnknownValueResolver unknownValueResolver = null)
 		{
@@ -75,6 +76,7 @@
 		/// </summary>
 		/// <param name="name">The name of the template.</param>
 		/// <param name="model">The model for the template.</param>
+        /// <param name="unknownValueResolver">The resolver to use to handle unknown keys.</param>
 		/// <returns>The template result.</returns>
 		public static string Run(string name, object model = null, UnknownValueResolver unknownValueResolver = null)
 		{

@@ -21,7 +21,7 @@
 				t => t.GetTypeInfo().IsGenericType && t.GetGenericTypeDefinition() == interfaceType;
 			return (matchesInterface(queryType)) ?
 				queryType :
-				queryType.GetInterfaces().FirstOrDefault(matchesInterface);
+				queryType.GetTypeInfo().GetInterfaces().FirstOrDefault(matchesInterface);
 		}
 
 		/// <summary>
